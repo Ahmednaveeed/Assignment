@@ -1,19 +1,417 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- tool bar -->
+
+    <!-- alignment -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="8dp" >
+
+        <!-- camera button -->
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/camera"
+            android:layout_marginEnd="80dp"
+            android:contentDescription="Camera" />
+
+        <!-- Socially text -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Socially"
+            android:textColor="#8B4513"
+            android:textSize="28sp" />
+
+        <!-- Message button -->
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/dm"
+            android:layout_marginStart="80dp"
+            android:contentDescription="Message" />
+    </LinearLayout>
+
+    <!-- Stories -->
+
+    <!-- alignment -->
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="12dp"
+        android:scrollbars="horizontal">
+
+        <!-- space for all stories -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="2dp"
+            android:scrollbarStyle="insideOverlay">
+
+            <!-- per story allocated space -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="6dp"
+                android:layout_marginEnd="12dp">
+
+                <!-- per story icon -->
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/oval"
+                    android:layout_marginEnd="1dp"
+                    android:contentDescription="your story" />
+
+                <!-- per text specs -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Your story"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginTop="2dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="6dp"
+                android:layout_marginEnd="12dp">
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/oval"
+                    android:layout_marginEnd="1dp"
+                    android:contentDescription="your story" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="karennne"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginTop="2dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="6dp"
+                android:layout_marginEnd="12dp">
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/oval"
+                    android:layout_marginEnd="1dp"
+                    android:contentDescription="your story" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="zackjohn"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginTop="2dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="6dp"
+                android:layout_marginEnd="12dp">
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/oval"
+                    android:layout_marginEnd="1dp"
+                    android:contentDescription="your story" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="kieron_d"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginTop="2dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="6dp"
+                android:layout_marginEnd="12dp">
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:src="@drawable/oval"
+                    android:layout_marginEnd="1dp"
+                    android:contentDescription="your story" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="kieron_d"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    android:layout_marginTop="2dp"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </HorizontalScrollView>
+
+    <!-- Posts section -->
+
+    <!-- entire page -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <!-- every post's card -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="460dp"
+                android:layout_marginBottom="8dp"
+                app:cardElevation="4dp"
+                app:cardBackgroundColor="@android:color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="470dp"
+                    android:orientation="vertical"
+                    android:padding="8dp">
+
+                    <!-- poster's data-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <!-- poster's profile picture -->
+                        <ImageView
+                            android:id="@+id/profileImage"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="8dp"
+                            android:contentDescription="joshua"
+                            android:src="@drawable/oval" />
+
+                        <!-- poster's name and location spacin -->
+                        <LinearLayout
+                            android:id="@+id/textContainer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toEndOf="@id/profileImage"
+                            android:orientation="vertical">
+
+                            <!-- name -->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="joshua_j"
+                                android:textColor="@color/black"
+                                android:textSize="16sp" />
+
+                            <!-- location -->
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Tokyo, Japan"
+                                android:textColor="@color/black"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                        <!-- options bar -->
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:contentDescription="Options"
+                            android:src="@drawable/options" />
+                    </RelativeLayout>
+
+                    <!-- post -->
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:src="@drawable/download" />
+
+                    <!-- ike comment etc spacinf -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="4dp">
+
+                        <!-- like -->
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:contentDescription="like"
+                            android:src="@drawable/like" />
+
+                        <!-- comment -->
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="8dp"
+                            android:contentDescription="comment"
+                            android:src="@drawable/comment" />
+
+                        <!-- share -->
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="8dp"
+                            android:contentDescription="share"
+                            android:src="@drawable/share" />
+
+                        <!-- centering options -->
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+
+                        <!-- options -->
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_gravity="center"
+                            android:contentDescription="Options"
+                            android:src="@drawable/options" />
+
+                        <!-- cornering save -->
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+
+                        <!-- save -->
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_marginStart="8dp"
+                            android:contentDescription="Save"
+                            android:src="@drawable/save" />
+                    </LinearLayout>
+
+                    <!-- liked by -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Liked by Craig, Love and 44686 others"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                    <!-- comment -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="joshua_j The game in Japan was amazing and I want to share some photos"
+                        android:textColor="@color/black"
+                        android:textSize="14sp" />
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+    </ScrollView>
+
+
+    <!-- navigation bar -->
+
+    <!-- spacing -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="10dp">
+
+        <!-- home button -->
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:src="@drawable/home"
+            android:layout_weight="1"
+            android:contentDescription="Home" />
+
+        <!-- search button -->
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:src="@drawable/search"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:contentDescription="Search" />
+
+        <!-- post button -->
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:src="@drawable/add"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:contentDescription="Add" />
+
+        <!-- heart button -->
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:src="@drawable/heart"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:contentDescription="Heart" />
+
+        <!-- profile button -->
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:src="@drawable/profile"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:contentDescription="Profile" />
+
+    </LinearLayout>
+</LinearLayout>
