@@ -12,6 +12,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Assignment">
         <activity
+            android:name=".Callmax"
+            android:exported="false" />
+        <activity
+            android:name=".Callkeiro"
+            android:exported="false" />
+        <activity
+            android:name=".Callandrew"
+            android:exported="false" />
+        <activity
+            android:name=".Callmartini"
+            android:exported="false" />
+        <activity
+            android:name=".Callkarenne"
+            android:exported="false" />
+        <activity
+            android:name=".Calljoshua"
+            android:exported="false" />
+        <activity
             android:name=".DMmax"
             android:exported="false" />
         <activity
