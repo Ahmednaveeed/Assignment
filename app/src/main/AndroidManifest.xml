@@ -12,6 +12,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Assignment">
         <activity
+            android:name=".DMmax"
+            android:exported="false" />
+        <activity
+            android:name=".DMkeiron"
+            android:exported="false" />
+        <activity
+            android:name=".DMandrew"
+            android:exported="false" />
+        <activity
+            android:name=".DMmartini"
+            android:exported="false" />
+        <activity
+            android:name=".DMkarenne"
+            android:exported="false" />
+        <activity
+            android:name=".DMjoshua"
+            android:exported="false" />
+        <activity
             android:name=".message"
             android:exported="false" />
         <activity
