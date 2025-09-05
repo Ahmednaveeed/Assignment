@@ -1,384 +1,459 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#FFFFFF"
     tools:context=".MainActivity">
 
-
-    <!-- tool bar -->
-
-    <!-- alignment -->
-    <LinearLayout
-        android:layout_width="match_parent"
+    <!-- Toolbar -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:padding="8dp" >
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="8dp">
 
-        <!-- camera button -->
+        <!-- Camera Button -->
         <ImageView
+            android:id="@+id/camera_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/camera"
             android:layout_marginEnd="80dp"
-            android:contentDescription="Camera" />
+            android:contentDescription="Camera"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
-        <!-- Socially text -->
+        <!-- Socially Text -->
         <TextView
+            android:id="@+id/socially_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Socially"
             android:textColor="#8B4513"
-            android:textSize="28sp" />
+            android:textSize="28sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/camera_button"
+            app:layout_constraintEnd_toStartOf="@+id/message_button" />
 
-        <!-- Message button -->
+        <!-- Message Button -->
         <ImageView
+            android:id="@+id/message_button"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:src="@drawable/dm"
             android:layout_marginStart="80dp"
-            android:contentDescription="Message" />
-    </LinearLayout>
+            android:contentDescription="Message"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <!-- Stories -->
-
-    <!-- alignment -->
     <HorizontalScrollView
-        android:layout_width="match_parent"
+        android:id="@+id/stories"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingTop="12dp"
-        android:scrollbars="horizontal">
+        android:scrollbars="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- space for all stories -->
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="2dp"
-            android:scrollbarStyle="insideOverlay">
+            android:padding="2dp">
 
-            <!-- per story allocated space -->
-            <LinearLayout
+
+            <!-- Story 1 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/story1_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:padding="6dp"
-                android:layout_marginEnd="12dp">
+                app:layout_constraintStart_toStartOf="parent">
 
-                <!-- per story icon -->
                 <ImageView
+                    android:id="@+id/story1_image"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:src="@drawable/oval"
                     android:layout_marginEnd="1dp"
-                    android:contentDescription="your story" />
+                    android:contentDescription="your story"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
-                <!-- per text specs -->
                 <TextView
+                    android:id="@+id/story1_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Your story"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:layout_marginTop="2dp"/>
+                    android:layout_marginTop="2dp"
+                    app:layout_constraintTop_toBottomOf="@+id/story1_image"
+                    app:layout_constraintStart_toStartOf="@+id/story1_image" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
+            <!-- Story 2 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/story2_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:padding="6dp"
-                android:layout_marginEnd="12dp">
+                app:layout_constraintStart_toEndOf="@+id/story1_container"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+                    android:id="@+id/story2_image"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:src="@drawable/oval"
                     android:layout_marginEnd="1dp"
-                    android:contentDescription="your story" />
+                    android:contentDescription="your story"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
+                    android:id="@+id/story2_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="karennne"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:layout_marginTop="2dp"/>
+                    android:layout_marginTop="2dp"
+                    app:layout_constraintTop_toBottomOf="@+id/story2_image"
+                    app:layout_constraintStart_toStartOf="@+id/story2_image" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
+            <!-- Story 3 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/story3_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:padding="6dp"
-                android:layout_marginEnd="12dp">
+                app:layout_constraintStart_toEndOf="@+id/story2_container"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+                    android:id="@+id/story3_image"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:src="@drawable/oval"
                     android:layout_marginEnd="1dp"
-                    android:contentDescription="your story" />
+                    android:contentDescription="your story"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
+                    android:id="@+id/story3_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="zackjohn"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:layout_marginTop="2dp"/>
+                    android:layout_marginTop="2dp"
+                    app:layout_constraintTop_toBottomOf="@+id/story3_image"
+                    app:layout_constraintStart_toStartOf="@+id/story3_image" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
+            <!-- Story 4 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/story4_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:padding="6dp"
-                android:layout_marginEnd="12dp">
+                app:layout_constraintStart_toEndOf="@+id/story3_container"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+                    android:id="@+id/story4_image"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:src="@drawable/oval"
                     android:layout_marginEnd="1dp"
-                    android:contentDescription="your story" />
+                    android:contentDescription="your story"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
+                    android:id="@+id/story4_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="kieron_d"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:layout_marginTop="2dp"/>
+                    android:layout_marginTop="2dp"
+                    app:layout_constraintTop_toBottomOf="@+id/story4_image"
+                    app:layout_constraintStart_toStartOf="@+id/story4_image" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            </LinearLayout>
-
-            <LinearLayout
+            <!-- Story 5 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/story5_container"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:padding="6dp"
-                android:layout_marginEnd="12dp">
+                app:layout_constraintStart_toEndOf="@+id/story4_container"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+                    android:id="@+id/story5_image"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:src="@drawable/oval"
                     android:layout_marginEnd="1dp"
-                    android:contentDescription="your story" />
+                    android:contentDescription="your story"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
 
                 <TextView
+                    android:id="@+id/story5_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="kieron_d"
                     android:textColor="@color/black"
                     android:textSize="16sp"
-                    android:layout_marginTop="2dp"/>
-
-            </LinearLayout>
-        </LinearLayout>
+                    android:layout_marginTop="2dp"
+                    app:layout_constraintTop_toBottomOf="@+id/story5_image"
+                    app:layout_constraintStart_toStartOf="@+id/story5_image" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </HorizontalScrollView>
 
-    <!-- Posts section -->
-
-    <!-- entire page -->
+    <!-- Posts Section -->
     <ScrollView
-        android:layout_width="match_parent"
+        android:id="@+id/post_scroll"
+        android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        app:layout_constraintTop_toBottomOf="@+id/stories"
+        app:layout_constraintBottom_toTopOf="@+id/navigation_bar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:padding="8dp">
 
-            <!-- every post's card -->
+            <!-- Post Card -->
             <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
+                android:id="@+id/post_card"
+                android:layout_width="0dp"
                 android:layout_height="460dp"
                 android:layout_marginBottom="8dp"
                 app:cardElevation="4dp"
-                app:cardBackgroundColor="@android:color/white">
+                app:cardBackgroundColor="@android:color/white"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
-                <LinearLayout
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="470dp"
-                    android:orientation="vertical"
                     android:padding="8dp">
 
-                    <!-- poster's data-->
-                    <RelativeLayout
+                    <!-- Poster's Data -->
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/poster_data"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toTopOf="parent">
 
-                        <!-- poster's profile picture -->
+                        <!-- Poster's Profile Picture -->
                         <ImageView
                             android:id="@+id/profileImage"
                             android:layout_width="40dp"
                             android:layout_height="40dp"
-                            android:layout_alignParentStart="true"
-                            android:layout_centerVertical="true"
                             android:layout_marginEnd="8dp"
                             android:contentDescription="joshua"
-                            android:src="@drawable/oval" />
+                            android:src="@drawable/oval"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent" />
 
-                        <!-- poster's name and location spacin -->
-                        <LinearLayout
+                        <!-- Poster's Name and Location -->
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/textContainer"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:layout_toEndOf="@id/profileImage"
-                            android:orientation="vertical">
+                            app:layout_constraintStart_toEndOf="@+id/profileImage"
+                            app:layout_constraintTop_toTopOf="@+id/profileImage"
+                            app:layout_constraintBottom_toBottomOf="@+id/profileImage">
 
-                            <!-- name -->
                             <TextView
+                                android:id="@+id/name_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="joshua_j"
                                 android:textColor="@color/black"
-                                android:textSize="16sp" />
+                                android:textSize="16sp"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintStart_toStartOf="parent" />
 
-                            <!-- location -->
                             <TextView
+                                android:id="@+id/location_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Tokyo, Japan"
                                 android:textColor="@color/black"
-                                android:textSize="12sp" />
-                        </LinearLayout>
+                                android:textSize="12sp"
+                                app:layout_constraintTop_toBottomOf="@+id/name_text"
+                                app:layout_constraintStart_toStartOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                        <!-- options bar -->
+                        <!-- Options Bar -->
                         <ImageView
+                            android:id="@+id/options_bar"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentEnd="true"
                             android:layout_marginStart="8dp"
                             android:layout_marginEnd="8dp"
                             android:contentDescription="Options"
-                            android:src="@drawable/options" />
-                    </RelativeLayout>
+                            android:src="@drawable/options"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/profileImage"
+                            app:layout_constraintBottom_toBottomOf="@+id/profileImage" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <!-- post -->
+                    <!-- Post Image -->
                     <ImageView
-                        android:layout_width="match_parent"
+                        android:id="@+id/post_image"
+                        android:layout_width="0dp"
                         android:layout_height="300dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginBottom="8dp"
-                        android:src="@drawable/download" />
+                        android:src="@drawable/download"
+                        app:layout_constraintTop_toBottomOf="@+id/poster_data"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
-                    <!-- ike comment etc spacinf -->
                     <LinearLayout
+                        android:id="@+id/interaction_layout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
-                        android:padding="4dp">
+                        android:padding="4dp"
+                        app:layout_constraintTop_toBottomOf="@+id/post_image">
 
-                        <!-- like -->
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:contentDescription="like"
-                            android:src="@drawable/like" />
-
-                        <!-- comment -->
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginStart="8dp"
-                            android:contentDescription="comment"
-                            android:src="@drawable/comment" />
-
-                        <!-- share -->
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginStart="8dp"
-                            android:contentDescription="share"
-                            android:src="@drawable/share" />
-
-                        <!-- centering options -->
-                        <View
+                        <!-- Left Group: Like, Comment, Share -->
+                        <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_weight="1">
 
-                        <!-- options -->
+                            <ImageView
+                                android:id="@+id/like_image"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:contentDescription="like"
+                                android:src="@drawable/like"
+                                android:layout_marginEnd="4dp" />
+
+                            <ImageView
+                                android:id="@+id/comment_image"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:contentDescription="comment"
+                                android:src="@drawable/comment"
+                                android:layout_marginStart="4dp"
+                                android:layout_marginEnd="4dp" />
+
+                            <ImageView
+                                android:id="@+id/share_image"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:contentDescription="share"
+                                android:src="@drawable/share"
+                                android:layout_marginStart="4dp" />
+                        </LinearLayout>
+
+                        <!-- Centered Options -->
                         <ImageView
+                            android:id="@+id/options_image"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:layout_gravity="center"
                             android:contentDescription="Options"
-                            android:src="@drawable/options" />
+                            android:src="@drawable/options"
+                            android:layout_gravity="center"
+                            android:layout_weight="0" />
 
-                        <!-- cornering save -->
-                        <View
+                        <!-- Right Save -->
+                        <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_height="0dp"
-                            android:layout_weight="1" />
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal"
+                            android:layout_weight="1"
+                            android:gravity="end">
 
-                        <!-- save -->
-                        <ImageView
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_marginStart="8dp"
-                            android:contentDescription="Save"
-                            android:src="@drawable/save" />
+                            <ImageView
+                                android:id="@+id/save_image"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:contentDescription="Save"
+                                android:src="@drawable/save" />
+                        </LinearLayout>
                     </LinearLayout>
 
-                    <!-- liked by -->
+                    <!-- Liked By -->
                     <TextView
+                        android:id="@+id/liked_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Liked by Craig, Love and 44686 others"
                         android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        app:layout_constraintTop_toBottomOf="@+id/interaction_layout"
+                        app:layout_constraintStart_toStartOf="parent" />
 
-                    <!-- comment -->
+                    <!-- Comment -->
                     <TextView
+                        android:id="@+id/comment_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="joshua_j The game in Japan was amazing and I want to share some photos"
                         android:textColor="@color/black"
-                        android:textSize="14sp" />
-
-                </LinearLayout>
+                        android:textSize="14sp"
+                        app:layout_constraintTop_toBottomOf="@+id/liked_text"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
             </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-
-    <!-- navigation bar -->
-
-    <!-- spacing -->
     <LinearLayout
+        android:id="@+id/navigation_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="center"
-        android:padding="10dp">
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- home button -->
+        <!-- Home Button -->
         <ImageView
+            android:id="@+id/home_image"
             android:layout_width="0dp"
             android:layout_height="24dp"
             android:src="@drawable/home"
             android:layout_weight="1"
             android:contentDescription="Home" />
 
-        <!-- search button -->
+        <!-- Search Button -->
         <ImageView
+            android:id="@+id/search_image"
             android:layout_width="0dp"
             android:layout_height="24dp"
             android:src="@drawable/search"
@@ -386,8 +461,9 @@
             android:layout_weight="1"
             android:contentDescription="Search" />
 
-        <!-- post button -->
+        <!-- Add Button -->
         <ImageView
+            android:id="@+id/add_image"
             android:layout_width="0dp"
             android:layout_height="24dp"
             android:src="@drawable/add"
@@ -395,8 +471,9 @@
             android:layout_weight="1"
             android:contentDescription="Add" />
 
-        <!-- heart button -->
+        <!-- Heart Button -->
         <ImageView
+            android:id="@+id/heart_image"
             android:layout_width="0dp"
             android:layout_height="24dp"
             android:src="@drawable/heart"
@@ -404,14 +481,14 @@
             android:layout_weight="1"
             android:contentDescription="Heart" />
 
-        <!-- profile button -->
+        <!-- Profile Button -->
         <ImageView
+            android:id="@+id/profile_image"
             android:layout_width="0dp"
             android:layout_height="24dp"
             android:src="@drawable/profile"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:contentDescription="Profile" />
-
     </LinearLayout>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
