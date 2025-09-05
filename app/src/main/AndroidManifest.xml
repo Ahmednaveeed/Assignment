@@ -12,6 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Assignment">
         <activity
+            android:name=".message"
+            android:exported="false" />
+        <activity
+            android:name=".search"
+            android:exported="false" />
+        <activity
+            android:name=".register"
+            android:exported="false" />
+        <activity
+            android:name=".login"
+            android:exported="false" />
+        <activity
             android:name=".savedacc"
             android:exported="false" />
         <activity
