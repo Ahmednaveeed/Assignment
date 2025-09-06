@@ -49,26 +49,26 @@
 
     <!-- Text Button -->
     <ImageView
-        android:id="@+id/hangup_button"
+        android:id="@+id/text_button"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/text"
         android:contentDescription="Text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/mute_button"
+        app:layout_constraintEnd_toStartOf="@+id/hangup_button"
         android:layout_marginBottom="80dp"
         android:layout_marginEnd="16dp" />
 
     <!-- Hangup button -->
     <ImageView
-        android:id="@+id/mute_button"
+        android:id="@+id/hangup_button"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:src="@drawable/hangup"
         android:contentDescription="Hangup"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/hangup_button"
+        app:layout_constraintStart_toEndOf="@+id/text_button"
         app:layout_constraintEnd_toStartOf="@+id/speaker_button"
         android:layout_marginBottom="50dp"
         android:layout_marginStart="16dp"
@@ -82,7 +82,7 @@
         android:src="@drawable/speaker"
         android:contentDescription="speaker"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/mute_button"
+        app:layout_constraintStart_toEndOf="@+id/hangup_button"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="75dp"
         android:layout_marginStart="16dp" />

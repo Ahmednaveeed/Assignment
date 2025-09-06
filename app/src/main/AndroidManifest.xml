@@ -21,7 +21,7 @@
             android:name=".Callandrew"
             android:exported="false" />
         <activity
-            android:name=".Callmartini"
+            android:name=".Callmartni"
             android:exported="false" />
         <activity
             android:name=".Callkarenne"
@@ -33,7 +33,7 @@
             android:name=".DMmax"
             android:exported="false" />
         <activity
-            android:name=".DMkeiron"
+            android:name=".DMkeiro"
             android:exported="false" />
         <activity
             android:name=".DMandrew"
@@ -61,15 +61,16 @@
             android:exported="false" />
         <activity
             android:name=".savedacc"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false">
         </activity>
     </application>
 

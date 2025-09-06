@@ -76,16 +76,32 @@
         android:layout_marginTop="16dp"/>
 
     <!-- Sign Up Link at Bottom -->
-    <TextView
-        android:id="@+id/signUp"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Don’t have an account? Sign up"
-        android:textColor="#8B4513"
-        android:textSize="14sp"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginBottom="24dp"/>
+        android:layout_marginBottom="24dp">
+
+        <!-- Normal text -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Don’t have an account? "
+            android:textColor="#8B4513"
+            android:textSize="14sp" />
+
+        <!-- Bold, clickable Sign up -->
+        <TextView
+            android:id="@+id/signUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sign up"
+            android:textColor="#8B4513"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

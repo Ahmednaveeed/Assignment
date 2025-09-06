@@ -3,28 +3,28 @@ package com.ahmed.i221132
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
-import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class DMjoshua : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_dmjoshua)
+        setContentView(R.layout.activity_home)
 
-        val video_call_button = findViewById<ImageView>(R.id.video_call_button)
+        val search_image = findViewById<ImageView>(R.id.search_image)
+        val message_button = findViewById<ImageView>(R.id.message_button)
 
-        video_call_button.setOnClickListener {
-            val intent = Intent(this, Calljoshua::class.java)
+        search_image.setOnClickListener {
+            val intent = Intent(this, search::class.java)
             startActivity(intent)
         }
 
-        val back_button = findViewById<ImageView>(R.id.back_button)
-        back_button.setOnClickListener {
+        message_button.setOnClickListener {
             val intent = Intent(this, message::class.java)
             startActivity(intent)
         }
+
     }
 }

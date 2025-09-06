@@ -50,24 +50,26 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp">
 
+        <!-- shop button -->
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
+            android:background="@android:color/white"
             android:layout_margin="4dp">
 
             <TextView
-                android:layout_width="60dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="8dp"
                 android:text="Shop"
-                android:textColor="#8B4513"
-                android:padding="8dp"/>
+                android:textColor="#8B4513" />
         </androidx.cardview.widget.CardView>
 
+        <!-- style button -->
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
+            android:background="@android:color/white"
             android:layout_margin="4dp">
 
             <TextView
@@ -78,10 +80,11 @@
                 android:padding="8dp"/>
         </androidx.cardview.widget.CardView>
 
+        <!-- sports button -->
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
+            android:background="@android:color/white"
             android:layout_margin="4dp">
 
             <TextView
@@ -92,10 +95,11 @@
                 android:padding="8dp"/>
         </androidx.cardview.widget.CardView>
 
+        <!-- audio button -->
         <androidx.cardview.widget.CardView
             android:layout_width="60dp"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
+            android:background="@android:color/white"
             android:layout_margin="4dp">
 
             <TextView
@@ -106,10 +110,11 @@
                 android:padding="8dp"/>
         </androidx.cardview.widget.CardView>
 
+        <!-- music button -->
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
+            android:background="@android:color/white"
             android:layout_margin="4dp">
 
             <TextView
@@ -300,17 +305,18 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
+            android:id="@+id/home_image"
             android:layout_width="0dp"
             android:layout_height="24dp"
             android:layout_weight="1"
-            android:src="@drawable/home"
+            android:src="@drawable/homee"
             android:contentDescription="Home"/>
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="24dp"
             android:layout_weight="1"
-            android:src="@drawable/search"
+            android:src="@drawable/search3"
             android:contentDescription="search"/>
 
         <ImageView
