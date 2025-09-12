@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Assignment">
         <activity
+            android:name=".heart_you"
+            android:exported="false" />
+        <activity
+            android:name=".heart_following"
+            android:exported="false" />
+        <activity
             android:name=".highlight3"
             android:exported="false" />
         <activity
