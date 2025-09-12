@@ -263,11 +263,14 @@
                     android:padding="8dp">
 
                     <!-- Poster's Data -->
+
+                    <!-- Post Image -->
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/poster_data"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:layout_editor_absoluteX="-43dp">
 
                         <!-- Poster's Profile Picture -->
                         <ImageView
@@ -277,38 +280,40 @@
                             android:layout_marginEnd="8dp"
                             android:contentDescription="joshua"
                             android:src="@drawable/oval"
+                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintBottom_toBottomOf="parent" />
+                            app:layout_constraintTop_toTopOf="parent" />
 
                         <!-- Poster's Name and Location -->
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:id="@+id/textContainer"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="@+id/profileImage"
                             app:layout_constraintStart_toEndOf="@+id/profileImage"
-                            app:layout_constraintTop_toTopOf="@+id/profileImage"
-                            app:layout_constraintBottom_toBottomOf="@+id/profileImage">
+                            app:layout_constraintTop_toTopOf="@+id/profileImage">
 
                             <TextView
                                 android:id="@+id/name_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
                                 android:text="joshua_j"
                                 android:textColor="@color/black"
                                 android:textSize="16sp"
-                                app:layout_constraintTop_toTopOf="parent"
-                                app:layout_constraintStart_toStartOf="parent" />
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
 
                             <TextView
                                 android:id="@+id/location_text"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
                                 android:text="Tokyo, Japan"
                                 android:textColor="@color/black"
                                 android:textSize="12sp"
-                                app:layout_constraintTop_toBottomOf="@+id/name_text"
-                                app:layout_constraintStart_toStartOf="parent" />
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/name_text" />
                         </androidx.constraintlayout.widget.ConstraintLayout>
 
                         <!-- Options Bar -->
@@ -316,16 +321,14 @@
                             android:id="@+id/options_bar"
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:layout_marginStart="8dp"
-                            android:layout_marginEnd="8dp"
+                            android:layout_marginEnd="4dp"
                             android:contentDescription="Options"
                             android:src="@drawable/options"
+                            app:layout_constraintBottom_toBottomOf="@+id/profileImage"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/profileImage"
-                            app:layout_constraintBottom_toBottomOf="@+id/profileImage" />
+                            app:layout_constraintTop_toTopOf="@+id/profileImage" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <!-- Post Image -->
                     <ImageView
                         android:id="@+id/post_image"
                         android:layout_width="0dp"
@@ -463,7 +466,7 @@
 
         <!-- Add Button -->
         <ImageView
-            android:id="@+id/add_image"
+            android:id="@+id/add_post"
             android:layout_width="0dp"
             android:layout_height="24dp"
             android:src="@drawable/add"
