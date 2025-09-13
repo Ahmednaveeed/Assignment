@@ -21,30 +21,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!-- Top bar -->
-
+            <!-- username -->
             <TextView
                 android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="160dp"
+                android:layout_marginStart="120dp"
                 android:layout_marginTop="16dp"
-                android:text="jacob_w"
+                android:text="_ahmednaveeed"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:textColor="#8B4513"
                 app:layout_constraintEnd_toStartOf="@id/dropdown_icon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <!-- arrow -->
             <ImageView
                 android:id="@+id/dropdown_icon"
-                android:layout_width="18dp"
-                android:layout_height="18dp"
-                android:layout_marginStart="4dp"
-                android:src="@drawable/back"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/back2"
                 app:layout_constraintBottom_toBottomOf="@+id/username"
-                app:layout_constraintStart_toEndOf="@id/username"/>
+                app:layout_constraintStart_toEndOf="@id/username"
+                app:tint="#8B4513" />
 
+            <!-- options -->
             <ImageView
                 android:id="@+id/options_btn"
                 android:layout_width="24dp"
@@ -56,11 +60,11 @@
                 android:layout_marginEnd="16dp"/>
 
             <!-- Profile image -->
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/profile_image"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
-                android:src="@drawable/profile"
+                android:src="@drawable/ahmed"
                 android:scaleType="centerCrop"
                 android:background="@drawable/circle"
                 android:padding="2dp"
@@ -74,7 +78,7 @@
                 android:id="@+id/posts_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="54"
+                android:text="9"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="@id/profile_image"
@@ -138,12 +142,12 @@
                 app:layout_constraintStart_toStartOf="@id/following_count"
                 app:layout_constraintEnd_toEndOf="@id/following_count"/>
 
-            <!-- Bio -->
+            <!-- name -->
             <TextView
                 android:id="@+id/bio_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Jacob West"
+                android:text="Ahmed Naveed"
                 android:textStyle="bold"
                 android:textSize="16sp"
                 app:layout_constraintTop_toBottomOf="@id/profile_image"
@@ -151,11 +155,12 @@
                 android:layout_marginTop="12dp"
                 android:layout_marginStart="16dp"/>
 
+            <!-- BIO -->
             <TextView
                 android:id="@+id/bio_work"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Digital goodies designer @pixsellz"
+                android:text="22 | FAST | ISB"
                 android:textSize="14sp"
                 app:layout_constraintTop_toBottomOf="@id/bio_name"
                 app:layout_constraintStart_toStartOf="parent"
@@ -165,7 +170,7 @@
                 android:id="@+id/bio_quote"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Everything is designed."
+                android:text="developer."
                 android:textSize="14sp"
                 app:layout_constraintTop_toBottomOf="@id/bio_work"
                 app:layout_constraintStart_toStartOf="parent"
@@ -176,12 +181,14 @@
             <Button
                 android:id="@+id/editProfileBtn"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
                 android:text="Edit Profile"
+                android:background="@drawable/rounded_button"
                 app:layout_constraintTop_toBottomOf="@id/bio_quote"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="15dp"
+                android:backgroundTint="#8B4513"
                 android:layout_marginHorizontal="16dp"/>
 
             <!-- Stories -->
@@ -200,7 +207,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <!-- Repeat story item -->
+                    <!-- New highlight -->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -209,18 +216,84 @@
                         android:layout_marginStart="20dp"
                         android:layout_marginEnd="12dp">
 
-                        <ImageView
+                        <!-- Outer White Circle -->
+                        <FrameLayout
                             android:layout_width="60dp"
                             android:layout_height="60dp"
-                            android:src="@drawable/profile"
-                            android:background="@drawable/circle"
+                            android:background="@drawable/highlight_circle"
+                            android:gravity="center">
+
+                            <!-- Plus Icon in the center -->
+                            <ImageView
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:contentDescription="Add New Highlight"
+                                android:src="@drawable/plus"
+                                android:scaleType="centerInside"
+                                android:layout_marginStart="19dp"
+                                android:layout_marginTop="18dp"
+                                app:tint="#8B4513" />
+                        </FrameLayout>
+
+                        <!-- Label -->
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="New"
+                            android:textSize="15sp"
+                            android:gravity="center"
+                            android:textColor="#8B4513"
+                            android:layout_marginTop="4dp"/>
+                    </LinearLayout>
+
+
+                    <!-- first highlight -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="12dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/highlight1"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:src="@drawable/cars"
                             android:padding="2dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Story 1"
-                            android:textSize="12sp"
+                            android:text="Cars"
+                            android:textSize="15sp"
+                            android:textColor="#8B4513"
+                            android:gravity="center"/>
+                    </LinearLayout>
+
+                    <!-- second highlight -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="12dp">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/highlight2"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:src="@drawable/sky"
+                            android:padding="2dp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sky"
+                            android:textSize="15sp"
+                            android:textColor="#8B4513"
                             android:gravity="center"/>
                     </LinearLayout>
 
@@ -232,64 +305,19 @@
                         android:layout_marginStart="15dp"
                         android:layout_marginEnd="12dp">
 
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:src="@drawable/profile"
-                            android:background="@drawable/circle"
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/highlight3"
+                            android:layout_width="70dp"
+                            android:layout_height="70dp"
+                            android:src="@drawable/trips"
                             android:padding="2dp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Story 1"
-                            android:textSize="12sp"
-                            android:gravity="center"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="12dp">
-
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:src="@drawable/profile"
-                            android:background="@drawable/circle"
-                            android:padding="2dp"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Story 1"
-                            android:textSize="12sp"
-                            android:gravity="center"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="12dp">
-
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:src="@drawable/profile"
-                            android:background="@drawable/circle"
-                            android:padding="2dp"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Story 1"
-                            android:textSize="12sp"
+                            android:text="Trips"
+                            android:textSize="15sp"
+                            android:textColor="#8B4513"
                             android:gravity="center"/>
                     </LinearLayout>
 
@@ -308,22 +336,27 @@
 
                 <ImageView
                     android:id="@+id/imageView"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:contentDescription="Grid"
-                    android:src="@drawable/circle"
+                    android:src="@drawable/feed"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginStart="80dp"
-                    tools:layout_editor_absoluteY="16dp" />
+                    app:tint="#8B4513"
+                    tools:layout_editor_absoluteY="16dp"
+                    tools:ignore="MissingConstraints" />
 
+                <!-- third highlight -->
                 <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:contentDescription="Tagged"
-                    android:src="@drawable/circle"
+                    android:src="@drawable/tag"
                     app:layout_constraintStart_toEndOf="@+id/imageView"
                     android:layout_marginStart="185dp"
-                    tools:layout_editor_absoluteY="16dp" />
+                    tools:layout_editor_absoluteY="16dp"
+                    app:tint="#a89fa7"
+                    tools:ignore="MissingConstraints" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <!-- Posts Grid -->
@@ -342,55 +375,55 @@
                     android:layout_height="120dp"
                     android:layout_columnWeight="1"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/image1"/>
+                    android:src="@drawable/post1"/>
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="120dp"
                     android:layout_columnWeight="1"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/image1"/>
+                    android:src="@drawable/post4"/>
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="120dp"
                     android:layout_columnWeight="1"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/image1"/>
+                    android:src="@drawable/post6"/>
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="120dp"
                     android:layout_columnWeight="1"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/image1"/>
+                    android:src="@drawable/post3"/>
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="120dp"
                     android:layout_columnWeight="1"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/image1"/>
+                    android:src="@drawable/post7"/>
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="120dp"
                     android:layout_columnWeight="1"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/image1"/>
+                    android:src="@drawable/post9"/>
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="120dp"
                     android:layout_columnWeight="1"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/image1"/>
+                    android:src="@drawable/post2"/>
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="120dp"
                     android:layout_columnWeight="1"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/image1"/>
+                    android:src="@drawable/post5"/>
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="120dp"
                     android:layout_columnWeight="1"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/image1"/>
+                    android:src="@drawable/post8"/>
             </GridLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -408,30 +441,40 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <ImageView
+            android:id="@+id/home_image"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="30dp"
-            android:src="@drawable/home"/>
+            android:src="@drawable/homee"
+            android:layout_marginTop="10dp"/>
         <ImageView
+            android:id="@+id/search_image"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="55dp"
-            android:src="@drawable/home"/>
+            android:src="@drawable/search"
+            android:layout_marginTop="10dp"/>
         <ImageView
+            android:id="@+id/add_post"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="55dp"
-            android:src="@drawable/search"/>
+            android:src="@drawable/add"
+            android:layout_marginTop="10dp"/>
         <ImageView
+            android:id="@+id/heart_image"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="55dp"
-            android:src="@drawable/add"/>
-        <ImageView
+            android:src="@drawable/heart"
+            android:layout_marginTop="10dp"/>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginStart="55dp"
-            android:src="@drawable/profile"/>
+            android:src="@drawable/ahmed"
+            android:layout_marginTop="10dp"/>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

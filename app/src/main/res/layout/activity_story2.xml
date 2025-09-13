@@ -31,12 +31,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/highlight_icon"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/circle2"
-            android:adjustViewBounds="true"
+            android:src="@drawable/hammad"
             android:layout_marginEnd="8dp" />
 
         <LinearLayout
@@ -51,7 +50,7 @@
                 android:id="@+id/highlight_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="username"
+                android:text="hammad_yaseen"
                 android:textColor="#FFFFFF"
                 android:textSize="17sp"
                 android:textStyle="bold" />
@@ -60,9 +59,9 @@
                 android:id="@+id/highlight_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="4h"
+                android:text="15h"
                 android:textSize="16sp"
-                android:textColor="@color/black"
+                android:textColor="#AFACAC"
                 android:paddingLeft="10dp"
                 android:layout_marginEnd="4dp" />
         </LinearLayout>
@@ -73,12 +72,13 @@
         android:id="@+id/close_button"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:src="@drawable/back"
+        android:src="@drawable/close"
         android:contentDescription="Close Story"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        app:tint="@color/white"/>
 
     <!-- Bottom Story Reply Bar -->
     <androidx.cardview.widget.CardView
@@ -113,7 +113,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/camera2"
-                    app:tint="#AAAAAA"
+                    app:tint="#AD6666"
                     android:layout_marginEnd="8dp"
                     android:contentDescription="Camera" />
 
@@ -123,7 +123,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Send message"
-                    android:textColor="#AAAAAA"
+                    android:textColor="#AD6666"
                     android:textSize="14sp" />
             </LinearLayout>
 
@@ -133,8 +133,8 @@
                 android:layout_width="26dp"
                 android:layout_height="26dp"
                 android:layout_marginStart="12dp"
-                android:src="@drawable/share"
-                app:tint="#FFFFFF"
+                android:src="@drawable/send"
+                app:tint="#AD6666"
                 android:contentDescription="Share" />
 
             <!-- Options Icon -->
@@ -144,7 +144,7 @@
                 android:layout_height="26dp"
                 android:layout_marginStart="16dp"
                 android:src="@drawable/options"
-                app:tint="#FFFFFF"
+                app:tint="#AD6666"
                 android:contentDescription="Options" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>

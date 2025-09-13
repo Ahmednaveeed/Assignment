@@ -7,12 +7,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".yourstory">
 
-    <!-- Full-Screen Story Image (Ends Above Nav Bar) -->
+    <!-- Full-Screen Story Image -->
     <ImageView
         android:id="@+id/story_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/image1"
+        android:src="@drawable/story0"
         android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,12 +31,11 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/highlight_icon"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:src="@drawable/circle2"
-            android:adjustViewBounds="true"
+            android:src="@drawable/ahmed"
             android:layout_marginEnd="8dp" />
 
         <LinearLayout
@@ -51,7 +50,7 @@
                 android:id="@+id/highlight_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="username"
+                android:text="_ahmednaveeed"
                 android:textColor="#FFFFFF"
                 android:textSize="17sp"
                 android:textStyle="bold" />
@@ -60,9 +59,9 @@
                 android:id="@+id/highlight_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="4h"
+                android:text="2h"
                 android:textSize="16sp"
-                android:textColor="@color/black"
+                android:textColor="#B3B3B3"
                 android:paddingLeft="10dp"
                 android:layout_marginEnd="4dp" />
         </LinearLayout>
@@ -73,12 +72,13 @@
         android:id="@+id/close_button"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:src="@drawable/back"
+        android:src="@drawable/close"
         android:contentDescription="Close Story"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        app:tint="@color/white"/>
 
     <!-- Bottom Story Bar -->
     <androidx.cardview.widget.CardView
@@ -104,28 +104,25 @@
                 android:orientation="horizontal"
                 android:paddingStart="12dp">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:src="@drawable/oval"
+                    android:src="@drawable/faizan"
                     android:scaleType="centerCrop"
-                    android:background="@drawable/circle"
                     android:layout_marginEnd="-8dp" />
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:src="@drawable/oval"
+                    android:src="@drawable/umair"
                     android:scaleType="centerCrop"
-                    android:background="@drawable/circle"
                     android:layout_marginEnd="-8dp" />
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:src="@drawable/oval"
-                    android:scaleType="centerCrop"
-                    android:background="@drawable/circle" />
+                    android:src="@drawable/hammad"
+                    android:scaleType="centerCrop" />
             </LinearLayout>
 
             <!-- Right: Options Icon -->
@@ -136,7 +133,7 @@
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/options"
-                app:tint="#FFFFFF"
+                app:tint="#836868"
                 android:contentDescription="Options"
                 android:layout_marginEnd="12dp" />
 
@@ -163,15 +160,15 @@
                         android:id="@+id/btn_highlight_icon"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
-                        android:src="@drawable/circle2"
-                        android:contentDescription="Highlight"
-                        android:background="@drawable/circle2"
+                        android:src="@drawable/reels"
+                        android:contentDescription="create"
+                        app:tint="#836868"
                         android:padding="6dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Highlight"
+                        android:text="Create"
                         android:textSize="12sp"
                         android:textColor="#FFFFFF"
                         android:layout_marginTop="4dp"/>
@@ -189,9 +186,9 @@
                         android:id="@+id/btn_facebook_icon"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
-                        android:src="@drawable/circle2"
+                        android:src="@drawable/facebook"
                         android:contentDescription="Facebook"
-                        android:background="@drawable/circle2"
+                        app:tint="#836868"
                         android:padding="6dp" />
 
                     <TextView
@@ -214,15 +211,15 @@
                         android:id="@+id/btn_create_icon"
                         android:layout_width="36dp"
                         android:layout_height="36dp"
-                        android:src="@drawable/circle2"
+                        android:src="@drawable/highlight"
                         android:contentDescription="Create"
-                        android:background="@drawable/circle2"
+                        app:tint="#836868"
                         android:padding="6dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Create"
+                        android:text="highlight"
                         android:textSize="12sp"
                         android:textColor="#FFFFFF"
                         android:layout_marginTop="4dp"/>

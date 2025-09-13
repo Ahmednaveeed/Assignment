@@ -5,10 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import android.widget.LinearLayout
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class message : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -30,32 +27,32 @@ class message : AppCompatActivity() {
         }
 
         dm1.setOnClickListener {
-            val intent = Intent(this, DMjoshua::class.java)
+            val intent = Intent(this, DMhammad::class.java)
             startActivity(intent)
         }
 
         dm2.setOnClickListener {
-            val intent = Intent(this, DMkarenne::class.java)
+            val intent = Intent(this, DMabdullah::class.java)
             startActivity(intent)
         }
 
         dm3.setOnClickListener {
-            val intent = Intent(this, DMmartini::class.java)
+            val intent = Intent(this, DMzohaib::class.java)
             startActivity(intent)
         }
 
         dm4.setOnClickListener {
-            val intent = Intent(this, DMandrew::class.java)
+            val intent = Intent(this, DMsauleh::class.java)
             startActivity(intent)
         }
 
         dm5.setOnClickListener {
-            val intent = Intent(this, DMkeiro::class.java)
+            val intent = Intent(this, DMfaizan::class.java)
             startActivity(intent)
         }
 
         dm6.setOnClickListener {
-            val intent = Intent(this, DMmax::class.java)
+            val intent = Intent(this, DMumair::class.java)
             startActivity(intent)
         }
 

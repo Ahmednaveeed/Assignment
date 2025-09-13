@@ -5,12 +5,12 @@
     android:layout_height="match_parent"
     android:background="#000000">
 
-    <!-- Full-Screen Story Image (Ends Above Nav Bar) -->
+    <!-- Full-Screen Story Image  -->
     <ImageView
         android:id="@+id/story_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/image1"
+        android:src="@drawable/hl1"
     android:scaleType="centerCrop"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintStart_toStartOf="parent"
@@ -29,13 +29,12 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/highlight_icon"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/circle"
-        android:adjustViewBounds="true"
-        android:layout_marginEnd="8dp" />
+            android:src="@drawable/cars"
+            android:layout_marginEnd="8dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -49,9 +48,9 @@
                 android:id="@+id/highlight_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Highlight"
-                android:textColor="#FFFFFF"
-                android:textSize="17sp"
+                android:text="Cars"
+                android:textColor="#E6E0E0"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -59,8 +58,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Sep 12, 2025"
-                android:textSize="14sp"
-                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textColor="#CAC4C4"
                 android:paddingLeft="10dp"
                 android:layout_marginEnd="4dp" />
         </LinearLayout>
@@ -71,14 +70,15 @@
         android:id="@+id/close_button"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:src="@drawable/back"
+        android:src="@drawable/close"
         android:contentDescription="Close Story"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="16dp"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="20dp"
+        app:tint="@color/white"/>
 
-    <!-- Bottom Navigation Bar with Curved Rectangle -->
+    <!-- Bottom Navigation Bar -->
     <androidx.cardview.widget.CardView
         android:id="@+id/bottom_nav_bar"
         android:layout_width="match_parent"
@@ -110,7 +110,8 @@
                     android:layout_marginEnd="4dp"
                     android:adjustViewBounds="true"
                     android:contentDescription="View"
-                    android:src="@drawable/circle2" />
+                    android:src="@drawable/activity"
+                    app:tint="#855A40"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -136,7 +137,8 @@
                     android:layout_marginEnd="4dp"
                     android:adjustViewBounds="true"
                     android:contentDescription="Create"
-                    android:src="@drawable/circle2" />
+                    android:src="@drawable/reels"
+                    app:tint="#855A40"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -162,7 +164,8 @@
                     android:layout_marginEnd="4dp"
                     android:adjustViewBounds="true"
                     android:contentDescription="Create Post"
-                    android:src="@drawable/circle2" />
+                    android:src="@drawable/create"
+                    app:tint="#855A40"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -188,7 +191,8 @@
                     android:layout_marginEnd="4dp"
                     android:adjustViewBounds="true"
                     android:contentDescription="Browse"
-                    android:src="@drawable/circle2" />
+                    android:src="@drawable/browse"
+                    app:tint="#855A40"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -208,18 +212,19 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:id="@+id/img_options"
+                    android:id="@+id/share"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginEnd="4dp"
                     android:adjustViewBounds="true"
                     android:contentDescription="Options"
-                    android:src="@drawable/circle2" />
+                    android:src="@drawable/send"
+                    app:tint="#855A40"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Options"
+                    android:text="send"
                     android:textSize="12sp"
                     android:textColor="#FFFFFF"
                     android:gravity="center" />
@@ -234,17 +239,18 @@
                 android:gravity="center">
 
                 <ImageView
-                    android:id="@+id/img_send"
+                    android:id="@+id/options"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:adjustViewBounds="true"
                     android:contentDescription="Send"
-                    android:src="@drawable/circle2" />
+                    android:src="@drawable/options"
+                    app:tint="#855A40"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Send"
+                    android:text="more"
                     android:textSize="12sp"
                     android:textColor="#FFFFFF"
                     android:gravity="center" />

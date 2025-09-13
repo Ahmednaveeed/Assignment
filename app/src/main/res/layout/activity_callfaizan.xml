@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#BF6262">
+
+    <!-- Profile Picture -->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/profile_image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/faizan"
+        android:contentDescription="Profile Picture"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_chainStyle="packed"
+        android:layout_marginBottom="32dp" />
+
+    <!-- Name -->
+    <TextView
+        android:id="@+id/name_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="faizan_naveed"
+        android:textColor="#ffffff"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@+id/profile_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <!-- Call Duration -->
+    <TextView
+        android:id="@+id/duration_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="03:21"
+        android:textColor="#ffffff"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/name_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <!-- Text Button -->
+    <ImageView
+        android:id="@+id/text_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/text"
+        android:contentDescription="Text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/hangup_button"
+        android:layout_marginBottom="80dp"
+        android:layout_marginEnd="16dp" />
+
+    <!-- Hangup button -->
+    <ImageView
+        android:id="@+id/hangup_button"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:src="@drawable/hangup"
+        android:contentDescription="Hangup"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/text_button"
+        app:layout_constraintEnd_toStartOf="@+id/speaker_button"
+        android:layout_marginBottom="50dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp" />
+
+    <!-- Speaker Button -->
+    <ImageView
+        android:id="@+id/speaker_button"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/speaker"
+        android:contentDescription="speaker"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/hangup_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="75dp"
+        android:layout_marginStart="16dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

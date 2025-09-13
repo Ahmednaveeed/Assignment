@@ -51,40 +51,40 @@
             android:name=".Profile"
             android:exported="false" />
         <activity
-            android:name=".Callmax"
+            android:name=".Callumair"
             android:exported="false" />
         <activity
-            android:name=".Callkeiro"
+            android:name=".Callfaizan"
             android:exported="false" />
         <activity
-            android:name=".Callandrew"
+            android:name=".Callsauleh"
             android:exported="false" />
         <activity
-            android:name=".Callmartni"
+            android:name=".Callzohaib"
             android:exported="false" />
         <activity
-            android:name=".Callkarenne"
+            android:name=".Callabdullah"
             android:exported="false" />
         <activity
-            android:name=".Calljoshua"
+            android:name=".Callhammad"
             android:exported="false" />
         <activity
-            android:name=".DMmax"
+            android:name=".DMumair"
             android:exported="false" />
         <activity
-            android:name=".DMkeiro"
+            android:name=".DMfaizan"
             android:exported="false" />
         <activity
-            android:name=".DMandrew"
+            android:name=".DMsauleh"
             android:exported="false" />
         <activity
-            android:name=".DMmartini"
+            android:name=".DMzohaib"
             android:exported="false" />
         <activity
-            android:name=".DMkarenne"
+            android:name=".DMabdullah"
             android:exported="false" />
         <activity
-            android:name=".DMjoshua"
+            android:name=".DMhammad"
             android:exported="false" />
         <activity
             android:name=".message"

@@ -9,6 +9,7 @@
     android:background="@android:color/white"
     tools:context=".heart_you">
 
+    <!-- top bar -->
     <LinearLayout
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
@@ -26,7 +27,7 @@
             android:text="Following"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="@color/black" />
+            android:textColor="#8B4513" />
 
         <TextView
             android:id="@+id/tab_you"
@@ -36,7 +37,7 @@
             android:gravity="center"
             android:text="You"
             android:textSize="16sp"
-            android:textColor="@color/black" />
+            android:textColor="#8B4513" />
     </LinearLayout>
 
     <!-- Scrollable content -->
@@ -44,10 +45,9 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/tabLayout"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/navigation_bar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
-        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -62,7 +62,7 @@
                 android:text="Follow Requests"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="#C62828"
+                android:textColor="#8B4513"
                 android:paddingVertical="12dp" />
 
             <!-- Section: New -->
@@ -77,31 +77,30 @@
             <!-- Row: New notification -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:paddingVertical="6dp">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/sample_user1"
+                    android:src="@drawable/abdullah"
                     android:scaleType="centerCrop"
-                    android:background="@drawable/circle_background"
                     android:layout_marginEnd="8dp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="karennne liked your photo. 1h"
+                    android:text="abdullah_malik309 liked your photo. 1h"
                     android:textSize="14sp"
                     android:textColor="@android:color/black" />
 
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/sample_post1"
+                    android:src="@drawable/post1"
                     android:scaleType="centerCrop"
                     android:layout_marginStart="8dp" />
             </LinearLayout>
@@ -115,34 +114,33 @@
                 android:textStyle="bold"
                 android:paddingVertical="8dp" />
 
-            <!-- Row: Today multi-likes -->
+            <!-- Row: Today -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:paddingVertical="6dp">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/sample_user2"
+                    android:src="@drawable/faizan"
                     android:scaleType="centerCrop"
-                    android:background="@drawable/circle_background"
                     android:layout_marginEnd="8dp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="kiero_d, zackjohn and 26 others liked your photo. 3h"
+                    android:text="faizan_naveed, zohaib_shafqat and 26 others liked your photo. 3h"
                     android:textSize="14sp"
                     android:textColor="@android:color/black" />
 
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/sample_post2"
+                    android:src="@drawable/post9"
                     android:scaleType="centerCrop"
                     android:layout_marginStart="8dp" />
             </LinearLayout>
@@ -159,56 +157,54 @@
             <!-- Row: Mention -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:paddingVertical="6dp">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/sample_user3"
+                    android:src="@drawable/umair"
                     android:scaleType="centerCrop"
-                    android:background="@drawable/circle_background"
                     android:layout_marginEnd="8dp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="craig_love mentioned you in a comment: @jacob_w exactly.. 2d"
+                    android:text="umair.asghar mentioned you in a comment: @_ahmednaveeed exactly.. 2d"
                     android:textSize="14sp"
                     android:textColor="@android:color/black" />
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/sample_post3"
+                    android:src="@drawable/post4"
                     android:scaleType="centerCrop"
                     android:layout_marginStart="8dp" />
             </LinearLayout>
 
-            <!-- Row: Started Following + Button -->
+            <!-- Row: Started Following -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:paddingVertical="6dp">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/sample_user4"
+                    android:src="@drawable/zohaib"
                     android:scaleType="centerCrop"
-                    android:background="@drawable/circle_background"
                     android:layout_marginEnd="8dp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="martini_rond started following you. 3d"
+                    android:text="zohaib_shafqat has started following you. 3d"
                     android:textSize="14sp"
                     android:textColor="@android:color/black" />
 
@@ -221,27 +217,26 @@
                     android:textColor="@android:color/black" />
             </LinearLayout>
 
-            <!-- Row: Started Following + Button -->
+            <!-- Row: Started Following -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:paddingVertical="6dp">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/sample_user5"
+                    android:src="@drawable/umair"
                     android:scaleType="centerCrop"
-                    android:background="@drawable/circle_background"
                     android:layout_marginEnd="8dp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="maxjacobson started following you. 3d"
+                    android:text="umair started following you. 3d"
                     android:textSize="14sp"
                     android:textColor="@android:color/black" />
 
@@ -254,27 +249,26 @@
                     android:textColor="@android:color/black" />
             </LinearLayout>
 
-            <!-- Row: Started Following + Follow Button -->
+            <!-- Row: Started Following -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:paddingVertical="6dp">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/sample_user6"
+                    android:src="@drawable/hammad"
                     android:scaleType="centerCrop"
-                    android:background="@drawable/circle_background"
                     android:layout_marginEnd="8dp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="mis_potter started following you. 3d"
+                    android:text="hammad_yasin has started following you. 3d"
                     android:textSize="14sp"
                     android:textColor="@android:color/black" />
 
@@ -283,7 +277,7 @@
                     android:layout_height="32dp"
                     android:text="Follow"
                     android:textSize="12sp"
-                    android:backgroundTint="#C62828"
+                    android:backgroundTint="#8B4513"
                     android:textColor="@android:color/white" />
             </LinearLayout>
 
@@ -296,31 +290,91 @@
                 android:textStyle="bold"
                 android:paddingVertical="8dp" />
 
-            <!-- Example row under This Month -->
+            <!-- row under Month -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 android:paddingVertical="6dp">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/sample_user7"
+                    android:src="@drawable/sauleh"
                     android:scaleType="centerCrop"
-                    android:background="@drawable/circle_background"
                     android:layout_marginEnd="8dp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="mr_burnham started following you. 4w"
+                    android:text="sauleh_naveed started following you. 4w"
                     android:textSize="14sp"
                     android:textColor="@android:color/black" />
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/navigation_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Home Button -->
+        <ImageView
+            android:id="@+id/home_image"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:src="@drawable/homee"
+            android:layout_weight="1"
+            android:contentDescription="Home" />
+
+        <!-- Search Button -->
+        <ImageView
+            android:id="@+id/search_image"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:src="@drawable/search"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:contentDescription="Search" />
+
+        <!-- Add Button -->
+        <ImageView
+            android:id="@+id/add_post"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:src="@drawable/add"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:contentDescription="Add" />
+
+        <!-- Heart Button -->
+        <ImageView
+            android:id="@+id/heart_image"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:src="@drawable/heart2"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            app:tint="#8B4513"
+            android:contentDescription="Heart" />
+
+        <!-- Profile Button -->
+        <ImageView
+            android:id="@+id/profile_image"
+            android:layout_width="0dp"
+            android:layout_height="24dp"
+            android:src="@drawable/profile"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:contentDescription="Profile" />
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

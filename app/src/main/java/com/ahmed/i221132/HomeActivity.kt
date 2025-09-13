@@ -16,9 +16,15 @@ class HomeActivity : AppCompatActivity() {
 
         val search_image = findViewById<ImageView>(R.id.search_image)
         val message_button = findViewById<ImageView>(R.id.message_button)
-        val profile_image = findViewById<ImageView>(R.id.profile_image)
         val add_post = findViewById<ImageView>(R.id.add_post)
         val camera_button = findViewById<ImageView>(R.id.camera_button)
+        val profile_image = findViewById<ImageView>(R.id.profile_image)
+        val heart_image = findViewById<ImageView>(R.id.heart_image)
+        val your_story = findViewById<ImageView>(R.id.your_story)
+        val story1_image = findViewById<ImageView>(R.id.story1_image)
+        val story2_image = findViewById<ImageView>(R.id.story2_image)
+        val story3_image = findViewById<ImageView>(R.id.story3_image)
+        val story4_image = findViewById<ImageView>(R.id.story4_image)
 
         pickImageLauncher = registerForActivityResult(
             ActivityResultContracts.GetContent()
@@ -42,7 +48,30 @@ class HomeActivity : AppCompatActivity() {
         profile_image.setOnClickListener {
             val intent = Intent(this, Profile::class.java)
             startActivity(intent)
-
+        }
+        heart_image.setOnClickListener {
+            val intent = Intent(this, heart_following::class.java)
+            startActivity(intent)
+        }
+        your_story.setOnClickListener {
+            val intent = Intent(this, addstory::class.java)
+            startActivity(intent)
+        }
+        story1_image.setOnClickListener {
+            val intent = Intent(this, addstory::class.java)
+            startActivity(intent)
+        }
+        story2_image.setOnClickListener {
+            val intent = Intent(this, addstory::class.java)
+            startActivity(intent)
+        }
+        story3_image.setOnClickListener {
+            val intent = Intent(this, addstory::class.java)
+            startActivity(intent)
+        }
+        story4_image.setOnClickListener {
+            val intent = Intent(this, addstory::class.java)
+            startActivity(intent)
         }
         camera_button.setOnClickListener {
             pickImageLauncher.launch("image/*")

@@ -16,9 +16,28 @@ class search : AppCompatActivity() {
         setContentView(R.layout.activity_search)
 
         val home_image = findViewById<ImageView>(R.id.home_image)
+        val search_image = findViewById<ImageView>(R.id.search_image)
+        val add_post = findViewById<ImageView>(R.id.add_post)
+        val heart_image = findViewById<ImageView>(R.id.heart_image)
+        val profile_image = findViewById<ImageView>(R.id.profile_image)
 
         home_image.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
+
+        search_image.setOnClickListener {
+            val intent = Intent(this, search::class.java)
+            startActivity(intent)
+        }
+
+        heart_image.setOnClickListener {
+            val intent = Intent(this, heart_following::class.java)
+            startActivity(intent)
+        }
+
+        profile_image.setOnClickListener {
+            val intent = Intent(this, Profile::class.java)
             startActivity(intent)
         }
 

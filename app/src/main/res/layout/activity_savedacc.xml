@@ -34,44 +34,45 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="80dp">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/oval"
+            android:src="@drawable/ahmed"
             android:contentDescription="Profile Picture"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Jacob_w"
-            android:textColor="#000000"
+            android:text="_ahmednaveeed"
+            android:textStyle="bold"
+            android:textColor="#525050"
             android:textSize="18sp"
 
             android:layout_marginTop="16dp"/>
     </LinearLayout>
 
     <!-- Log In Button -->
-
-    <!-- Switch Accounts -->
     <Button
         android:id="@+id/loginBtn"
-        android:layout_width="200dp"
+        android:layout_width="330dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:backgroundTint="#8b4745"
+        android:background="@drawable/rounded_button"
         android:text="Log In"
+        android:backgroundTint="@color/black"
         android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.519"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/profileContainer" />
 
+    <!-- Switch Accounts -->
     <TextView
         android:id="@+id/switchAccounts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Switch Accounts"
         android:textColor="#8B4513"
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/loginBtn"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

@@ -1,15 +1,51 @@
 package com.ahmed.i221132
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 
 class heart_following : AppCompatActivity() {
+    @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_heart_following)
+
+        val tab_you = findViewById<ImageView>(R.id.tab_you)
+        val tab_following = findViewById<ImageView>(R.id.tab_following)
+        val home_image = findViewById<ImageView>(R.id.home_image)
+        val search_image = findViewById<ImageView>(R.id.search_image)
+        val add_post = findViewById<ImageView>(R.id.add_post)
+        val heart_image = findViewById<ImageView>(R.id.heart_image)
+        val profile_image = findViewById<ImageView>(R.id.profile_image)
+
+
+        tab_you.setOnClickListener {
+            val intent = Intent(this, heart_you::class.java)
+            startActivity(intent)
+        }
+        tab_following.setOnClickListener {
+            val intent = Intent(this, heart_following::class.java)
+            startActivity(intent)
+        }
+        home_image.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
+        }
+        search_image.setOnClickListener {
+            val intent = Intent(this, search::class.java)
+            startActivity(intent)
+        }
+        heart_image.setOnClickListener {
+            val intent = Intent(this, heart_following::class.java)
+            startActivity(intent)
+        }
+        profile_image.setOnClickListener {
+            val intent = Intent(this, Profile::class.java)
+            startActivity(intent)
+        }
+
 
     }
 }
