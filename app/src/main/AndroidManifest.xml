@@ -12,6 +12,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Assignment">
         <activity
+            android:name=".yourstory"
+            android:exported="false" />
+        <activity
+            android:name=".addstory"
+            android:exported="false" />
+        <activity
+            android:name=".story4"
+            android:exported="false" />
+        <activity
+            android:name=".story3"
+            android:exported="false" />
+        <activity
+            android:name=".story2"
+            android:exported="false" />
+        <activity
+            android:name=".story1"
+            android:exported="false" />
+        <activity
             android:name=".heart_you"
             android:exported="false" />
         <activity

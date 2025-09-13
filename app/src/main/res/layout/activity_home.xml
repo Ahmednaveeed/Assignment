@@ -74,7 +74,7 @@
             android:padding="2dp">
 
 
-            <!-- Story 1 -->
+            <!-- your story -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/story1_container"
                 android:layout_width="wrap_content"
@@ -83,7 +83,7 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <ImageView
-                    android:id="@+id/story1_image"
+                    android:id="@+id/your_story"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:src="@drawable/oval"
@@ -100,11 +100,11 @@
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:layout_marginTop="2dp"
-                    app:layout_constraintTop_toBottomOf="@+id/story1_image"
-                    app:layout_constraintStart_toStartOf="@+id/story1_image" />
+                    app:layout_constraintTop_toBottomOf="@+id/your_story"
+                    app:layout_constraintStart_toStartOf="@+id/your_story" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Story 2 -->
+            <!-- Story 1 -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/story2_container"
                 android:layout_width="wrap_content"
@@ -114,7 +114,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/story2_image"
+                    android:id="@+id/story1_image"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:src="@drawable/oval"
@@ -131,11 +131,11 @@
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:layout_marginTop="2dp"
-                    app:layout_constraintTop_toBottomOf="@+id/story2_image"
-                    app:layout_constraintStart_toStartOf="@+id/story2_image" />
+                    app:layout_constraintTop_toBottomOf="@+id/story1_image"
+                    app:layout_constraintStart_toStartOf="@+id/story1_image" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Story 3 -->
+            <!-- Story 2 -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/story3_container"
                 android:layout_width="wrap_content"
@@ -145,7 +145,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/story3_image"
+                    android:id="@+id/story2_image"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:src="@drawable/oval"
@@ -162,11 +162,11 @@
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:layout_marginTop="2dp"
-                    app:layout_constraintTop_toBottomOf="@+id/story3_image"
-                    app:layout_constraintStart_toStartOf="@+id/story3_image" />
+                    app:layout_constraintTop_toBottomOf="@+id/story2_image"
+                    app:layout_constraintStart_toStartOf="@+id/story2_image" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Story 4 -->
+            <!-- Story 3 -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/story4_container"
                 android:layout_width="wrap_content"
@@ -176,7 +176,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/story4_image"
+                    android:id="@+id/story3_image"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:src="@drawable/oval"
@@ -193,11 +193,11 @@
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:layout_marginTop="2dp"
-                    app:layout_constraintTop_toBottomOf="@+id/story4_image"
-                    app:layout_constraintStart_toStartOf="@+id/story4_image" />
+                    app:layout_constraintTop_toBottomOf="@+id/story3_image"
+                    app:layout_constraintStart_toStartOf="@+id/story3_image" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Story 5 -->
+            <!-- Story 4 -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/story5_container"
                 android:layout_width="wrap_content"
@@ -207,7 +207,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/story5_image"
+                    android:id="@+id/story4_image"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:src="@drawable/oval"
@@ -224,8 +224,8 @@
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     android:layout_marginTop="2dp"
-                    app:layout_constraintTop_toBottomOf="@+id/story5_image"
-                    app:layout_constraintStart_toStartOf="@+id/story5_image" />
+                    app:layout_constraintTop_toBottomOf="@+id/story4_image"
+                    app:layout_constraintStart_toStartOf="@+id/story4_image" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </HorizontalScrollView>

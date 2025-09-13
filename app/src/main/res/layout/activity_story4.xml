@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#000000"
+    tools:context=".story4">
+
+    <!-- Full-Screen Story Image (Ends Above Nav Bar) -->
+    <ImageView
+        android:id="@+id/story_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/image1"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/story_reply_bar" />
+
+    <!-- Top Text Section (Highlight Name and Date) -->
+    <LinearLayout
+        android:id="@+id/top_text_section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp">
+
+        <ImageView
+            android:id="@+id/highlight_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/circle2"
+            android:adjustViewBounds="true"
+            android:layout_marginEnd="8dp" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="5dp"
+            android:gravity="center_vertical">
+
+
+            <TextView
+                android:id="@+id/highlight_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="username"
+                android:textColor="#FFFFFF"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/highlight_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4h"
+                android:textSize="16sp"
+                android:textColor="@color/black"
+                android:paddingLeft="10dp"
+                android:layout_marginEnd="4dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- Close Button (Top Right) -->
+    <ImageView
+        android:id="@+id/close_button"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/back"
+        android:contentDescription="Close Story"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp" />
+
+    <!-- Bottom Story Reply Bar -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/story_reply_bar"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        app:cardCornerRadius="16dp"
+        app:cardBackgroundColor="#000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:padding="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Reply Box -->
+            <LinearLayout
+                android:layout_width="300dp"
+                android:layout_height="45dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="@drawable/reply_box_bg"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:layout_marginStart="10dp">
+
+                <!-- Camera Icon -->
+                <ImageView
+                    android:id="@+id/ic_camera"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/camera2"
+                    app:tint="#AAAAAA"
+                    android:layout_marginEnd="8dp"
+                    android:contentDescription="Camera" />
+
+                <!-- Placeholder Text -->
+                <TextView
+                    android:id="@+id/reply_placeholder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Send message"
+                    android:textColor="#AAAAAA"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
+            <!-- Share Icon -->
+            <ImageView
+                android:id="@+id/ic_share"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="12dp"
+                android:src="@drawable/share"
+                app:tint="#FFFFFF"
+                android:contentDescription="Share" />
+
+            <!-- Options Icon -->
+            <ImageView
+                android:id="@+id/ic_options"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/options"
+                app:tint="#FFFFFF"
+                android:contentDescription="Options" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
