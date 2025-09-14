@@ -12,7 +12,7 @@
         android:id="@+id/story_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:src="@drawable/image1"
+        android:src="@drawable/story2"
         android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

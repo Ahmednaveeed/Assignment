@@ -1,5 +1,8 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <solid android:color="@android:color/white"/>
-    <corners android:radius="6dp"/>
+
+    <!-- Use theme color or custom color -->
+    <solid android:color="?attr/colorPrimary"/>   <!-- takes from theme -->
+
+    <corners android:radius="12dp"/> <!-- make it more curvy if you want -->
 </shape>

@@ -16,7 +16,13 @@ class register : AppCompatActivity() {
         setContentView(R.layout.activity_register)
 
         val backBtn = findViewById<ImageView>(R.id.backBtn)
-        val passwordEditText = findViewById<EditText>(R.id.etPassword)
+
+        backBtn.setOnClickListener {
+            val intent = Intent(this, savedacc::class.java)
+            finish()
+        }
+
+        val passwordEditText = findViewById<EditText>(R.id.passwordEditText)
         val toggleIcon = findViewById<ImageView>(R.id.ivTogglePassword)
         val etDob = findViewById<EditText>(R.id.etDob)
 
@@ -26,10 +32,7 @@ class register : AppCompatActivity() {
 
         var isPasswordVisible = false
 
-        backBtn.setOnClickListener {
-            val intent = Intent(this, savedacc::class.java)
-            startActivity(intent)
-        }
+
 
         etDob.setOnClickListener {
             val calendar = Calendar.getInstance()

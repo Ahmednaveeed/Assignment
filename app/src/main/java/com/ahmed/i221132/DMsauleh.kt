@@ -20,7 +20,7 @@ class DMsauleh : AppCompatActivity() {
         val back_button = findViewById<ImageView>(R.id.back_button)
         back_button.setOnClickListener {
             val intent = Intent(this, message::class.java)
-            startActivity(intent)
+            finish()
         }
     }
 }

@@ -14,7 +14,7 @@ class Callfaizan : AppCompatActivity() {
 
         hangup_button.setOnClickListener {
             val intent = Intent(this, DMfaizan::class.java)
-            startActivity(intent)
+            finish()
         }
     }
 }

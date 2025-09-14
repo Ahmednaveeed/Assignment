@@ -14,7 +14,7 @@ class Callumair : AppCompatActivity() {
 
         hangup_button.setOnClickListener {
             val intent = Intent(this, DMumair::class.java)
-            startActivity(intent)
+            finish()
         }
     }
 }

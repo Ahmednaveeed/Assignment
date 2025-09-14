@@ -72,7 +72,6 @@
             android:layout_height="50dp"
             android:text="Log in"
             android:background="@drawable/rounded_button"
-            android:backgroundTint="@color/black"
             android:textColor="#FFFFFF"
             android:layout_marginTop="20dp"/>
 

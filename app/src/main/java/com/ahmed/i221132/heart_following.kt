@@ -1,19 +1,18 @@
 package com.ahmed.i221132
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 
 class heart_following : AppCompatActivity() {
-    @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_heart_following)
 
-        val tab_you = findViewById<ImageView>(R.id.tab_you)
-        val tab_following = findViewById<ImageView>(R.id.tab_following)
+        val tab_you = findViewById<TextView>(R.id.tab_you)
+        val tab_following = findViewById<TextView>(R.id.tab_following)
         val home_image = findViewById<ImageView>(R.id.home_image)
         val search_image = findViewById<ImageView>(R.id.search_image)
         val add_post = findViewById<ImageView>(R.id.add_post)

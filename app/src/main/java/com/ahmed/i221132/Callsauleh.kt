@@ -14,7 +14,7 @@ class Callsauleh : AppCompatActivity() {
 
         hangup_button.setOnClickListener {
             val intent = Intent(this, DMsauleh::class.java)
-            startActivity(intent)
+            finish()
         }
 
     }

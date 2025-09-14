@@ -20,7 +20,7 @@ class DMumair : AppCompatActivity() {
 
         back_button.setOnClickListener {
             val intent = Intent(this, message::class.java)
-            startActivity(intent)
+            finish()
         }
     }
 }

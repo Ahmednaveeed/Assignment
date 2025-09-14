@@ -14,7 +14,7 @@ class Callzohaib : AppCompatActivity() {
 
         hangup_button.setOnClickListener {
             val intent = Intent(this, DMzohaib::class.java)
-            startActivity(intent)
+            finish()
         }
 
     }

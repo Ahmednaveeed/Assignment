@@ -7,10 +7,12 @@ import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.color.DynamicColors
 
 private lateinit var pickImageLauncher: ActivityResultLauncher<String>
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
@@ -54,23 +56,23 @@ class HomeActivity : AppCompatActivity() {
             startActivity(intent)
         }
         your_story.setOnClickListener {
-            val intent = Intent(this, addstory::class.java)
+            val intent = Intent(this, yourstory::class.java)
             startActivity(intent)
         }
         story1_image.setOnClickListener {
-            val intent = Intent(this, addstory::class.java)
+            val intent = Intent(this, story1::class.java)
             startActivity(intent)
         }
         story2_image.setOnClickListener {
-            val intent = Intent(this, addstory::class.java)
+            val intent = Intent(this, story2::class.java)
             startActivity(intent)
         }
         story3_image.setOnClickListener {
-            val intent = Intent(this, addstory::class.java)
+            val intent = Intent(this, story3::class.java)
             startActivity(intent)
         }
         story4_image.setOnClickListener {
-            val intent = Intent(this, addstory::class.java)
+            val intent = Intent(this, story4::class.java)
             startActivity(intent)
         }
         camera_button.setOnClickListener {

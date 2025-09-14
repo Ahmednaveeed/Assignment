@@ -14,7 +14,7 @@ class Callabdullah : AppCompatActivity() {
 
         hangup_button.setOnClickListener {
             val intent = Intent(this, DMabdullah::class.java)
-            startActivity(intent)
+            finish()
         }
 
     }

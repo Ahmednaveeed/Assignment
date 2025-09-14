@@ -44,7 +44,7 @@
         android:layout_height="0dp"
         android:fillViewport="true"
         app:layout_constraintTop_toBottomOf="@id/tabLayout"
-        app:layout_constraintBottom_toTopOf="@id/navigation_bar"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
@@ -84,7 +84,8 @@
                         android:textSize="14sp"
                         android:ellipsize="end"
                         android:singleLine="true"
-                        android:layout_marginBottom="4dp" />
+                        android:layout_marginBottom="4dp"
+                        android:textColor="@color/black"/>
 
                     <!-- 3 Image previews -->
                     <LinearLayout
@@ -297,7 +298,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="zohaib_shafqat, hammad and saim liked joshua_l photo. 3h"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:textColor="@color/black"/>
 
                 <ImageView
                     android:layout_width="60dp"
@@ -325,7 +327,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="hammad, ali and abdullah liked your photo   .3h"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:textColor="@color/black"/>
 
                 <ImageView
                     android:layout_width="60dp"
@@ -353,7 +356,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="faizan, sauleh and abdullah liked joshua_l photo. 3h"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:textColor="@color/black"/>
 
                 <ImageView
                     android:layout_width="60dp"
@@ -381,7 +385,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="abdullah, umair and saim liked ahmed's photo. 3h"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:textColor="@color/black"/>
 
                 <ImageView
                     android:layout_width="60dp"
@@ -393,7 +398,7 @@
     </ScrollView>
 
     <LinearLayout
-        android:id="@+id/navigation_bar"
+        android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -407,8 +412,9 @@
         <ImageView
             android:id="@+id/home_image"
             android:layout_width="0dp"
-            android:layout_height="24dp"
+            android:layout_height="28dp"
             android:src="@drawable/homee"
+            app:tint="#8B4513"
             android:layout_weight="1"
             android:contentDescription="Home" />
 
@@ -416,17 +422,18 @@
         <ImageView
             android:id="@+id/search_image"
             android:layout_width="0dp"
-            android:layout_height="24dp"
+            android:layout_height="28dp"
             android:src="@drawable/search"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
+            app:tint="#8B4513"
             android:contentDescription="Search" />
 
         <!-- Add Button -->
         <ImageView
             android:id="@+id/add_post"
             android:layout_width="0dp"
-            android:layout_height="24dp"
+            android:layout_height="28dp"
             android:src="@drawable/add"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
@@ -436,7 +443,7 @@
         <ImageView
             android:id="@+id/heart_image"
             android:layout_width="0dp"
-            android:layout_height="24dp"
+            android:layout_height="28dp"
             android:src="@drawable/heart2"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
@@ -444,11 +451,11 @@
             android:contentDescription="Heart" />
 
         <!-- Profile Button -->
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
             android:layout_width="0dp"
-            android:layout_height="24dp"
-            android:src="@drawable/profile"
+            android:layout_height="28dp"
+            android:src="@drawable/ahmed"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:contentDescription="Profile" />

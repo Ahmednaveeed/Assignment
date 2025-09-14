@@ -2,55 +2,134 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Selected image full screen -->
+    <!-- Selected Image Full Screen -->
     <ImageView
         android:id="@+id/storyImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerCrop" />
 
-    <!-- Top icons -->
+    <ImageView
+        android:id="@+id/closeBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/circle_bg"
+        android:layout_marginEnd="8dp"
+        android:padding="8dp"
+        android:tint="#A07373"
+        android:layout_marginTop="12dp"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/close" />
+
+    <!-- Top Action Icons -->
     <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
+        android:id="@+id/topActions"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:padding="16dp">
+        android:gravity="end"
+        android:orientation="horizontal"
+        android:padding="12dp">
 
         <ImageView
-            android:src="@drawable/circle"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="8dp"/>
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/circle_bg"
+            android:padding="8dp"
+            android:tint="#A07373"
+            android:src="@drawable/friends" />
 
         <ImageView
-            android:src="@drawable/circle"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="8dp"/>
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/circle_bg"
+            android:padding="8dp"
+            android:tint="#A07373"
+            android:src="@drawable/text2" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/circle_bg"
+            android:padding="8dp"
+            android:tint="#A07373"
+            android:src="@drawable/union" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/circle_bg"
+            android:padding="8dp"
+            android:tint="#A07373"
+            android:src="@drawable/music" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/circle_bg"
+            android:padding="8dp"
+            android:tint="#A07373"
+            android:src="@drawable/filters" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/circle_bg"
+            android:padding="8dp"
+            android:tint="#A07373"
+            android:src="@drawable/options" />
+
     </LinearLayout>
 
-    <!-- Bottom buttons -->
+    <!-- Bottom Action Buttons -->
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/bottomActions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:gravity="center"
+        android:orientation="horizontal"
+        android:background="#000000"
         android:padding="16dp">
 
         <Button
-            android:id="@+id/closeFriendsBtn"
-            android:text="Close Friends"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-
-        <Button
             android:id="@+id/yourStoryBtn"
-            android:text="Your Story"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"/>
+            android:layout_weight="1"
+            android:background="@drawable/pill_bg_grey"
+            android:text="Your Story"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"/>
+
+        <Button
+            android:id="@+id/closeFriendsBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/pill_bg_grey"
+            android:text="Close Friends"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="14sp"/>
+
+        <ImageView
+            android:id="@+id/sendBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/circle_bg2"
+            android:padding="8dp"
+            android:src="@drawable/forward"
+            android:backgroundTint="@null"
+            android:tint="#000000" />
+
     </LinearLayout>
+
 </RelativeLayout>

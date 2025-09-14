@@ -1,8 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Base application theme -->
     <style name="Base.Theme.Assignment" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <!-- Set #8B4513 as the default app color -->
+        <item name="colorPrimary">#E6C36A5C</item>
+        <item name="colorOnPrimary">@color/white</item>
+
+        <item name="colorSecondary">@color/saddle_brown</item>
+        <item name="colorOnSecondary">@color/white</item>
     </style>
 
     <style name="Theme.Assignment" parent="Base.Theme.Assignment" />

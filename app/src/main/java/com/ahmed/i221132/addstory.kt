@@ -14,6 +14,7 @@ class addstory : AppCompatActivity() {
 
         val storyImage = findViewById<ImageView>(R.id.storyImage)
         val imageUri = intent.getStringExtra("storyImage")
+        val closeBtn = findViewById<ImageView>(R.id.closeBtn)
 
         if (imageUri != null) {
             storyImage.setImageURI(Uri.parse(imageUri))
@@ -25,6 +26,10 @@ class addstory : AppCompatActivity() {
         }
         findViewById<Button>(R.id.yourStoryBtn)?.setOnClickListener {
             Toast.makeText(this, "Added to your story (demo)", Toast.LENGTH_SHORT).show()
+        }
+
+        closeBtn.setOnClickListener {
+            finish()
         }
 
     }
