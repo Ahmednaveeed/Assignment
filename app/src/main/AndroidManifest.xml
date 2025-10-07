@@ -9,6 +9,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+
         android:supportsRtl="true"
         android:theme="@style/Theme.Assignment">
         <activity
@@ -39,13 +40,13 @@
             android:name=".heart_following"
             android:exported="false" />
         <activity
-            android:name=".highlight3"
+            android:name=".Highlight3"
             android:exported="false" />
         <activity
-            android:name=".highlight2"
+            android:name=".Highlight2"
             android:exported="false" />
         <activity
-            android:name=".highlight1"
+            android:name=".Highlight1"
             android:exported="false" />
         <activity
             android:name=".EditProfile"
@@ -103,7 +104,9 @@
             android:exported="false" />
         <activity
             android:name=".savedacc"
-            android:exported="false"></activity>
+            android:exported="false">
+
+        </activity>
         <activity
             android:name=".HomeActivity"
             android:exported="false" />
@@ -115,8 +118,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            />
         </activity>
     </application>
-
 </manifest>

@@ -56,5 +56,15 @@ class message : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val bottomCamera = findViewById<ImageView>(R.id.bottomCamera)
+
+        bottomCamera.setOnClickListener {
+            val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
+            if (cameraIntent.resolveActivity(packageManager) != null) {
+                startActivity(cameraIntent)
+            }
+        }
+
+
     }
 }

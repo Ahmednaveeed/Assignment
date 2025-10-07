@@ -20,14 +20,6 @@ class addstory : AppCompatActivity() {
             storyImage.setImageURI(Uri.parse(imageUri))
         }
 
-        // Buttons (you can add Toasts for demo)
-        findViewById<Button>(R.id.closeFriendsBtn)?.setOnClickListener {
-            Toast.makeText(this, "Shared with close friends (demo)", Toast.LENGTH_SHORT).show()
-        }
-        findViewById<Button>(R.id.yourStoryBtn)?.setOnClickListener {
-            Toast.makeText(this, "Added to your story (demo)", Toast.LENGTH_SHORT).show()
-        }
-
         closeBtn.setOnClickListener {
             finish()
         }

@@ -20,9 +20,6 @@ class friendprofile : AppCompatActivity() {
         val search_image = findViewById<ImageView>(R.id.search_image)
         val heart_image = findViewById<ImageView>(R.id.heart_image)
         val profile_image = findViewById<ImageView>(R.id.profile_image)
-        val highlight1 = findViewById<ImageView>(R.id.highlight1)
-        val highlight2 = findViewById<ImageView>(R.id.highlight2)
-        val highlight3 = findViewById<ImageView>(R.id.highlight3)
         val back_button = findViewById<ImageView>(R.id.back_button)
         val messageBtn = findViewById<Button>(R.id.messageBtn)
 
@@ -49,19 +46,6 @@ class friendprofile : AppCompatActivity() {
         }
         profile_image.setOnClickListener {
             val intent = Intent(this, Profile::class.java)
-            startActivity(intent)
-        }
-
-        highlight1.setOnClickListener {
-            val intent = Intent(this, highlight1::class.java)
-            startActivity(intent)
-        }
-        highlight2.setOnClickListener {
-            val intent = Intent(this, highlight2::class.java)
-            startActivity(intent)
-        }
-        highlight3.setOnClickListener {
-            val intent = Intent(this, highlight3::class.java)
             startActivity(intent)
         }
 
