@@ -59,7 +59,7 @@
                 app:layout_constraintTop_toTopOf="@id/username"
                 app:layout_constraintBottom_toBottomOf="@id/username"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="16dp"/>
+                android:layout_marginEnd="16dp" />
 
             <!-- Profile image -->
             <de.hdodenhof.circleimageview.CircleImageView
@@ -73,7 +73,7 @@
                 app:layout_constraintTop_toBottomOf="@id/username"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="20dp"
-                android:layout_marginStart="16dp"/>
+                android:layout_marginStart="16dp" />
 
             <!-- Posts count -->
             <TextView
@@ -89,7 +89,7 @@
                 app:layout_constraintEnd_toStartOf="@id/followers_count"
                 app:layout_constraintHorizontal_chainStyle="spread"
                 android:layout_marginTop="20dp"
-                android:layout_marginStart="0dp"/>
+                android:layout_marginStart="0dp" />
 
             <TextView
                 android:id="@+id/posts_label"
@@ -100,7 +100,7 @@
                 android:textColor="@color/black"
                 app:layout_constraintTop_toBottomOf="@id/posts_count"
                 app:layout_constraintStart_toStartOf="@id/posts_count"
-                app:layout_constraintEnd_toEndOf="@id/posts_count"/>
+                app:layout_constraintEnd_toEndOf="@id/posts_count" />
 
             <!-- Followers -->
             <TextView
@@ -113,7 +113,7 @@
                 android:textColor="@color/black"
                 app:layout_constraintTop_toTopOf="@id/posts_count"
                 app:layout_constraintStart_toEndOf="@id/posts_count"
-                app:layout_constraintEnd_toStartOf="@id/following_count"/>
+                app:layout_constraintEnd_toStartOf="@id/following_count" />
 
             <TextView
                 android:id="@+id/followers_label"
@@ -124,7 +124,7 @@
                 android:textColor="@color/black"
                 app:layout_constraintTop_toBottomOf="@id/followers_count"
                 app:layout_constraintStart_toStartOf="@id/followers_count"
-                app:layout_constraintEnd_toEndOf="@id/followers_count"/>
+                app:layout_constraintEnd_toEndOf="@id/followers_count" />
 
             <!-- Following -->
             <TextView
@@ -137,7 +137,7 @@
                 android:textColor="@color/black"
                 app:layout_constraintTop_toTopOf="@id/posts_count"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="40dp"/>
+                android:layout_marginEnd="40dp" />
 
             <TextView
                 android:id="@+id/following_label"
@@ -148,7 +148,7 @@
                 android:textColor="@color/black"
                 app:layout_constraintTop_toBottomOf="@id/following_count"
                 app:layout_constraintStart_toStartOf="@id/following_count"
-                app:layout_constraintEnd_toEndOf="@id/following_count"/>
+                app:layout_constraintEnd_toEndOf="@id/following_count" />
 
             <!-- name -->
             <TextView
@@ -162,7 +162,7 @@
                 app:layout_constraintTop_toBottomOf="@id/profile_picture"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="12dp"
-                android:layout_marginStart="16dp"/>
+                android:layout_marginStart="16dp" />
 
             <!-- BIO -->
             <TextView
@@ -174,7 +174,7 @@
                 android:textColor="@color/black"
                 app:layout_constraintTop_toBottomOf="@id/bio_name"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="16dp"/>
+                android:layout_marginStart="16dp" />
 
             <TextView
                 android:id="@+id/bio_quote"
@@ -186,7 +186,7 @@
                 app:layout_constraintTop_toBottomOf="@id/bio_work"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="16dp"
-                android:layout_marginBottom="12dp"/>
+                android:layout_marginBottom="12dp" />
 
             <!-- Edit Profile Button -->
             <Button
@@ -199,7 +199,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="15dp"
-                android:layout_marginHorizontal="16dp"/>
+                android:layout_marginHorizontal="16dp" />
 
             <!-- Stories -->
             <HorizontalScrollView
@@ -253,9 +253,8 @@
                             android:textSize="15sp"
                             android:gravity="center"
                             android:textColor="#8B4513"
-                            android:layout_marginTop="4dp"/>
+                            android:layout_marginTop="4dp" />
                     </LinearLayout>
-
 
                     <!-- first highlight -->
                     <LinearLayout
@@ -271,7 +270,7 @@
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:src="@drawable/cars"
-                            android:padding="2dp"/>
+                            android:padding="2dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -279,7 +278,7 @@
                             android:text="Cars"
                             android:textSize="15sp"
                             android:textColor="#8B4513"
-                            android:gravity="center"/>
+                            android:gravity="center" />
                     </LinearLayout>
 
                     <!-- second highlight -->
@@ -296,7 +295,7 @@
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:src="@drawable/sky"
-                            android:padding="2dp"/>
+                            android:padding="2dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -304,7 +303,7 @@
                             android:text="Sky"
                             android:textSize="15sp"
                             android:textColor="#8B4513"
-                            android:gravity="center"/>
+                            android:gravity="center" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -320,7 +319,7 @@
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:src="@drawable/trips"
-                            android:padding="2dp"/>
+                            android:padding="2dp" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -328,7 +327,7 @@
                             android:text="Trips"
                             android:textSize="15sp"
                             android:textColor="#8B4513"
-                            android:gravity="center"/>
+                            android:gravity="center" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -369,72 +368,17 @@
                     tools:ignore="MissingConstraints" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Posts Grid -->
-            <GridLayout
-                android:id="@+id/postsGrid"
+            <!-- Posts Grid (Updated with RecyclerView) -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/profile_posts_recycler_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:columnCount="3"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false"
                 app:layout_constraintTop_toBottomOf="@id/tag"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="12dp">
-
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_columnWeight="1"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/post1"/>
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_columnWeight="1"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/post4"/>
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_columnWeight="1"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/post6"/>
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_columnWeight="1"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/post3"/>
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_columnWeight="1"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/post7"/>
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_columnWeight="1"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/post9"/>
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_columnWeight="1"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/post2"/>
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_columnWeight="1"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/post5"/>
-                <ImageView
-                    android:layout_width="0dp"
-                    android:layout_height="120dp"
-                    android:layout_columnWeight="1"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/post8"/>
-            </GridLayout>
+                android:layout_marginTop="12dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

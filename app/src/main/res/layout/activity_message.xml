@@ -21,7 +21,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/back"
-            app:tint="#8B4513"/>
+            app:tint="#8B4513" />
 
         <!-- username -->
         <TextView
@@ -33,7 +33,7 @@
             android:text="_ahmednaveeed"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:textColor="#8B4513"/>
+            android:textColor="#8B4513" />
 
         <!-- plus -->
         <ImageView
@@ -41,7 +41,7 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/plus"
-            app:tint="#8B4513"/>
+            app:tint="#8B4513" />
     </LinearLayout>
 
     <!-- Search Bar -->
@@ -60,10 +60,9 @@
         app:layout_constraintTop_toBottomOf="@id/topBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="12dp"/>
+        android:layout_margin="12dp" />
 
-
-    <!-- DMs -->
+    <!-- DMs Section (Updated with RecyclerView) -->
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
@@ -78,294 +77,12 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- first DM -->
-            <LinearLayout
-                android:id="@+id/dm1"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/dms_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="12dp"
-                android:gravity="center_vertical">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/hammad"
-                    android:scaleType="centerCrop"/>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:paddingStart="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="hammad_yasin"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Have a nice day, bro!"
-                        android:textColor="#888" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:text=".now"
-                    android:textSize="12sp" />
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/camera"
-                    app:tint="#8B4513"/>
-            </LinearLayout>
-
-            <!-- second DM -->
-            <LinearLayout
-                android:id="@+id/dm2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="12dp"
-                android:gravity="center_vertical">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/abdullah"
-                    android:scaleType="centerCrop"/>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:paddingStart="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="abdullah_malik309"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="I head this is a good movie, s..."
-                        android:textColor="#888" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:text=".now"
-                    android:textSize="12sp" />
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/camera"
-                    app:tint="#8B4513"/>
-            </LinearLayout>
-
-            <!-- third DM -->
-            <LinearLayout
-                android:id="@+id/dm3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="12dp"
-                android:gravity="center_vertical">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/zohaib"
-                    android:scaleType="centerCrop"/>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:paddingStart="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="zohaib_shafqat"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="See you on the next meeting!"
-                        android:textColor="#888" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:text=".15m"
-                    android:textSize="12sp" />
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/camera"
-                    app:tint="#8B4513"/>
-            </LinearLayout>
-
-            <!-- fourth DM -->
-            <LinearLayout
-                android:id="@+id/dm4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="12dp"
-                android:gravity="center_vertical">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/sauleh"
-                    android:scaleType="centerCrop"/>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:paddingStart="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="saulehnaveed"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Sounds good😂😂😂"
-                        android:textColor="#888" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:text=".20m"
-                    android:textSize="12sp" />
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/camera"
-                    app:tint="#8B4513"/>
-            </LinearLayout>
-
-            <!-- fifth DM -->
-            <LinearLayout
-                android:id="@+id/dm5"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="12dp"
-                android:gravity="center_vertical">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/faizan"
-                    android:scaleType="centerCrop"/>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:paddingStart="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="faizan_naveed"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="The new design looks cool, b..."
-                        android:textColor="#888" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:text=".1m"
-                    android:textSize="12sp" />
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/camera"
-                    app:tint="#8B4513"/>
-            </LinearLayout>
-
-            <!-- sixth DM -->
-            <LinearLayout
-                android:id="@+id/dm6"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="12dp"
-                android:gravity="center_vertical">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:src="@drawable/umair"
-                    android:scaleType="centerCrop"/>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1"
-                    android:paddingStart="10dp">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="umair.asghar"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Thank you, bro!"
-                        android:textColor="#888" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="40dp"
-                    android:layout_height="wrap_content"
-                    android:text=".2h"
-                    android:textSize="12sp" />
-
-                <ImageView
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/camera"
-                    app:tint="#8B4513"/>
-            </LinearLayout>
-
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="false" />
         </LinearLayout>
     </ScrollView>
 
@@ -382,7 +99,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:src="@drawable/camera2"
-            app:tint="#8B4513"/>
+            app:tint="#8B4513" />
 
         <TextView
             android:layout_width="wrap_content"

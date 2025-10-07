@@ -7,6 +7,8 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import de.hdodenhof.circleimageview.CircleImageView
 
 class Profile : AppCompatActivity() {
@@ -14,6 +16,26 @@ class Profile : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
+
+        // NEW: RecyclerView Setup for Profile Posts Grid
+        val recyclerView = findViewById<RecyclerView>(R.id.profile_posts_recycler_view)
+        recyclerView.layoutManager = GridLayoutManager(this, 3)  // 3 columns for grid
+
+        val profilePosts = listOf(
+            ProfilePost(R.drawable.post1),
+            ProfilePost(R.drawable.post4),
+            ProfilePost(R.drawable.post6),
+            ProfilePost(R.drawable.post3),
+            ProfilePost(R.drawable.post7),
+            ProfilePost(R.drawable.post9),
+            ProfilePost(R.drawable.post2),
+            ProfilePost(R.drawable.post5),
+            ProfilePost(R.drawable.post8)
+        )
+
+        val adapter = ProfilePostAdapter(profilePosts)
+        recyclerView.adapter = adapter
+        // END NEW
 
         val home_image = findViewById<ImageView>(R.id.home_image)
         val search_image = findViewById<ImageView>(R.id.search_image)
@@ -58,6 +80,5 @@ class Profile : AppCompatActivity() {
             val intent = Intent(this, EditProfile::class.java)
             startActivity(intent)
         }
-
     }
 }

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="12dp"
+    android:gravity="center_vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/dm_profile_image"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/hammad"
+        android:scaleType="centerCrop" />
+
+    <LinearLayout
+        android:id="@+id/dm_text_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="1"
+        android:paddingStart="10dp">
+
+        <TextView
+            android:id="@+id/dm_username_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="hammad_yasin"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/dm_last_message_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Have a nice day, bro!"
+            android:textColor="#888" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/dm_timestamp_text"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:text=".now"
+        android:textSize="12sp" />
+
+    <ImageView
+        android:id="@+id/dm_camera_image"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/camera"
+        android:tint="#8B4513" />
+</LinearLayout>

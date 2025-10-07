@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="@android:color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <!-- Poster's Data -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/poster_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <!-- Poster's Profile Picture -->
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/post_profile_image"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="Profile"
+                android:src="@drawable/abdullah"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Poster's Name and Location -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/text_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="@+id/post_profile_image"
+                app:layout_constraintStart_toEndOf="@+id/post_profile_image"
+                app:layout_constraintTop_toTopOf="@+id/post_profile_image">
+
+                <TextView
+                    android:id="@+id/post_username_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="abdullah_malik309"
+                    android:textColor="@color/black"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/post_location_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="ISB, pakistan"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/post_username_text" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!-- Options Bar -->
+            <ImageView
+                android:id="@+id/post_options_bar"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="4dp"
+                android:contentDescription="Options"
+                android:src="@drawable/options"
+                app:layout_constraintBottom_toBottomOf="@+id/post_profile_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/post_profile_image" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Post Image -->
+        <ImageView
+            android:id="@+id/post_image_view"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:src="@drawable/abdullah2"
+            app:layout_constraintTop_toBottomOf="@+id/poster_data"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <!-- Interaction Layout -->
+        <LinearLayout
+            android:id="@+id/interaction_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="4dp"
+            app:layout_constraintTop_toBottomOf="@+id/post_image_view">
+
+            <!-- Left Group: Like, Comment, Share -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1">
+
+                <!-- Like -->
+                <ImageView
+                    android:id="@+id/post_like_image"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="Like"
+                    android:src="@drawable/like"
+                    android:layout_marginEnd="4dp" />
+
+                <!-- Comment -->
+                <ImageView
+                    android:id="@+id/post_comment_image"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:contentDescription="Comment"
+                    android:src="@drawable/comment"
+                    android:layout_marginStart="4dp"
+                    android:layout_marginEnd="4dp" />
+
+                <!-- Share -->
+                <ImageView
+                    android:id="@+id/post_share_image"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="Share"
+                    android:src="@drawable/send"
+                    android:layout_marginStart="4dp" />
+            </LinearLayout>
+
+            <!-- Centered Options -->
+            <ImageView
+                android:id="@+id/post_options_image"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:contentDescription="Options"
+                android:src="@drawable/options"
+                android:layout_gravity="center"
+                android:layout_weight="0" />
+
+            <!-- Right Save -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_weight="1"
+                android:gravity="end">
+
+                <ImageView
+                    android:id="@+id/post_save_image"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:contentDescription="Save"
+                    android:src="@drawable/save" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Liked By -->
+        <TextView
+            android:id="@+id/post_liked_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Liked by hammad__yasin and 44686 others"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/interaction_layout"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <!-- Caption -->
+        <TextView
+            android:id="@+id/post_caption_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="abdullah_malik309 The game in Japan was amazing and I want to share some photos"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintTop_toBottomOf="@+id/post_liked_text"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

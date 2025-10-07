@@ -4,8 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
-import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class message : AppCompatActivity() {
     @SuppressLint("MissingInflatedId")
@@ -13,46 +14,28 @@ class message : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_message)
 
-        val dm1 = findViewById<LinearLayout>(R.id.dm1)
-        val dm2 = findViewById<LinearLayout>(R.id.dm2)
-        val dm3 = findViewById<LinearLayout>(R.id.dm3)
-        val dm4 = findViewById<LinearLayout>(R.id.dm4)
-        val dm5 = findViewById<LinearLayout>(R.id.dm5)
-        val dm6 = findViewById<LinearLayout>(R.id.dm6)
+        // NEW: RecyclerView Setup for DMs
+        val recyclerView = findViewById<RecyclerView>(R.id.dms_recycler_view)
+        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        val dms = listOf(
+            DMMessage("hammad_yasin", "Have a nice day, bro!", ".now", R.drawable.hammad),
+            DMMessage("abdullah_malik309", "I head this is a good movie, s...", ".now", R.drawable.abdullah),
+            DMMessage("zohaib_shafqat", "See you on the next meeting!", ".15m", R.drawable.zohaib),
+            DMMessage("saulehnaveed", "Sounds good😂😂😂", ".20m", R.drawable.sauleh),
+            DMMessage("faizan_naveed", "The new design looks cool, b...", ".1m", R.drawable.faizan),
+            DMMessage("umair.asghar", "Thank you, bro!", ".2h", R.drawable.umair)
+            // more can be added
+        )
+
+        val adapter = DMAdapter(dms, this)
+        recyclerView.adapter = adapter
+        // END NEW
+
         val backBtn = findViewById<ImageView>(R.id.backBtn)
 
         backBtn.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
-        }
-
-        dm1.setOnClickListener {
-            val intent = Intent(this, DMhammad::class.java)
-            startActivity(intent)
-        }
-
-        dm2.setOnClickListener {
-            val intent = Intent(this, DMabdullah::class.java)
-            startActivity(intent)
-        }
-
-        dm3.setOnClickListener {
-            val intent = Intent(this, DMzohaib::class.java)
-            startActivity(intent)
-        }
-
-        dm4.setOnClickListener {
-            val intent = Intent(this, DMsauleh::class.java)
-            startActivity(intent)
-        }
-
-        dm5.setOnClickListener {
-            val intent = Intent(this, DMfaizan::class.java)
-            startActivity(intent)
-        }
-
-        dm6.setOnClickListener {
-            val intent = Intent(this, DMumair::class.java)
             startActivity(intent)
         }
 
@@ -64,7 +47,5 @@ class message : AppCompatActivity() {
                 startActivity(cameraIntent)
             }
         }
-
-
     }
 }
