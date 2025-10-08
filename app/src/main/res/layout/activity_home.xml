@@ -77,185 +77,25 @@
             app:layout_constraintBottom_toBottomOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Stories -->
-    <HorizontalScrollView
-        android:id="@+id/stories"
+    <!-- Stories RecyclerView (UPDATED) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/stories_recycler_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:paddingTop="12dp"
-        android:scrollbars="horizontal"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:clipToPadding="false"
         app:layout_constraintTop_toBottomOf="@+id/toolbar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="2dp">
-
-            <!-- Your Story -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/story1_container"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="6dp"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:ignore="MissingConstraints">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/your_story"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:src="@drawable/ahmed"
-                    android:layout_marginEnd="1dp"
-                    android:contentDescription="Your story"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/story1_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Your story"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:layout_marginTop="2dp"
-                    app:layout_constraintTop_toBottomOf="@+id/your_story"
-                    app:layout_constraintStart_toStartOf="@+id/your_story" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!-- Story 1 -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/story2_container"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="6dp"
-                app:layout_constraintStart_toEndOf="@+id/story1_container"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/story1_image"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:src="@drawable/abdullah"
-                    android:layout_marginEnd="1dp"
-                    android:contentDescription="Story 1"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/story2_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="abdullah"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:layout_marginTop="2dp"
-                    app:layout_constraintTop_toBottomOf="@+id/story1_image"
-                    app:layout_constraintStart_toStartOf="@+id/story1_image" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!-- Story 2 -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/story3_container"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="6dp"
-                app:layout_constraintStart_toEndOf="@+id/story2_container"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/story2_image"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:src="@drawable/hammad"
-                    android:layout_marginEnd="1dp"
-                    android:contentDescription="Story 2"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/story3_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="hammad"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:layout_marginTop="2dp"
-                    app:layout_constraintTop_toBottomOf="@+id/story2_image"
-                    app:layout_constraintStart_toStartOf="@+id/story2_image" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!-- Story 3 -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/story4_container"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="6dp"
-                app:layout_constraintStart_toEndOf="@+id/story3_container"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/story3_image"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:src="@drawable/zohaib"
-                    android:layout_marginEnd="1dp"
-                    android:contentDescription="Story 3"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/story4_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="zohaibbb"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:layout_marginTop="2dp"
-                    app:layout_constraintTop_toBottomOf="@+id/story3_image"
-                    app:layout_constraintStart_toStartOf="@+id/story3_image" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <!-- Story 4 -->
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/story5_container"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="6dp"
-                app:layout_constraintStart_toEndOf="@+id/story4_container"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/story4_image"
-                    android:layout_width="70dp"
-                    android:layout_height="70dp"
-                    android:src="@drawable/sauleh"
-                    android:layout_marginEnd="1dp"
-                    android:contentDescription="Story 4"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-                <TextView
-                    android:id="@+id/story5_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="saulehh"
-                    android:textColor="@color/black"
-                    android:textSize="16sp"
-                    android:layout_marginTop="2dp"
-                    app:layout_constraintTop_toBottomOf="@+id/story4_image"
-                    app:layout_constraintStart_toStartOf="@+id/story4_image" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </HorizontalScrollView>
-
-    <!-- Posts Section (Updated with RecyclerView) -->
+    <!-- Posts Section -->
     <ScrollView
         android:id="@+id/post_scroll"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/stories"
+        app:layout_constraintTop_toBottomOf="@+id/stories_recycler_view"
         app:layout_constraintBottom_toTopOf="@+id/navigation_bar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">

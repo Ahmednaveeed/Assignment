@@ -9,7 +9,6 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.color.DynamicColors
 import de.hdodenhof.circleimageview.CircleImageView
 
 private lateinit var pickImageLauncher: ActivityResultLauncher<String>
@@ -20,7 +19,34 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        // NEW: RecyclerView Setup for Posts
+        // NEW: Stories RecyclerView Setup
+        val storiesRecyclerView = findViewById<RecyclerView>(R.id.stories_recycler_view)
+        storiesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+        val stories = listOf(
+            Story("Your story", R.drawable.ahmed),
+            Story("abdullah", R.drawable.abdullah),
+            Story("hammad", R.drawable.hammad),
+            Story("zohaibbb", R.drawable.zohaib),
+            Story("saulehh", R.drawable.sauleh)
+        )
+
+        val storyAdapter = StoryAdapter(stories, this) { position ->
+            // Handle story clicks based on position
+            val intent = when (position) {
+                0 -> Intent(this, yourstory::class.java)
+                1 -> Intent(this, story1::class.java)
+                2 -> Intent(this, story2::class.java)
+                3 -> Intent(this, story3::class.java)
+                4 -> Intent(this, story4::class.java)
+                else -> return@StoryAdapter
+            }
+            startActivity(intent)
+        }
+        storiesRecyclerView.adapter = storyAdapter
+        // END NEW
+
+        // Posts RecyclerView Setup
         val recyclerView = findViewById<RecyclerView>(R.id.posts_recycler_view)
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
@@ -41,30 +67,22 @@ class HomeActivity : AppCompatActivity() {
                 "Liked by hammad__yasin and 2686 others",
                 "zohaib_shafqat Snooker is my passion"
             )
-            // more can be added
         )
 
         val adapter = PostAdapter(posts, this)
         recyclerView.adapter = adapter
-        // END NEW
 
         val search_image = findViewById<ImageView>(R.id.search_image)
         val message_button = findViewById<ImageView>(R.id.message_button)
         val add_post = findViewById<ImageView>(R.id.add_post)
         val camera_button = findViewById<ImageView>(R.id.camera_button)
-        val profile_image = findViewById<CircleImageView>(R.id.profile_image)  // FIXED: Cast to CircleImageView
+        val profile_image = findViewById<CircleImageView>(R.id.profile_image)
         val heart_image = findViewById<ImageView>(R.id.heart_image)
-        val your_story = findViewById<CircleImageView>(R.id.your_story)  // FIXED: Cast to CircleImageView
-        val story1_image = findViewById<CircleImageView>(R.id.story1_image)  // FIXED: Cast to CircleImageView
-        val story2_image = findViewById<CircleImageView>(R.id.story2_image)  // FIXED: Cast to CircleImageView
-        val story3_image = findViewById<CircleImageView>(R.id.story3_image)  // FIXED: Cast to CircleImageView
-        val story4_image = findViewById<CircleImageView>(R.id.story4_image)  // FIXED: Cast to CircleImageView
 
         pickImageLauncher = registerForActivityResult(
             ActivityResultContracts.GetContent()
         ) { uri: Uri? ->
             if (uri != null) {
-                // Open Story Page with selected image
                 val intent = Intent(this, addstory::class.java)
                 intent.putExtra("storyImage", uri.toString())
                 startActivity(intent)
@@ -85,26 +103,6 @@ class HomeActivity : AppCompatActivity() {
         }
         heart_image.setOnClickListener {
             val intent = Intent(this, heart_following::class.java)
-            startActivity(intent)
-        }
-        your_story.setOnClickListener {
-            val intent = Intent(this, yourstory::class.java)
-            startActivity(intent)
-        }
-        story1_image.setOnClickListener {
-            val intent = Intent(this, story1::class.java)
-            startActivity(intent)
-        }
-        story2_image.setOnClickListener {
-            val intent = Intent(this, story2::class.java)
-            startActivity(intent)
-        }
-        story3_image.setOnClickListener {
-            val intent = Intent(this, story3::class.java)
-            startActivity(intent)
-        }
-        story4_image.setOnClickListener {
-            val intent = Intent(this, story4::class.java)
             startActivity(intent)
         }
         camera_button.setOnClickListener {
