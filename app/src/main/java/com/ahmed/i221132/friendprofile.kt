@@ -6,15 +6,28 @@ import android.graphics.Color
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 class friendprofile : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_friendprofile)
+
+        // NEW: Highlights RecyclerView Setup
+        val highlightsRecyclerView = findViewById<RecyclerView>(R.id.highlights_recycler_view)
+        highlightsRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+        val highlights = listOf(
+            Highlight("Cars", R.drawable.cars),
+            Highlight("Sky", R.drawable.sky),
+            Highlight("Trips", R.drawable.trips)
+        )
+
+        val highlightAdapter = HighlightAdapter(highlights, this)
+        highlightsRecyclerView.adapter = highlightAdapter
+        // END NEW
 
         val home_image = findViewById<ImageView>(R.id.home_image)
         val search_image = findViewById<ImageView>(R.id.search_image)
@@ -26,24 +39,28 @@ class friendprofile : AppCompatActivity() {
         messageBtn.setOnClickListener {
             val intent = Intent(this, DMhammad::class.java)
             startActivity(intent)
-
         }
+
         back_button.setOnClickListener {
             val intent = Intent(this, DMhammad::class.java)
             finish()
         }
+
         home_image.setOnClickListener {
             val intent = Intent(this, HomeActivity::class.java)
             startActivity(intent)
         }
+
         search_image.setOnClickListener {
             val intent = Intent(this, search::class.java)
             startActivity(intent)
         }
+
         heart_image.setOnClickListener {
             val intent = Intent(this, heart_following::class.java)
             startActivity(intent)
         }
+
         profile_image.setOnClickListener {
             val intent = Intent(this, Profile::class.java)
             startActivity(intent)
@@ -64,6 +81,5 @@ class friendprofile : AppCompatActivity() {
                 followBtn.setTextColor(Color.WHITE)
             }
         }
-
     }
 }

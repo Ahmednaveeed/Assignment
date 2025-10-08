@@ -47,7 +47,6 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="8dp" />
 
-
             <!-- options -->
             <ImageView
                 android:id="@+id/options_btn"
@@ -204,8 +203,8 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:src="@drawable/link"
-                    android:tint="@color/black"
-                    android:layout_marginEnd="6dp"/>
+                    android:layout_marginEnd="6dp"
+                    app:tint="@color/black" />
 
                 <!-- Website text -->
                 <TextView
@@ -216,7 +215,6 @@
                     android:textColor="@color/black"
                     android:textStyle="bold"/>
             </LinearLayout>
-
 
             <!-- Followers preview (below bio) -->
             <LinearLayout
@@ -322,104 +320,16 @@
                     android:padding="8dp"/>
             </LinearLayout>
 
-
-
-            <!-- Stories -->
-            <HorizontalScrollView
-                android:id="@+id/stories"
+            <!-- Highlights RecyclerView (UPDATED) -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/highlights_recycler_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:scrollbars="none"
+                android:clipToPadding="false"
                 app:layout_constraintTop_toBottomOf="@id/profileActions"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="12dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <!-- New highlight -->
-
-
-
-                    <!-- first highlight -->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="12dp">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/highlight1"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:src="@drawable/cars"
-                            android:padding="2dp"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Cars"
-                            android:textSize="15sp"
-                            android:textColor="#8B4513"
-                            android:gravity="center"/>
-                    </LinearLayout>
-
-                    <!-- second highlight -->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="12dp">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/highlight2"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:src="@drawable/sky"
-                            android:padding="2dp"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Sky"
-                            android:textSize="15sp"
-                            android:textColor="#8B4513"
-                            android:gravity="center"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="12dp">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/highlight3"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:src="@drawable/trips"
-                            android:padding="2dp"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Trips"
-                            android:textSize="15sp"
-                            android:textColor="#8B4513"
-                            android:gravity="center"/>
-                    </LinearLayout>
-
-                </LinearLayout>
-            </HorizontalScrollView>
+                android:layout_marginTop="12dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/tag"
@@ -429,7 +339,7 @@
                 android:gravity="center"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/stories">
+                app:layout_constraintTop_toBottomOf="@+id/highlights_recycler_view">
 
                 <ImageView
                     android:id="@+id/imageView"
