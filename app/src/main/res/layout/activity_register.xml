@@ -63,6 +63,7 @@
 
             <!-- profile image -->
             <ImageView
+                android:id="@+id/profile_photo"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/camera"
@@ -177,7 +178,7 @@
             android:layout_width="0dp"
             android:layout_height="60dp"
             android:text="Create an Account"
-            android:enabled="false"
+            android:enabled="true"
             android:textColor="@android:color/white"
             android:background="@drawable/signup_bg"
             android:layout_marginTop="20dp"

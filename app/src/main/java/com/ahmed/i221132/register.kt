@@ -4,35 +4,35 @@ import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import java.util.Calendar
 
 class register : AppCompatActivity() {
     @SuppressLint("WrongViewCast")
+    private lateinit var auth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
+        auth = FirebaseAuth.getInstance()
 
         val backBtn = findViewById<ImageView>(R.id.backBtn)
-
-        backBtn.setOnClickListener {
-            val intent = Intent(this, savedacc::class.java)
-            finish()
-        }
-
         val passwordEditText = findViewById<EditText>(R.id.passwordEditText)
         val toggleIcon = findViewById<ImageView>(R.id.ivTogglePassword)
         val etDob = findViewById<EditText>(R.id.etDob)
+        val registerBtn = findViewById<Button>(R.id.btnSignUp)
+        val emailEditText = findViewById<EditText>(R.id.etEmail)
 
         // Disable keyboard input
         etDob.isFocusable = false
         etDob.isClickable = true
 
         var isPasswordVisible = false
-
-
 
         etDob.setOnClickListener {
             val calendar = Calendar.getInstance()
@@ -49,6 +49,11 @@ class register : AppCompatActivity() {
                 year, month, day
             )
             datePicker.show()
+        }
+
+        backBtn.setOnClickListener {
+            val intent = Intent(this, savedacc::class.java)
+            finish()
         }
 
         toggleIcon.setOnClickListener {
@@ -68,5 +73,33 @@ class register : AppCompatActivity() {
             isPasswordVisible = !isPasswordVisible
         }
 
+        // firebase registration
+        registerBtn.setOnClickListener {
+            val email = emailEditText.text.toString().trim()
+            val password = passwordEditText.text.toString().trim()
+
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Please enter email and password.", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        // Registration success. User is automatically logged in.
+                        Toast.makeText(baseContext, "Registration Successful!", Toast.LENGTH_SHORT).show()
+
+
+                        val intent = Intent(this, HomeActivity::class.java)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
+                        finish()
+                    } else {
+                        // If sign in fails
+                        Toast.makeText(baseContext, "Authentication failed: ${task.exception?.message}",
+                            Toast.LENGTH_LONG).show()
+                    }
+                }
+        }
     }
 }
