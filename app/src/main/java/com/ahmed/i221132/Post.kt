@@ -1,10 +1,12 @@
 package com.ahmed.i221132
 
 data class Post(
-    val username: String,
-    val location: String,
-    val profileImageRes: Int,  // Drawable resource ID
-    val postImageRes: Int,     // Drawable resource ID
-    val likedByText: String,
-    val caption: String
+    // Properties must match the keys in the Firebase database exactly
+    val postId: String = "",
+    val userId: String = "",
+    val imageUrl: String = "",
+    val caption: String = "",
+    val location: String = "",
+    val timestamp: Long = 0L,
+    val likes: Int = 0
 )
