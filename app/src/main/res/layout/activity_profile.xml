@@ -201,137 +201,16 @@
                 android:layout_marginTop="15dp"
                 android:layout_marginHorizontal="16dp" />
 
-            <!-- Stories -->
-            <HorizontalScrollView
-                android:id="@+id/stories"
+            <!-- Highlights RecyclerView (UPDATED) -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/profile_highlights_recycler_view"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:scrollbars="none"
+                android:clipToPadding="false"
                 app:layout_constraintTop_toBottomOf="@id/editProfileBtn"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="12dp">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <!-- New highlight -->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginEnd="12dp">
-
-                        <!-- Outer White Circle -->
-                        <FrameLayout
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:background="@drawable/highlight_circle"
-                            android:gravity="center">
-
-                            <!-- Plus Icon in the center -->
-                            <ImageView
-                                android:layout_width="22dp"
-                                android:layout_height="22dp"
-                                android:contentDescription="Add New Highlight"
-                                android:src="@drawable/plus"
-                                android:scaleType="centerInside"
-                                android:layout_marginStart="19dp"
-                                android:layout_marginTop="18dp"
-                                app:tint="#8B4513" />
-                        </FrameLayout>
-
-                        <!-- Label -->
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="New"
-                            android:textSize="15sp"
-                            android:gravity="center"
-                            android:textColor="#8B4513"
-                            android:layout_marginTop="4dp" />
-                    </LinearLayout>
-
-                    <!-- first highlight -->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="12dp">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/highlight1"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:src="@drawable/cars"
-                            android:padding="2dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Cars"
-                            android:textSize="15sp"
-                            android:textColor="#8B4513"
-                            android:gravity="center" />
-                    </LinearLayout>
-
-                    <!-- second highlight -->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="12dp">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/highlight2"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:src="@drawable/sky"
-                            android:padding="2dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Sky"
-                            android:textSize="15sp"
-                            android:textColor="#8B4513"
-                            android:gravity="center" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="center"
-                        android:layout_marginStart="15dp"
-                        android:layout_marginEnd="12dp">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/highlight3"
-                            android:layout_width="70dp"
-                            android:layout_height="70dp"
-                            android:src="@drawable/trips"
-                            android:padding="2dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Trips"
-                            android:textSize="15sp"
-                            android:textColor="#8B4513"
-                            android:gravity="center" />
-                    </LinearLayout>
-
-                </LinearLayout>
-            </HorizontalScrollView>
+                android:layout_marginTop="12dp"/>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/tag"
@@ -341,7 +220,7 @@
                 android:gravity="center"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
-                app:layout_constraintTop_toBottomOf="@+id/stories">
+                app:layout_constraintTop_toBottomOf="@+id/profile_highlights_recycler_view">
 
                 <ImageView
                     android:id="@+id/imageView"

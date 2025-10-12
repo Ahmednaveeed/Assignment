@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.hdodenhof.circleimageview.CircleImageView
 
@@ -17,7 +18,42 @@ class Profile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        // NEW: RecyclerView Setup for Profile Posts Grid
+        // NEW: Highlights RecyclerView Setup
+        val highlightsRecyclerView = findViewById<RecyclerView>(R.id.profile_highlights_recycler_view)
+        highlightsRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+        val profileHighlights = listOf(
+            ProfileHighlight("New", 0, isNewButton = true),  // "New" button
+            ProfileHighlight("Cars", R.drawable.cars, isNewButton = false),
+            ProfileHighlight("Sky", R.drawable.sky, isNewButton = false),
+            ProfileHighlight("Trips", R.drawable.trips, isNewButton = false)
+        )
+
+        val highlightAdapter = ProfileHighlightAdapter(profileHighlights, this) { position ->
+            // Handle highlight clicks based on position
+            when (position) {
+                0 -> {
+                    // "New" button clicked - you can add functionality here
+                    Toast.makeText(this, "Add new highlight", Toast.LENGTH_SHORT).show()
+                }
+                1 -> {
+                    val intent = Intent(this, Highlight1::class.java)
+                    startActivity(intent)
+                }
+                2 -> {
+                    val intent = Intent(this, Highlight2::class.java)
+                    startActivity(intent)
+                }
+                3 -> {
+                    val intent = Intent(this, Highlight3::class.java)
+                    startActivity(intent)
+                }
+            }
+        }
+        highlightsRecyclerView.adapter = highlightAdapter
+        // END NEW
+
+        // Posts RecyclerView Setup
         val recyclerView = findViewById<RecyclerView>(R.id.profile_posts_recycler_view)
         recyclerView.layoutManager = GridLayoutManager(this, 3)  // 3 columns for grid
 
@@ -35,15 +71,11 @@ class Profile : AppCompatActivity() {
 
         val adapter = ProfilePostAdapter(profilePosts)
         recyclerView.adapter = adapter
-        // END NEW
 
         val home_image = findViewById<ImageView>(R.id.home_image)
         val search_image = findViewById<ImageView>(R.id.search_image)
         val heart_image = findViewById<ImageView>(R.id.heart_image)
         val profile_image = findViewById<CircleImageView>(R.id.profile_image)
-        val highlight1 = findViewById<CircleImageView>(R.id.highlight1)
-        val highlight2 = findViewById<CircleImageView>(R.id.highlight2)
-        val highlight3 = findViewById<CircleImageView>(R.id.highlight3)
         val editProfileBtn = findViewById<Button>(R.id.editProfileBtn)
 
         home_image.setOnClickListener {
@@ -60,19 +92,6 @@ class Profile : AppCompatActivity() {
         }
         profile_image.setOnClickListener {
             val intent = Intent(this, Profile::class.java)
-            startActivity(intent)
-        }
-
-        highlight1.setOnClickListener {
-            val intent = Intent(this, Highlight1::class.java)
-            startActivity(intent)
-        }
-        highlight2.setOnClickListener{
-            val intent = Intent(this, Highlight2::class.java)
-            startActivity(intent)
-        }
-        highlight3.setOnClickListener {
-            val intent = Intent(this, Highlight3::class.java)
             startActivity(intent)
         }
 
