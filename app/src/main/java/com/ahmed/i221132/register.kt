@@ -10,17 +10,28 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import java.util.Calendar
 
 class register : AppCompatActivity() {
     @SuppressLint("WrongViewCast")
     private lateinit var auth: FirebaseAuth
+    private lateinit var database: FirebaseDatabase
+
+    // Variables for other profile fields
+    private lateinit var nameEditText: EditText
+    private lateinit var usernameEditText: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_register)
-        auth = FirebaseAuth.getInstance()
 
+        // --- Firebase Initialization ---
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
+
+        // --- View Initialization ---
+        val profileImageButton = findViewById<ImageView>(R.id.profile_photo)
         val backBtn = findViewById<ImageView>(R.id.backBtn)
         val passwordEditText = findViewById<EditText>(R.id.passwordEditText)
         val toggleIcon = findViewById<ImageView>(R.id.ivTogglePassword)
@@ -28,12 +39,20 @@ class register : AppCompatActivity() {
         val registerBtn = findViewById<Button>(R.id.btnSignUp)
         val emailEditText = findViewById<EditText>(R.id.etEmail)
 
-        // Disable keyboard input
+        // Initialize username
+        usernameEditText = findViewById<EditText>(R.id.etUsername)
+
+        // Disable keyboard input for Date of Birth
         etDob.isFocusable = false
         etDob.isClickable = true
 
         var isPasswordVisible = false
 
+        profileImageButton.setOnClickListener {
+            Toast.makeText(this, "Profile picture upload feature is currently disabled.", Toast.LENGTH_SHORT).show()
+        }
+
+        // --- Date of Birth Picker Click Listener ---
         etDob.setOnClickListener {
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
@@ -51,11 +70,13 @@ class register : AppCompatActivity() {
             datePicker.show()
         }
 
+        // --- Back Button Click Listener  ---
         backBtn.setOnClickListener {
             val intent = Intent(this, savedacc::class.java)
             finish()
         }
 
+        // --- Password Toggle Click Listener ---
         toggleIcon.setOnClickListener {
             if (isPasswordVisible) {
                 // Hide Password
@@ -73,27 +94,38 @@ class register : AppCompatActivity() {
             isPasswordVisible = !isPasswordVisible
         }
 
-        // firebase registration
+        // --- REVISED Firebase Registration and Profile Saving Logic ---
         registerBtn.setOnClickListener {
             val email = emailEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
+            val username = usernameEditText.text.toString().trim()
+            val name = nameEditText.text.toString().trim() // Getting name here
 
-            if (email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(this, "Please enter email and password.", Toast.LENGTH_SHORT).show()
+            // Input Validation (Simplified: removed filePath check)
+            if (email.isEmpty() || password.isEmpty() || username.isEmpty() || name.isEmpty()) {
+                Toast.makeText(this, "Please fill all required profile fields.", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
+            // 1. Create User with Firebase Auth
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        // Registration success. User is automatically logged in.
-                        Toast.makeText(baseContext, "Registration Successful!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(baseContext, "Authentication successful. Saving profile...", Toast.LENGTH_SHORT).show()
 
+                        val user = auth.currentUser
 
-                        val intent = Intent(this, HomeActivity::class.java)
-                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        startActivity(intent)
-                        finish()
+                        // 2. CRITICAL CHANGE: Directly call the Realtime DB save function
+                        if (user != null) {
+                            saveProfileToDatabase(user.uid, email)
+                        } else {
+                            // Fallback
+                            startActivity(Intent(this, HomeActivity::class.java).apply {
+                                flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                            })
+                            finish()
+                        }
+
                     } else {
                         // If sign in fails
                         Toast.makeText(baseContext, "Authentication failed: ${task.exception?.message}",
@@ -101,5 +133,41 @@ class register : AppCompatActivity() {
                     }
                 }
         }
+    }
+    // --- REVISED Save Profile Data to Realtime Database and Navigate ---
+    private fun saveProfileToDatabase(uid: String, email: String) {
+        val username = usernameEditText.text.toString()
+        val name = nameEditText.text.toString()
+
+        // Using a static URL since Firebase Storage is removed
+        val defaultImageUrl = "https://default-image-url.com/profile.png"
+
+        val userMap = HashMap<String, Any>()
+        userMap["email"] = email
+        userMap["username"] = username
+        userMap["name"] = name
+        userMap["profileImageUrl"] = defaultImageUrl
+        userMap["dateOfBirth"] = findViewById<EditText>(R.id.etDob).text.toString()
+        userMap["isOnline"] = true
+        userMap["posts"] = 0
+        userMap["followers"] = 0
+        userMap["following"] = 0
+
+        // Save to Realtime Database under /users/{UID}
+        database.getReference("users").child(uid).setValue(userMap)
+            .addOnSuccessListener {
+                // Profile saved successfully. Navigate to Home.
+                Toast.makeText(this, "Profile setup complete!", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this, HomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
+                finish()
+            }
+            .addOnFailureListener { e ->
+                Toast.makeText(this, "Failed to save profile data: ${e.message}", Toast.LENGTH_LONG).show()
+                val intent = Intent(this, HomeActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
     }
 }

@@ -9,9 +9,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-
         android:supportsRtl="true"
         android:theme="@style/Theme.Assignment">
+        <activity
+            android:name=".add_post"
+            android:exported="false" />
         <activity
             android:name=".friendprofile"
             android:exported="false" />
@@ -104,9 +106,7 @@
             android:exported="false" />
         <activity
             android:name=".savedacc"
-            android:exported="false">
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".HomeActivity"
             android:exported="false" />
@@ -120,4 +120,5 @@
             </intent-filter>
         </activity>
     </application>
+
 </manifest>
