@@ -52,7 +52,7 @@ class HomeActivity : AppCompatActivity() {
         // --- VIEW SETUP ---
         val search_image = findViewById<ImageView>(R.id.search_image)
         val message_button = findViewById<ImageView>(R.id.message_button)
-        val add_post = findViewById<ImageView>(R.id.add_post)
+        val addPostButton = findViewById<ImageView>(R.id.add_post)
         val camera_button = findViewById<ImageView>(R.id.camera_button)
         val profile_image = findViewById<CircleImageView>(R.id.profile_image)
         val heart_image = findViewById<ImageView>(R.id.heart_image)
@@ -89,7 +89,6 @@ class HomeActivity : AppCompatActivity() {
             if(it.resultCode == RESULT_OK){
                 val uri = it.data?.data
 
-                // 🔑 This is the critical part:
                 // It creates an intent for your new screen, passes the image URI,
                 // and starts the activity.
                 if (uri != null) {
@@ -101,7 +100,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
 
-        add_post.setOnClickListener {
+        addPostButton.setOnClickListener {
             // This part correctly opens the gallery to select an image
             val intent = Intent()
             intent.action = Intent.ACTION_GET_CONTENT

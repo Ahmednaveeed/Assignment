@@ -38,8 +38,8 @@ class PostAdapter(
 
         // 1. Load the main post image using Coil
         holder.postImageView.load(post.imageUrl) {
-            placeholder(R.drawable.default_post_placeholder) // Optional: a placeholder image
-            error(R.drawable.error_placeholder) // Optional: an error image
+            //placeholder(R.drawable.default_post_placeholder) // Optional: a placeholder image
+            //error(R.drawable.error_placeholder) // Optional: an error image
         }
 
         // 2. Bind the simple text data
