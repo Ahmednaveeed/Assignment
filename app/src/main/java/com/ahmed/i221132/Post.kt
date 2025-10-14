@@ -1,10 +1,9 @@
 package com.ahmed.i221132
 
 data class Post(
-    // Properties must match the keys in the Firebase database exactly
     val postId: String = "",
     val userId: String = "",
-    val imageUrl: String = "",
+    val imageBase64: String = "", // 🔑 Changed from imageUrl
     val caption: String = "",
     val location: String = "",
     val timestamp: Long = 0L,

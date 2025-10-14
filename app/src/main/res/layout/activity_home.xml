@@ -91,32 +91,15 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Posts Section -->
-    <ScrollView
-        android:id="@+id/post_scroll"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/posts_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:clipToPadding="false"
         app:layout_constraintTop_toBottomOf="@+id/stories_recycler_view"
         app:layout_constraintBottom_toTopOf="@+id/navigation_bar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="8dp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/posts_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clipToPadding="false"
-                android:nestedScrollingEnabled="false"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Bottom Navigation -->
     <LinearLayout
