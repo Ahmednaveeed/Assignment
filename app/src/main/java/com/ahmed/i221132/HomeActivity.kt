@@ -69,11 +69,71 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun loadFeedContent() {
-        // ... (This function remains the same as before, no changes needed here)
         val storiesRecyclerView = findViewById<RecyclerView>(R.id.stories_recycler_view)
         storiesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        val stories = listOf(Story("Your story", R.drawable.ahmed))
-        storiesRecyclerView.adapter = StoryAdapter(stories, this) { /* click logic */ }
+
+        val storyList = mutableListOf<Story>()
+        val storyAdapter = StoryAdapter(storyList, this) { userId ->
+            val intent = Intent(this, StoryViewActivity::class.java)
+            intent.putExtra("USER_ID", userId)
+            startActivity(intent)
+        }
+        storiesRecyclerView.adapter = storyAdapter
+
+        // --- 🔑 NEW LOGIC STARTS HERE ---
+        val currentUserUid = auth.currentUser?.uid ?: return
+        val storiesRef = database.getReference("stories")
+        val twentyFourHoursAgo = System.currentTimeMillis() - (24 * 60 * 60 * 1000)
+
+        storiesRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                storyList.clear()
+                val usersWithStories = mutableSetOf<String>()
+
+                // 1. Find all users who have active stories
+                for (userStorySnapshot in snapshot.children) {
+                    val userId = userStorySnapshot.key
+                    var hasActiveStory = false
+                    // Check if any of their stories are from the last 24 hours
+                    userStorySnapshot.children.forEach { story ->
+                        val timestamp = story.child("timestamp").getValue(Long::class.java) ?: 0L
+                        if (timestamp > twentyFourHoursAgo) {
+                            hasActiveStory = true
+                            return@forEach // Exit the inner loop once an active story is found
+                        }
+                    }
+                    if (hasActiveStory && userId != null) {
+                        usersWithStories.add(userId)
+                    }
+                }
+
+                // 2. Fetch the current user's data and add them to the front
+                database.getReference("users").child(currentUserUid).get().addOnSuccessListener { userSnapshot ->
+                    val currentUser = userSnapshot.getValue(Story::class.java)
+                    if (currentUser != null) {
+                        storyList.add(0, currentUser)
+                        storyAdapter.notifyDataSetChanged()
+                    }
+
+                    // 3. Fetch data for all other users who have stories
+                    usersWithStories.forEach { userId ->
+                        if (userId != currentUserUid) { // Ensure no duplicates
+                            database.getReference("users").child(userId).get().addOnSuccessListener { otherUserSnapshot ->
+                                val otherUser = otherUserSnapshot.getValue(Story::class.java)
+                                if (otherUser != null) {
+                                    storyList.add(otherUser)
+                                    storyAdapter.notifyDataSetChanged()
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@HomeActivity, "Failed to load stories.", Toast.LENGTH_SHORT).show()
+            }
+        })
 
         val postsRecyclerView = findViewById<RecyclerView>(R.id.posts_recycler_view)
         postsRecyclerView.layoutManager = LinearLayoutManager(this)

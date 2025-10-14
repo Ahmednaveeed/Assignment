@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Assignment">
         <activity
+            android:name=".StoryViewActivity"
+            android:exported="false" />
+        <activity
             android:name=".NewMessageActivity"
             android:exported="false" />
         <activity
