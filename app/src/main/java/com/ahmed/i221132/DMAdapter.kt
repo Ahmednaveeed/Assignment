@@ -2,12 +2,13 @@ package com.ahmed.i221132
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
 import de.hdodenhof.circleimageview.CircleImageView
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -34,10 +35,22 @@ class DMAdapter(
         val conversation = conversations[position]
 
         holder.usernameText.text = conversation.username
-        holder.profileImage.load(conversation.profileImageUrl)
-        // 🔑 Display the actual last message and timestamp
         holder.lastMessageText.text = conversation.lastMessage
         holder.timestampText.text = formatTimestamp(conversation.timestamp)
+
+        // This decoding logic now works because of the new imports
+        val profileImageBase64 = conversation.profileImageBase64
+        if (profileImageBase64.isNotEmpty()) {
+            try {
+                val imageBytes = Base64.decode(profileImageBase64, Base64.DEFAULT)
+                val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+                holder.profileImage.setImageBitmap(decodedImage)
+            } catch (e: Exception) {
+                holder.profileImage.setImageResource(R.drawable.user)
+            }
+        } else {
+            holder.profileImage.setImageResource(R.drawable.user)
+        }
 
         holder.itemView.setOnClickListener {
             val intent = Intent(context, ChatActivity::class.java)
@@ -49,8 +62,8 @@ class DMAdapter(
 
     override fun getItemCount(): Int = conversations.size
 
-    // Helper function to format the timestamp
     private fun formatTimestamp(timestamp: Long): String {
+        if (timestamp == 0L) return ""
         val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
         return sdf.format(Date(timestamp))
     }

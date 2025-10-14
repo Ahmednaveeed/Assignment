@@ -14,7 +14,7 @@ class NewMessageActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var database: FirebaseDatabase
     private lateinit var usersRecyclerView: RecyclerView
-    private lateinit var userAdapter: DMAdapter // We can reuse the DMAdapter!
+    private lateinit var userAdapter: DMAdapter
     private val userList = mutableListOf<Conversation>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
