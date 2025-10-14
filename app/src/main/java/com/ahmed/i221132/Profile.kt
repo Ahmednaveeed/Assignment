@@ -1,103 +1,163 @@
 package com.ahmed.i221132
 
-import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Base64
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import de.hdodenhof.circleimageview.CircleImageView
+// ❌ Coil is no longer needed for the main profile picture, but keep it for the adapter if needed elsewhere
+import coil.load
 
 class Profile : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId")
+
+    private lateinit var auth: FirebaseAuth
+    private lateinit var database: FirebaseDatabase
+
+    private lateinit var postAdapter: ProfilePostAdapter
+    private val postList = mutableListOf<ProfilePost>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
-        // NEW: Highlights RecyclerView Setup
-        val highlightsRecyclerView = findViewById<RecyclerView>(R.id.profile_highlights_recycler_view)
-        highlightsRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
 
-        val profileHighlights = listOf(
-            ProfileHighlight("New", 0, isNewButton = true),  // "New" button
-            ProfileHighlight("Cars", R.drawable.cars, isNewButton = false),
-            ProfileHighlight("Sky", R.drawable.sky, isNewButton = false),
-            ProfileHighlight("Trips", R.drawable.trips, isNewButton = false)
-        )
+        setupHighlights()
 
-        val highlightAdapter = ProfileHighlightAdapter(profileHighlights, this) { position ->
-            // Handle highlight clicks based on position
-            when (position) {
-                0 -> {
-                    // "New" button clicked - you can add functionality here
-                    Toast.makeText(this, "Add new highlight", Toast.LENGTH_SHORT).show()
-                }
-                1 -> {
-                    val intent = Intent(this, Highlight1::class.java)
-                    startActivity(intent)
-                }
-                2 -> {
-                    val intent = Intent(this, Highlight2::class.java)
-                    startActivity(intent)
-                }
-                3 -> {
-                    val intent = Intent(this, Highlight3::class.java)
-                    startActivity(intent)
+        val recyclerView = findViewById<RecyclerView>(R.id.profile_posts_recycler_view)
+        recyclerView.layoutManager = GridLayoutManager(this, 3)
+        postAdapter = ProfilePostAdapter(postList, this)
+        recyclerView.adapter = postAdapter
+
+        loadProfileData()
+        setupNavigation()
+    }
+
+    private fun loadProfileData() {
+        val uid = auth.currentUser?.uid
+        if (uid == null) {
+            startActivity(Intent(this, login::class.java))
+            finish()
+            return
+        }
+
+        val userRef = database.getReference("users").child(uid)
+        userRef.get().addOnSuccessListener { dataSnapshot ->
+            if (dataSnapshot.exists()) {
+                val profilePicture = findViewById<CircleImageView>(R.id.profile_picture)
+                val username = findViewById<TextView>(R.id.username)
+                val followersCount = findViewById<TextView>(R.id.followers_count)
+                val followingCount = findViewById<TextView>(R.id.following_count)
+                val bioName = findViewById<TextView>(R.id.bio_name)
+
+                val usernameStr = dataSnapshot.child("username").getValue(String::class.java)
+                val nameStr = dataSnapshot.child("name").getValue(String::class.java)
+                val followers = dataSnapshot.child("followers").getValue(Long::class.java) ?: 0L
+                val following = dataSnapshot.child("following").getValue(Long::class.java) ?: 0L
+
+                username.text = usernameStr
+                bioName.text = nameStr
+                followersCount.text = followers.toString()
+                followingCount.text = following.toString()
+
+                // 🔑 CHANGE: Fetched 'profileImageBase64'
+                val profileImageBase64 = dataSnapshot.child("profileImageBase64").getValue(String::class.java)
+
+                // 🔑 CHANGE: Replaced Coil with Base64 decoding logic
+                if (!profileImageBase64.isNullOrEmpty()) {
+                    try {
+                        val imageBytes = Base64.decode(profileImageBase64, Base64.DEFAULT)
+                        val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+                        profilePicture.setImageBitmap(decodedImage)
+                    } catch (e: Exception) {
+                        profilePicture.setImageResource(R.drawable.user)
+                    }
+                } else {
+                    profilePicture.setImageResource(R.drawable.user)
                 }
             }
         }
-        highlightsRecyclerView.adapter = highlightAdapter
-        // END NEW
 
-        // Posts RecyclerView Setup
-        val recyclerView = findViewById<RecyclerView>(R.id.profile_posts_recycler_view)
-        recyclerView.layoutManager = GridLayoutManager(this, 3)  // 3 columns for grid
+        loadUserPosts(uid)
+    }
 
-        val profilePosts = listOf(
-            ProfilePost(R.drawable.post1),
-            ProfilePost(R.drawable.post4),
-            ProfilePost(R.drawable.post6),
-            ProfilePost(R.drawable.post3),
-            ProfilePost(R.drawable.post7),
-            ProfilePost(R.drawable.post9),
-            ProfilePost(R.drawable.post2),
-            ProfilePost(R.drawable.post5),
-            ProfilePost(R.drawable.post8)
-        )
+    private fun loadUserPosts(uid: String) {
+        val postsCountTextView = findViewById<TextView>(R.id.posts_count)
+        val postsRef = database.getReference("posts")
 
-        val adapter = ProfilePostAdapter(profilePosts)
-        recyclerView.adapter = adapter
+        postsRef.orderByChild("userId").equalTo(uid).addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                postList.clear()
+                for (postSnapshot in snapshot.children) {
+                    val post = postSnapshot.getValue(ProfilePost::class.java)
+                    if (post != null) {
+                        postList.add(post)
+                    }
+                }
+                postList.reverse()
+                postAdapter.notifyDataSetChanged()
+                postsCountTextView.text = postList.size.toString()
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@Profile, "Failed to load posts.", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    // This function can be expanded later to fetch dynamic highlights
+
+    private fun setupHighlights() {
+
+        val highlightsRecyclerView = findViewById<RecyclerView>(R.id.profile_highlights_recycler_view)
+
+        highlightsRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+        val highlights = listOf(ProfileHighlight("New", 0, isNewButton = true))
+
+        highlightsRecyclerView.adapter = ProfileHighlightAdapter(highlights, this) { /* click logic */ }
+
+    }
+
+
+
+    // Groups all navigation listeners together for cleaner code
+
+    private fun setupNavigation() {
 
         val home_image = findViewById<ImageView>(R.id.home_image)
+
         val search_image = findViewById<ImageView>(R.id.search_image)
+
         val heart_image = findViewById<ImageView>(R.id.heart_image)
+
         val profile_image = findViewById<CircleImageView>(R.id.profile_image)
+
         val editProfileBtn = findViewById<Button>(R.id.editProfileBtn)
 
-        home_image.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
-        }
-        search_image.setOnClickListener {
-            val intent = Intent(this, search::class.java)
-            startActivity(intent)
-        }
-        heart_image.setOnClickListener {
-            val intent = Intent(this, heart_following::class.java)
-            startActivity(intent)
-        }
-        profile_image.setOnClickListener {
-            val intent = Intent(this, Profile::class.java)
-            startActivity(intent)
-        }
 
-        editProfileBtn.setOnClickListener {
-            val intent = Intent(this, EditProfile::class.java)
-            startActivity(intent)
-        }
+
+        home_image.setOnClickListener { startActivity(Intent(this, HomeActivity::class.java)) }
+
+        search_image.setOnClickListener { startActivity(Intent(this, search::class.java)) }
+
+        heart_image.setOnClickListener { startActivity(Intent(this, heart_following::class.java)) }
+
+        profile_image.setOnClickListener { /* Already on profile, do nothing or refresh */ }
+
+        editProfileBtn.setOnClickListener { startActivity(Intent(this, EditProfile::class.java)) }
+
     }
+
 }
