@@ -1,51 +1,96 @@
 package com.ahmed.i221132
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 
 class message : AppCompatActivity() {
-    @SuppressLint("MissingInflatedId")
+
+    private lateinit var auth: FirebaseAuth
+    private lateinit var database: FirebaseDatabase
+    private lateinit var conversationsRecyclerView: RecyclerView
+    private lateinit var conversationAdapter: DMAdapter
+    private val conversationList = mutableListOf<Conversation>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_message)
 
-        // NEW: RecyclerView Setup for DMs
-        val recyclerView = findViewById<RecyclerView>(R.id.dms_recycler_view)
-        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-
-        val dms = listOf(
-            DMMessage("hammad_yasin", "Have a nice day, bro!", ".now", R.drawable.hammad),
-            DMMessage("abdullah_malik309", "I head this is a good movie, s...", ".now", R.drawable.abdullah),
-            DMMessage("zohaib_shafqat", "See you on the next meeting!", ".15m", R.drawable.zohaib),
-            DMMessage("saulehnaveed", "Sounds good😂😂😂", ".20m", R.drawable.sauleh),
-            DMMessage("faizan_naveed", "The new design looks cool, b...", ".1m", R.drawable.faizan),
-            DMMessage("umair.asghar", "Thank you, bro!", ".2h", R.drawable.umair)
-            // more can be added
-        )
-
-        val adapter = DMAdapter(dms, this)
-        recyclerView.adapter = adapter
-        // END NEW
-
+        // 🔑 1. INITIALIZE ALL VARIABLES FIRST
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance()
+        conversationsRecyclerView = findViewById(R.id.dms_recycler_view)
         val backBtn = findViewById<ImageView>(R.id.backBtn)
+        val newMessageButton = findViewById<ImageView>(R.id.addbtn)
 
+        // 🔑 2. SET UP THE RECYCLERVIEW AND ADAPTER
+        conversationsRecyclerView.layoutManager = LinearLayoutManager(this)
+        conversationAdapter = DMAdapter(conversationList, this)
+        conversationsRecyclerView.adapter = conversationAdapter
+
+        // 🔑 3. SET UP CLICK LISTENERS
         backBtn.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, HomeActivity::class.java))
         }
 
-        val bottomCamera = findViewById<ImageView>(R.id.bottomCamera)
+        newMessageButton.setOnClickListener {
+            // Open the new activity that lists all users
+            startActivity(Intent(this, NewMessageActivity::class.java))
+        }
 
-        bottomCamera.setOnClickListener {
-            val cameraIntent = Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE)
-            if (cameraIntent.resolveActivity(packageManager) != null) {
-                startActivity(cameraIntent)
+        // 🔑 4. FINALLY, LOAD THE DATA
+        loadConversations()
+    }
+
+    private fun loadConversations() {
+        val currentUserUid = auth.currentUser?.uid ?: return
+        val conversationsRef = database.getReference("user-chats").child(currentUserUid)
+
+        // Listen for changes in the user's conversation list
+        conversationsRef.orderByChild("timestamp").addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                conversationList.clear()
+                for (convoSnapshot in snapshot.children) {
+                    val partnerId = convoSnapshot.key
+                    val lastMessage = convoSnapshot.child("lastMessage").getValue(String::class.java)
+                    val timestamp = convoSnapshot.child("timestamp").getValue(Long::class.java)
+
+                    if (partnerId != null) {
+                        // Now, fetch the partner's user details (username, profile pic)
+                        database.getReference("users").child(partnerId).get().addOnSuccessListener { userSnapshot ->
+                            val username = userSnapshot.child("username").getValue(String::class.java)
+                            val profileImageUrl = userSnapshot.child("profileImageUrl").getValue(String::class.java)
+                            val uid = userSnapshot.child("uid").getValue(String::class.java)
+
+                            val conversation = Conversation(
+                                uid = uid ?: partnerId,
+                                username = username ?: "",
+                                profileImageUrl = profileImageUrl ?: "",
+                                lastMessage = lastMessage ?: "",
+                                timestamp = timestamp ?: 0L
+                            )
+                            // To avoid adding duplicates during the async fetch
+                            if (!conversationList.any { it.uid == conversation.uid }) {
+                                conversationList.add(conversation)
+                            }
+
+                            // Sort the list to show the newest conversations first
+                            conversationList.sortByDescending { it.timestamp }
+                            conversationAdapter.notifyDataSetChanged()
+                        }
+                    }
+                }
             }
-        }
+
+            override fun onCancelled(error: DatabaseError) {
+                Toast.makeText(this@message, "Failed to load conversations.", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 }

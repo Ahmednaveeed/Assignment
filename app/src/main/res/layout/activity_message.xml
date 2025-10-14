@@ -37,7 +37,7 @@
 
         <!-- plus -->
         <ImageView
-            android:id="@+id/cameraBtn"
+            android:id="@+id/addbtn"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/plus"

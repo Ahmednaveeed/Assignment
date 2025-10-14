@@ -5,13 +5,16 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import de.hdodenhof.circleimageview.CircleImageView
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class DMAdapter(
-    private val dms: List<DMMessage>,
+    private val conversations: List<Conversation>,
     private val context: Context
 ) : RecyclerView.Adapter<DMAdapter.DMViewHolder>() {
 
@@ -20,7 +23,6 @@ class DMAdapter(
         val usernameText: TextView = itemView.findViewById(R.id.dm_username_text)
         val lastMessageText: TextView = itemView.findViewById(R.id.dm_last_message_text)
         val timestampText: TextView = itemView.findViewById(R.id.dm_timestamp_text)
-        val cameraImage: ImageView = itemView.findViewById(R.id.dm_camera_image)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DMViewHolder {
@@ -29,24 +31,27 @@ class DMAdapter(
     }
 
     override fun onBindViewHolder(holder: DMViewHolder, position: Int) {
-        val dm = dms[position]
-        holder.profileImage.setImageResource(dm.profileImageRes)
-        holder.usernameText.text = dm.username
-        holder.lastMessageText.text = dm.lastMessage
-        holder.timestampText.text = dm.timestamp
+        val conversation = conversations[position]
 
-        // Click listener to open respective DM chats
+        holder.usernameText.text = conversation.username
+        holder.profileImage.load(conversation.profileImageUrl)
+        // 🔑 Display the actual last message and timestamp
+        holder.lastMessageText.text = conversation.lastMessage
+        holder.timestampText.text = formatTimestamp(conversation.timestamp)
+
         holder.itemView.setOnClickListener {
-            when (dm.username) {
-                "hammad_yasin" -> context.startActivity(Intent(context, DMhammad::class.java))
-                "abdullah_malik309" -> context.startActivity(Intent(context, DMabdullah::class.java))
-                "zohaib_shafqat" -> context.startActivity(Intent(context, DMzohaib::class.java))
-                "saulehnaveed" -> context.startActivity(Intent(context, DMsauleh::class.java))
-                "faizan_naveed" -> context.startActivity(Intent(context, DMfaizan::class.java))
-                "umair.asghar" -> context.startActivity(Intent(context, DMumair::class.java))
-            }
+            val intent = Intent(context, ChatActivity::class.java)
+            intent.putExtra("USER_ID", conversation.uid)
+            intent.putExtra("USER_NAME", conversation.username)
+            context.startActivity(intent)
         }
     }
 
-    override fun getItemCount(): Int = dms.size
+    override fun getItemCount(): Int = conversations.size
+
+    // Helper function to format the timestamp
+    private fun formatTimestamp(timestamp: Long): String {
+        val sdf = SimpleDateFormat("hh:mm a", Locale.getDefault())
+        return sdf.format(Date(timestamp))
+    }
 }

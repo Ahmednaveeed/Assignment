@@ -37,12 +37,12 @@ class friendprofile : AppCompatActivity() {
         val messageBtn = findViewById<Button>(R.id.messageBtn)
 
         messageBtn.setOnClickListener {
-            val intent = Intent(this, DMhammad::class.java)
+           // val intent = Intent(this, DMhammad::class.java)
             startActivity(intent)
         }
 
         back_button.setOnClickListener {
-            val intent = Intent(this, DMhammad::class.java)
+            //val intent = Intent(this, DMhammad::class.java)
             finish()
         }
 
