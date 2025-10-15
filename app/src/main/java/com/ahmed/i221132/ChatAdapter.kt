@@ -16,13 +16,11 @@ class ChatAdapter(
     private val onEdit: (ChatMessage) -> Unit    // Callback for edit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    // --- Define constants for all four view types ---
     private val VIEW_TYPE_SENT_TEXT = 1
     private val VIEW_TYPE_RECEIVED_TEXT = 2
     private val VIEW_TYPE_SENT_IMAGE = 3
     private val VIEW_TYPE_RECEIVED_IMAGE = 4
 
-    // --- Two separate ViewHolders for text and image messages ---
     class TextViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val messageText: TextView = itemView.findViewById(R.id.message_text)
     }
@@ -31,7 +29,6 @@ class ChatAdapter(
         val messageImage: ImageView = itemView.findViewById(R.id.message_image)
     }
 
-    // --- This function determines which layout to use ---
     override fun getItemViewType(position: Int): Int {
         val message = messageList[position]
         val isSent = message.senderId == currentUserId
@@ -45,7 +42,6 @@ class ChatAdapter(
         }
     }
 
-    // --- This function inflates the correct layout ---
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         return when (viewType) {
@@ -56,11 +52,11 @@ class ChatAdapter(
         }
     }
 
-    // --- This function binds the data and sets listeners ---
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val message = messageList[position]
         val fiveMinutesInMillis = 5 * 60 * 1000 // 5 minutes
 
+        // Bind the data based on the view type
         when (holder.itemViewType) {
             VIEW_TYPE_SENT_TEXT, VIEW_TYPE_RECEIVED_TEXT -> {
                 val textHolder = holder as TextViewHolder
@@ -78,20 +74,20 @@ class ChatAdapter(
             }
         }
 
-        // --- Add long-press listener for editing and deleting ---
+        // --- 🔑 EDITED: Long-press listener now handles both edit and delete ---
         holder.itemView.setOnLongClickListener {
-            // Only allow actions on messages sent by the current user within the time limit
+            // Check if the message was sent by the current user and is less than 5 minutes old
             if (message.senderId == currentUserId && (System.currentTimeMillis() - message.timestamp) < fiveMinutesInMillis) {
-                // Only allow editing for text messages
+                // For text messages, show both options
                 if (!message.text.isNullOrEmpty()) {
-                    onEdit(message)
+                    onEdit(message) // The onEdit function will show a dialog with both options
                 } else {
-                    // For image messages, only allow deletion
+                    // For image messages, just allow deletion
                     onDelete(message)
                 }
                 true // Consume the long click
             } else {
-                false
+                false // Do nothing for old messages or messages from others
             }
         }
     }

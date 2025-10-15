@@ -74,7 +74,7 @@ class ChatActivity : AppCompatActivity() {
             messageList,
             senderId!!,
             onDelete = { message -> showDeleteConfirmation(message) },
-            onEdit = { message -> showEditDialog(message) }
+            onEdit = { message -> showEditDeleteDialog(message) }
         )
         messagesRecyclerView.layoutManager = LinearLayoutManager(this).apply { stackFromEnd = true }
         messagesRecyclerView.adapter = chatAdapter
@@ -161,6 +161,18 @@ class ChatActivity : AppCompatActivity() {
                 Toast.makeText(this@ChatActivity, "Failed to load messages.", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun showEditDeleteDialog(message: ChatMessage) {
+        val options = arrayOf("Edit Message", "Delete Message")
+        AlertDialog.Builder(this)
+            .setItems(options) { _, which ->
+                when (which) {
+                    0 -> showEditDialog(message) // Call the existing edit dialog
+                    1 -> showDeleteConfirmation(message) // Call the delete confirmation
+                }
+            }
+            .show()
     }
 
     // 🔑 NEW: Function to show a confirmation dialog before deleting
