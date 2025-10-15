@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Assignment">
         <activity
+            android:name=".HighlightViewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddHighlightActivity"
+            android:exported="false" />
+        <activity
             android:name=".CommentsActivity"
             android:exported="false" />
         <activity

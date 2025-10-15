@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+    <ImageView
+        android:id="@+id/highlight_image_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitCenter" />
+
+    <ProgressBar
+        android:id="@+id/highlight_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginTop="8dp"
+        android:progressTint="@android:color/white"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:paddingHorizontal="16dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/highlight_cover_image"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:src="@drawable/user"/>
+
+        <TextView
+            android:id="@+id/highlight_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Highlight"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:layout_toEndOf="@id/highlight_cover_image"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="12dp"/>
+
+        <ImageView
+            android:id="@+id/close_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/close"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            app:tint="@android:color/white" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom|end"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/send_button"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/send"
+            app:tint="@android:color/white"
+            android:layout_marginEnd="20dp"/>
+
+        <ImageView
+            android:id="@+id/options_button"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/options"
+            app:tint="@android:color/white" />
+    </LinearLayout>
+</FrameLayout>

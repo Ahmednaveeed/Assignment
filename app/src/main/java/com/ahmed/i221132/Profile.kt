@@ -119,17 +119,32 @@ class Profile : AppCompatActivity() {
     // This function can be expanded later to fetch dynamic highlights
 
     private fun setupHighlights() {
-
+        val uid = auth.currentUser?.uid ?: return
         val highlightsRecyclerView = findViewById<RecyclerView>(R.id.profile_highlights_recycler_view)
-
         highlightsRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
-        val highlights = listOf(ProfileHighlight("New", 0, isNewButton = true))
+        val highlightList = mutableListOf<ProfileHighlight>()
+        val highlightAdapter = ProfileHighlightAdapter(highlightList, this, uid)
+        highlightsRecyclerView.adapter = highlightAdapter
 
-        highlightsRecyclerView.adapter = ProfileHighlightAdapter(highlights, this) { /* click logic */ }
+        val highlightsRef = database.getReference("highlights").child(uid)
+        highlightsRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                highlightList.clear()
+                // Always add the "New" button first
+                highlightList.add(ProfileHighlight(title = "New", isNewButton = true))
 
+                for (highlightSnapshot in snapshot.children) {
+                    val highlight = highlightSnapshot.getValue(ProfileHighlight::class.java)
+                    if (highlight != null) {
+                        highlightList.add(highlight)
+                    }
+                }
+                highlightAdapter.notifyDataSetChanged()
+            }
+            override fun onCancelled(error: DatabaseError) {}
+        })
     }
-
 
 
     // Groups all navigation listeners together for cleaner code

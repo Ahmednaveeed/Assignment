@@ -1,6 +1,9 @@
 package com.ahmed.i221132
 
 import android.content.Context
+import android.content.Intent
+import android.graphics.BitmapFactory
+import android.util.Base64
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +15,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 class ProfileHighlightAdapter(
     private val highlights: List<ProfileHighlight>,
     private val context: Context,
-    private val onHighlightClick: (Int) -> Unit
+    private val currentUserId: String // 🔑 Pass the user's ID
 ) : RecyclerView.Adapter<ProfileHighlightAdapter.ProfileHighlightViewHolder>() {
 
     class ProfileHighlightViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -31,18 +34,26 @@ class ProfileHighlightAdapter(
         holder.highlightText.text = highlight.title
 
         if (highlight.isNewButton) {
-            // Show "New" button style
             holder.highlightImage.visibility = View.GONE
             holder.newHighlightContainer.visibility = View.VISIBLE
+            holder.itemView.setOnClickListener {
+                context.startActivity(Intent(context, AddHighlightActivity::class.java))
+            }
         } else {
-            // Show regular highlight
             holder.highlightImage.visibility = View.VISIBLE
             holder.newHighlightContainer.visibility = View.GONE
-            holder.highlightImage.setImageResource(highlight.imageResource)
-        }
+            // Decode the cover image
+            try {
+                val imageBytes = Base64.decode(highlight.coverImageBase64, Base64.DEFAULT)
+                holder.highlightImage.setImageBitmap(BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size))
+            } catch (e: Exception) { /* Use placeholder */ }
 
-        holder.itemView.setOnClickListener {
-            onHighlightClick(position)
+            holder.itemView.setOnClickListener {
+                val intent = Intent(context, HighlightViewActivity::class.java)
+                intent.putExtra("USER_ID", currentUserId)
+                intent.putExtra("HIGHLIGHT_ID", highlight.highlightId)
+                context.startActivity(intent)
+            }
         }
     }
 
