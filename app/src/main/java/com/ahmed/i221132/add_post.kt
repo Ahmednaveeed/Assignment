@@ -91,11 +91,13 @@ class add_post : AppCompatActivity() {
         val postMap = HashMap<String, Any>()
         postMap["postId"] = postId
         postMap["userId"] = uid
-        postMap["imageBase64"] = imageBase64 // The encoded image string
+        postMap["imageBase64"] = imageBase64
         postMap["caption"] = caption
         postMap["location"] = location
         postMap["timestamp"] = timestamp
-        postMap["likes"] = 0
+
+        // 🔑 FIXED: Initialize 'likes' as an empty map, not the number 0
+        postMap["likes"] = emptyMap<String, Boolean>()
 
         database.getReference("posts").child(postId).setValue(postMap)
             .addOnSuccessListener {

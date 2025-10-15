@@ -1,6 +1,8 @@
 package com.ahmed.i221132
 
+
 import android.content.Context
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.text.Spannable
 import android.text.SpannableStringBuilder
@@ -12,7 +14,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.MutableData
+import com.google.firebase.database.Transaction
 import de.hdodenhof.circleimageview.CircleImageView
 
 class PostAdapter(
@@ -27,15 +35,19 @@ class PostAdapter(
         val postImageView: ImageView = itemView.findViewById(R.id.post_image_view)
         val likedText: TextView = itemView.findViewById(R.id.post_liked_text)
         val captionText: TextView = itemView.findViewById(R.id.post_caption_text)
+        val likeButton: ImageView = itemView.findViewById(R.id.post_like_image)
+        val commentButton: ImageView = itemView.findViewById(R.id.post_comment_image)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val view = LayoutInflater.from(context).inflate(R.layout.item_post, parent, false)
         return PostViewHolder(view)
+
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val post = posts[position]
+        val currentUserUid = FirebaseAuth.getInstance().currentUser?.uid ?: ""
 
         // 1. Decode the Base64 string for the main post image
         try {
@@ -53,10 +65,47 @@ class PostAdapter(
 
         // 2. Set simple text fields
         holder.locationText.text = post.location
-        holder.likedText.text = "${post.likes} likes"
+        holder.likedText.text = "${post.likes.size} likes"
 
         // 3. Fetch the user's info to populate the header and caption
         fetchUserInfo(post, holder)
+
+        // --- 🔑 NEW: LIKE FUNCTIONALITY ---
+        // Set the initial state of the like button
+        if (post.likes.containsKey(currentUserUid)) {
+            holder.likeButton.setImageResource(R.drawable.love) // Your red heart icon
+        } else {
+            holder.likeButton.setImageResource(R.drawable.like) // Your empty heart icon
+        }
+
+        // Add click listener for liking/unliking
+        holder.likeButton.setOnClickListener {
+            val postRef = FirebaseDatabase.getInstance().getReference("posts").child(post.postId)
+            postRef.runTransaction(object : Transaction.Handler {
+                override fun doTransaction(currentData: MutableData): Transaction.Result {
+                    val p = currentData.getValue(Post::class.java) ?: return Transaction.success(currentData)
+                    val likes = p.likes.toMutableMap()
+                    if (likes.containsKey(currentUserUid)) {
+                        likes.remove(currentUserUid) // Unlike
+                    } else {
+                        likes[currentUserUid] = true // Like
+                    }
+                    currentData.child("likes").value = likes
+                    return Transaction.success(currentData)
+                }
+                override fun onComplete(error: DatabaseError?, committed: Boolean, currentData: DataSnapshot?) {
+                    // Transaction complete, UI updates automatically
+                }
+            })
+        }
+
+        // --- 🔑 NEW: COMMENT NAVIGATION ---
+        holder.commentButton.setOnClickListener {
+            val intent = Intent(context, CommentsActivity::class.java)
+            intent.putExtra("POST_ID", post.postId)
+            context.startActivity(intent)
+        }
+
     }
 
     override fun getItemCount(): Int = posts.size

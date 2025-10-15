@@ -136,14 +136,14 @@
             </LinearLayout>
 
             <!-- Centered Options -->
-            <ImageView
+            <!--<ImageView
                 android:id="@+id/post_options_image"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:contentDescription="Options"
                 android:src="@drawable/options"
                 android:layout_gravity="center"
-                android:layout_weight="0" />
+                android:layout_weight="0" /> -->
 
             <!-- Right Save -->
             <LinearLayout
