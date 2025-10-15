@@ -455,7 +455,7 @@
             android:id="@+id/profile_image"
             android:layout_width="0dp"
             android:layout_height="28dp"
-            android:src="@drawable/ahmed"
+            android:src="@drawable/user"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:contentDescription="Profile" />

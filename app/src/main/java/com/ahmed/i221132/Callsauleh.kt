@@ -13,7 +13,7 @@ class Callsauleh : AppCompatActivity() {
         val hangup_button = findViewById<ImageView>(R.id.hangup_button)
 
         hangup_button.setOnClickListener {
-            val intent = Intent(this, DMsauleh::class.java)
+            //val intent = Intent(this, DMsauleh::class.java)
             finish()
         }
 

@@ -13,7 +13,7 @@ class Callfaizan : AppCompatActivity() {
         val hangup_button = findViewById<ImageView>(R.id.hangup_button)
 
         hangup_button.setOnClickListener {
-            val intent = Intent(this, DMfaizan::class.java)
+            //val intent = Intent(this, DMfaizan::class.java)
             finish()
         }
     }

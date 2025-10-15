@@ -15,8 +15,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import de.hdodenhof.circleimageview.CircleImageView
-// ❌ Coil is no longer needed for the main profile picture, but keep it for the adapter if needed elsewhere
-import coil.load
 
 class Profile : AppCompatActivity() {
 
@@ -30,16 +28,18 @@ class Profile : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile)
 
+        // --- Initialization ---
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
 
+        // --- Setup RecyclerViews ---
         setupHighlights()
-
-        val recyclerView = findViewById<RecyclerView>(R.id.profile_posts_recycler_view)
-        recyclerView.layoutManager = GridLayoutManager(this, 3)
+        val postsRecyclerView = findViewById<RecyclerView>(R.id.profile_posts_recycler_view)
+        postsRecyclerView.layoutManager = GridLayoutManager(this, 3)
         postAdapter = ProfilePostAdapter(postList, this)
-        recyclerView.adapter = postAdapter
+        postsRecyclerView.adapter = postAdapter
 
+        // --- Load Data and Setup Navigation ---
         loadProfileData()
         setupNavigation()
     }
@@ -53,42 +53,54 @@ class Profile : AppCompatActivity() {
         }
 
         val userRef = database.getReference("users").child(uid)
+
         userRef.get().addOnSuccessListener { dataSnapshot ->
             if (dataSnapshot.exists()) {
-                val profilePicture = findViewById<CircleImageView>(R.id.profile_picture)
+                // Find all UI elements
+                val mainProfilePicture = findViewById<CircleImageView>(R.id.profile_picture)
+                val navProfilePicture = findViewById<CircleImageView>(R.id.profile_image)
                 val username = findViewById<TextView>(R.id.username)
                 val followersCount = findViewById<TextView>(R.id.followers_count)
                 val followingCount = findViewById<TextView>(R.id.following_count)
                 val bioName = findViewById<TextView>(R.id.bio_name)
+                val bioText = findViewById<TextView>(R.id.bio_quote) // Your new single bio TextView
 
+                // Extract data from Firebase
+                val profileImageBase64 = dataSnapshot.child("profileImageBase64").getValue(String::class.java)
                 val usernameStr = dataSnapshot.child("username").getValue(String::class.java)
                 val nameStr = dataSnapshot.child("name").getValue(String::class.java)
+                val bio = dataSnapshot.child("bio").getValue(String::class.java)
                 val followers = dataSnapshot.child("followers").getValue(Long::class.java) ?: 0L
                 val following = dataSnapshot.child("following").getValue(Long::class.java) ?: 0L
 
+                // Update UI with fetched data
                 username.text = usernameStr
                 bioName.text = nameStr
+                bioText.text = bio // Set the bio
                 followersCount.text = followers.toString()
                 followingCount.text = following.toString()
 
-                // 🔑 CHANGE: Fetched 'profileImageBase64'
-                val profileImageBase64 = dataSnapshot.child("profileImageBase64").getValue(String::class.java)
-
-                // 🔑 CHANGE: Replaced Coil with Base64 decoding logic
+                // Decode and set the profile picture on both views
                 if (!profileImageBase64.isNullOrEmpty()) {
                     try {
                         val imageBytes = Base64.decode(profileImageBase64, Base64.DEFAULT)
                         val decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
-                        profilePicture.setImageBitmap(decodedImage)
+                        mainProfilePicture.setImageBitmap(decodedImage)
+                        navProfilePicture.setImageBitmap(decodedImage)
                     } catch (e: Exception) {
-                        profilePicture.setImageResource(R.drawable.user)
+                        mainProfilePicture.setImageResource(R.drawable.user)
+                        navProfilePicture.setImageResource(R.drawable.user)
                     }
                 } else {
-                    profilePicture.setImageResource(R.drawable.user)
+                    mainProfilePicture.setImageResource(R.drawable.user)
+                    navProfilePicture.setImageResource(R.drawable.user)
                 }
             }
+        }.addOnFailureListener {
+            Toast.makeText(this, "Failed to load profile.", Toast.LENGTH_SHORT).show()
         }
 
+        // Fetch this user's posts separately
         loadUserPosts(uid)
     }
 
@@ -105,8 +117,10 @@ class Profile : AppCompatActivity() {
                         postList.add(post)
                     }
                 }
-                postList.reverse()
+                postList.reverse() // Show newest first
                 postAdapter.notifyDataSetChanged()
+
+                // Update the post count with the actual number of posts found
                 postsCountTextView.text = postList.size.toString()
             }
 
@@ -115,8 +129,6 @@ class Profile : AppCompatActivity() {
             }
         })
     }
-
-    // This function can be expanded later to fetch dynamic highlights
 
     private fun setupHighlights() {
         val uid = auth.currentUser?.uid ?: return
@@ -131,9 +143,7 @@ class Profile : AppCompatActivity() {
         highlightsRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 highlightList.clear()
-                // Always add the "New" button first
                 highlightList.add(ProfileHighlight(title = "New", isNewButton = true))
-
                 for (highlightSnapshot in snapshot.children) {
                     val highlight = highlightSnapshot.getValue(ProfileHighlight::class.java)
                     if (highlight != null) {
@@ -146,33 +156,18 @@ class Profile : AppCompatActivity() {
         })
     }
 
-
-    // Groups all navigation listeners together for cleaner code
-
     private fun setupNavigation() {
-
         val home_image = findViewById<ImageView>(R.id.home_image)
-
         val search_image = findViewById<ImageView>(R.id.search_image)
-
+        val add_post = findViewById<ImageView>(R.id.add_post)
         val heart_image = findViewById<ImageView>(R.id.heart_image)
-
-        val profile_image = findViewById<CircleImageView>(R.id.profile_image)
-
         val editProfileBtn = findViewById<Button>(R.id.editProfileBtn)
 
-
-
         home_image.setOnClickListener { startActivity(Intent(this, HomeActivity::class.java)) }
-
         search_image.setOnClickListener { startActivity(Intent(this, search::class.java)) }
-
+        // The add_post button should launch the gallery picker, similar to HomeActivity
+        // add_post.setOnClickListener { ... }
         heart_image.setOnClickListener { startActivity(Intent(this, heart_following::class.java)) }
-
-        profile_image.setOnClickListener { /* Already on profile, do nothing or refresh */ }
-
         editProfileBtn.setOnClickListener { startActivity(Intent(this, EditProfile::class.java)) }
-
     }
-
 }
