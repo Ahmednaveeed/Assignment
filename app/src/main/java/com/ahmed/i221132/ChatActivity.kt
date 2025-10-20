@@ -278,6 +278,19 @@ class ChatActivity : AppCompatActivity() {
             .show()
     }
 
+    private fun triggerScreenshotAlert() {
+        // Determine the user whose chat was screenshotted (the target of the notification)
+        val currentUserName = supportActionBar?.title?.toString() ?: "A User"
+
+        // Notify the user you are chatting with (the receiver)
+        sendFCMNotification(
+            receiverId!!,
+            "SECURITY ALERT",
+            "${currentUserName} took a screenshot of your chat."
+        )
+        Toast.makeText(this, "MOCK ALERT SENT to receiver.", Toast.LENGTH_LONG).show()
+    }
+
     // NEW: Function to delete the message from Firebase
     private fun deleteMessage(message: ChatMessage) {
         database.getReference("chats").child(chatRoomId!!).child("messages")
