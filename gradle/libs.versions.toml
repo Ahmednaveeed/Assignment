@@ -1,6 +1,6 @@
 [versions]
 # 🔑 FIXED: Adjusted to stable versions
-agp = "8.2.2"
+agp = "8.12.3"
 kotlin = "1.9.22"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -15,6 +15,7 @@ credentials = "1.2.2"
 credentialsPlayServicesAuth = "1.2.2"
 googleid = "1.1.0"
 firebaseBom = "33.0.0"
+#firebaseDatabaseKtx = "22.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -33,7 +34,8 @@ firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
 firebase-database = { group = "com.google.firebase", name = "firebase-database" }
 firebase-storage-ktx = { group = "com.google.firebase", name = "firebase-storage-ktx" }
 firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging" }
-
+#firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
+firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx" }
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }

@@ -2,6 +2,21 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Required for Agora -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <!-- Required for Agora -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+
+    <!-- Declare camera hardware is not strictly required -->
+    <uses-feature android:name="android.hardware.camera" android:required="false" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -35,66 +50,71 @@
         <activity
             android:name=".friendprofile"
             android:exported="false" />
-        <activity
-            android:name=".yourstory"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".yourstory"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".addstory"
             android:exported="false" />
-        <activity
-            android:name=".story4"
-            android:exported="false" />
-        <activity
-            android:name=".story3"
-            android:exported="false" />
-        <activity
-            android:name=".story2"
-            android:exported="false" />
-        <activity
-            android:name=".story1"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".story4"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".story3"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".story2"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".story1"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".heart_you"
             android:exported="false" />
         <activity
             android:name=".heart_following"
             android:exported="false" />
-        <activity
-            android:name=".Highlight3"
-            android:exported="false" />
-        <activity
-            android:name=".Highlight2"
-            android:exported="false" />
-        <activity
-            android:name=".Highlight1"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".Highlight3"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".Highlight2"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".Highlight1"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".EditProfile"
             android:exported="false" />
         <activity
             android:name=".Profile"
             android:exported="false" />
-        <activity
-            android:name=".Callumair"
-            android:exported="false" />
-        <activity
-            android:name=".Callfaizan"
-            android:exported="false" />
-        <activity
-            android:name=".Callsauleh"
-            android:exported="false" />
-        <activity
-            android:name=".Callzohaib"
-            android:exported="false" />
-        <activity
-            android:name=".Callabdullah"
-            android:exported="false" />
-        <activity
-            android:name=".Callhammad"
-            android:exported="false" />
+<!--        <activity-->
+<!--            android:name=".Callumair"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".Callfaizan"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".Callsauleh"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".Callzohaib"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".Callabdullah"-->
+<!--            android:exported="false" />-->
+<!--        <activity-->
+<!--            android:name=".Callhammad"-->
+<!--            android:exported="false" />-->
         <activity
             android:name=".message"
             android:exported="false" />
+        <activity
+            android:name=".CallActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".search"
             android:exported="false" />
@@ -119,6 +139,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- FCM Messaging Service -->
+        <service
+            android:name=".SociallyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+
+
     </application>
 
 </manifest>
