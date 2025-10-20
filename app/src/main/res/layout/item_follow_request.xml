@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp">
+
+    <!-- Profile Image -->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/request_profile_image"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/user"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <!-- Username -->
+    <TextView
+        android:id="@+id/request_username"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="requesting_user_1"
+        android:textColor="@android:color/black"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toEndOf="@id/request_profile_image"
+        app:layout_constraintTop_toTopOf="@id/request_profile_image"
+        app:layout_constraintEnd_toStartOf="@id/accept_button"/>
+
+    <!-- Full Name / Context -->
+    <TextView
+        android:id="@+id/request_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Requested to follow you."
+        android:textColor="@android:color/darker_gray"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@id/request_username"
+        app:layout_constraintTop_toBottomOf="@id/request_username"
+        app:layout_constraintEnd_toStartOf="@id/accept_button"/>
+
+    <!-- Accept Button -->
+    <Button
+        android:id="@+id/accept_button"
+        android:layout_width="80dp"
+        android:layout_height="35dp"
+        android:text="Accept"
+        android:textSize="12sp"
+        android:textColor="@android:color/white"
+        android:backgroundTint="#8B4513"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toStartOf="@id/reject_button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <!-- Reject Button -->
+    <Button
+        android:id="@+id/reject_button"
+        android:layout_width="70dp"
+        android:layout_height="35dp"
+        android:text="Reject"
+        android:textSize="12sp"
+        android:textColor="@android:color/black"
+        android:backgroundTint="#E0E0E0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
