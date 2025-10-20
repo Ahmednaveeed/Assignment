@@ -4,399 +4,98 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/white"
     tools:context=".heart_following">
 
-    <!-- Tabs (Following | You) -->
+    <!-- Header Section -->
+    <TextView
+        android:id="@+id/activity_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Activity"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <!-- Tab Container (Following / You) -->
     <LinearLayout
-        android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/tab_following"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="Following"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="#8B4513" />
-
-        <TextView
-            android:id="@+id/tab_you"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:text="You"
-            android:textSize="16sp"
-            android:textColor="#8B4513" />
-    </LinearLayout>
-
-    <!-- Scrollable notifications list -->
-    <ScrollView
+        android:id="@+id/tab_container"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout"
-        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/activity_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <!-- Following Tab (Active Tab) -->
+        <TextView
+            android:id="@+id/tab_following"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp">
+            android:layout_weight="1"
+            android:text="Following"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:textSize="16sp"
+            android:textColor="#8B4513"
+            android:textStyle="bold"/>
 
-            <!-- Notification Row Example -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingVertical="8dp">
+        <!-- You Tab (Leads to heart_you.kt, likely showing requests) -->
+        <TextView
+            android:id="@+id/tab_you"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="You"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:textSize="16sp"
+            android:textColor="@android:color/darker_gray"/>
+    </LinearLayout>
 
-                <!-- Profile Pic -->
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/abdullah"
-                    android:scaleType="centerCrop"
-                    android:layout_marginEnd="8dp" />
+    <!-- Separator Line -->
+    <View
+        android:id="@+id/tab_separator"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="#D3D3D3"
+        app:layout_constraintTop_toBottomOf="@id/tab_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-                <!-- Text + Preview Images -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
+    <!-- 🚀 CRITICAL: RecyclerView for Follow Requests / Activity Feed -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/requests_recycler_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/tab_separator"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/item_follow_request"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="abdullah_malik309 liked 3 posts. 3h"
-                        android:textSize="14sp"
-                        android:ellipsize="end"
-                        android:singleLine="true"
-                        android:layout_marginBottom="4dp"
-                        android:textColor="@color/black"/>
+    <!-- Empty State for Requests -->
+    <TextView
+        android:id="@+id/no_requests_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No new follow requests."
+        android:textSize="16sp"
+        android:textColor="@android:color/darker_gray"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="@id/requests_recycler_view"
+        app:layout_constraintBottom_toBottomOf="@id/requests_recycler_view"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-                    <!-- 3 Image previews -->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/post1"
-                            android:layout_marginEnd="4dp" />
-
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/post2"
-                            android:layout_marginEnd="4dp" />
-
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/post3" />
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-
-            <!-- Example: Started Following You -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingVertical="8dp">
-
-                <!-- Profile Pic -->
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/faizan"
-                    android:scaleType="centerCrop"
-                    android:layout_marginEnd="8dp" />
-
-                <!-- Text -->
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="faizan_naveed started following you. 3h"
-                    android:textSize="14sp"
-                    android:textColor="@color/black" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingVertical="8dp">
-
-                <!-- Profile Pic -->
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/umair"
-                    android:scaleType="centerCrop"
-                    android:layout_marginEnd="8dp" />
-
-                <!-- Text + Preview Images -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="umair.asghar liked 5 posts. 3h"
-                        android:textSize="14sp"
-                        android:ellipsize="end"
-                        android:singleLine="true"
-                        android:layout_marginBottom="4dp" />
-
-                    <!-- 3 Image previews -->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/post4"
-                            android:layout_marginEnd="4dp" />
-
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/post5"
-                            android:layout_marginEnd="4dp" />
-
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/post6" />
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingVertical="8dp">
-
-                <!-- Profile Pic -->
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/sauleh"
-                    android:scaleType="centerCrop"
-                    android:layout_marginEnd="8dp" />
-
-                <!-- Text + Preview Images -->
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_weight="1">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="sauleh_naveed liked 3 posts. 3h"
-                        android:textSize="14sp"
-                        android:ellipsize="end"
-                        android:singleLine="true"
-                        android:layout_marginBottom="4dp" />
-
-                    <!-- 3 Image previews -->
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/post1"
-                            android:layout_marginEnd="4dp" />
-
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/post3"
-                            android:layout_marginEnd="4dp" />
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/post7"
-                            android:layout_marginEnd="4dp" />
-
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/post8"
-                            android:layout_marginEnd="4dp" />
-
-                        <ImageView
-                            android:layout_width="60dp"
-                            android:layout_height="60dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/post9"
-                            android:layout_marginEnd="4dp" />
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-
-
-            <!-- Example: someone liked 1 post -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingVertical="8dp">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/zohaib"
-                    android:scaleType="centerCrop"
-                    android:layout_marginEnd="8dp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="zohaib_shafqat, hammad and saim liked joshua_l photo. 3h"
-                    android:textSize="14sp"
-                    android:textColor="@color/black"/>
-
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/post1"
-                    android:scaleType="centerCrop" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingVertical="8dp">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/hammad"
-                    android:scaleType="centerCrop"
-                    android:layout_marginEnd="8dp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="hammad, ali and abdullah liked your photo   .3h"
-                    android:textSize="14sp"
-                    android:textColor="@color/black"/>
-
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/ahmed"
-                    android:scaleType="centerCrop" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingVertical="8dp">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/faizan"
-                    android:scaleType="centerCrop"
-                    android:layout_marginEnd="8dp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="faizan, sauleh and abdullah liked joshua_l photo. 3h"
-                    android:textSize="14sp"
-                    android:textColor="@color/black"/>
-
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/post5"
-                    android:scaleType="centerCrop" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical"
-                android:paddingVertical="8dp">
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/abdullah"
-                    android:scaleType="centerCrop"
-                    android:layout_marginEnd="8dp" />
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="abdullah, umair and saim liked ahmed's photo. 3h"
-                    android:textSize="14sp"
-                    android:textColor="@color/black"/>
-
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:src="@drawable/image4"
-                    android:scaleType="centerCrop" />
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-
+    <!-- Bottom Navigation -->
     <LinearLayout
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
@@ -404,6 +103,8 @@
         android:orientation="horizontal"
         android:gravity="center"
         android:padding="10dp"
+        android:backgroundTint="@color/white"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
@@ -426,7 +127,6 @@
             android:src="@drawable/search"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
-            app:tint="#8B4513"
             android:contentDescription="Search" />
 
         <!-- Add Button -->
@@ -444,10 +144,9 @@
             android:id="@+id/heart_image"
             android:layout_width="0dp"
             android:layout_height="28dp"
-            android:src="@drawable/heart2"
+            android:src="@drawable/heart"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
-            app:tint="#8B4513"
             android:contentDescription="Heart" />
 
         <!-- Profile Button -->
@@ -455,9 +154,10 @@
             android:id="@+id/profile_image"
             android:layout_width="0dp"
             android:layout_height="28dp"
-            android:src="@drawable/user"
+            android:src="@drawable/ahmed"
             android:layout_marginStart="16dp"
             android:layout_weight="1"
             android:contentDescription="Profile" />
     </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
