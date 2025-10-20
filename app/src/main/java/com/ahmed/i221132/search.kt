@@ -53,7 +53,7 @@ class search : AppCompatActivity() {
         // 2. Setup RecyclerView and Adapter
         searchAdapter = SearchAdapter(this, userList) { user ->
             // Handle item click: Navigate to the user's Profile
-            val intent = Intent(this, Profile::class.java)
+            val intent = Intent(this, friendprofile::class.java)
             // Pass the target user's UID to the Profile activity
             intent.putExtra("TARGET_USER_UID", user.uid)
             startActivity(intent)
