@@ -6,13 +6,13 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
-import android.util.Base64 // 🔑 CORRECTED IMPORT
+import android.util.Base64
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AlertDialog // 🔑 NEW IMPORT
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -39,6 +39,10 @@ class ChatActivity : AppCompatActivity() {
     private lateinit var attachButton: ImageView
     private lateinit var imagePickerLauncher: ActivityResultLauncher<Intent>
 
+    // 🔑 NEW: Call Buttons
+    private lateinit var videoCallButton: ImageView
+    private lateinit var audioCallButton: ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
@@ -61,7 +65,7 @@ class ChatActivity : AppCompatActivity() {
             finish()
             return
         }
-
+        listenForOnlineStatus()
         chatRoomId = getChatRoomId(senderId!!, receiverId!!)
 
         messagesRecyclerView = findViewById(R.id.messages_recycler_view)
@@ -69,7 +73,12 @@ class ChatActivity : AppCompatActivity() {
         sendButton = findViewById(R.id.send_button)
         attachButton = findViewById(R.id.attach_button)
 
-        // 🔑 CHANGED: Pass listeners for edit and delete actions to the adapter
+        // 🔑 NEW: Initialize Call Buttons (Ensure these IDs exist in your XML)
+        videoCallButton = findViewById(R.id.video_call_button)
+        audioCallButton = findViewById(R.id.audio_call_button)
+
+
+        // CHANGED: Pass listeners for edit and delete actions to the adapter
         chatAdapter = ChatAdapter(
             messageList,
             senderId!!,
@@ -98,8 +107,77 @@ class ChatActivity : AppCompatActivity() {
             }
         }
 
+        // 🔑 NEW: Call Button Listeners
+        videoCallButton.setOnClickListener { startCall(receiverId!!, "VIDEO") }
+        audioCallButton.setOnClickListener { startCall(receiverId!!, "AUDIO") }
+
         listenForMessages()
     }
+
+    // 🔑 MOVED and MODIFIED: Call Signaling Logic
+    private fun startCall(targetUserId: String, callType: String) {
+        val currentUserId = auth.currentUser?.uid ?: return
+
+        // 1. Generate a unique channel name
+        val sortedUids = listOf(currentUserId, targetUserId).sorted()
+        val channelName = "${sortedUids[0]}_${sortedUids[1]}"
+
+        // 2. Create a signaling node in Firebase to notify the recipient
+        val callRef = database.getReference("calls").child(targetUserId)
+        val callData = mapOf(
+            "callerId" to currentUserId,
+            "callType" to callType, // "VIDEO" or "AUDIO"
+            "channelName" to channelName,
+            "status" to "ringing"
+        )
+
+        callRef.setValue(callData)
+            .addOnSuccessListener {
+                // 3. Launch the local Call Activity
+                val intent = Intent(this, CallActivity::class.java)
+                intent.putExtra("CHANNEL_NAME", channelName)
+                intent.putExtra("CALL_TYPE", callType)
+                intent.putExtra("IS_CALLER", true)
+                intent.putExtra("TARGET_USER_UID", targetUserId) // For cleanup
+                startActivity(intent)
+            }
+            .addOnFailureListener {
+                Toast.makeText(this, "Failed to initiate call via Firebase.", Toast.LENGTH_SHORT).show()
+            }
+    }
+
+
+    private fun listenForOnlineStatus() {
+        val receiverRef = database.getReference("users").child(receiverId!!)
+
+        receiverRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val isOnline = snapshot.child("isOnline").getValue(Boolean::class.java) ?: false
+                val lastSeen = snapshot.child("lastSeen").getValue(Long::class.java)
+
+                val toolbarTitle = supportActionBar?.title?.toString() ?: "User"
+
+                if (isOnline) {
+                    supportActionBar?.subtitle = "Online"
+                } else if (lastSeen != null) {
+                    // Format the timestamp into a readable "Last seen X minutes ago" string
+                    val timeDifference = System.currentTimeMillis() - lastSeen
+                    // Simple version:
+                    supportActionBar?.subtitle = "Last seen offline"
+                    // Advanced version: Use a library or helper function to format time difference
+                } else {
+                    supportActionBar?.subtitle = "Offline"
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {}
+        })
+    }
+
+
+
+
+
+
 
     private fun sendMessage(messageText: String) {
         val timestamp = System.currentTimeMillis()
@@ -126,12 +204,25 @@ class ChatActivity : AppCompatActivity() {
 
         database.getReference("chats").child(chatRoomId!!).child("messages").child(messageKey).setValue(message)
             .addOnSuccessListener {
-                // 🔑 NEW: Update the conversation index for image messages
+                // NEW: Update the conversation index for image messages
                 updateConversationIndex("📷 Photo", timestamp)
             }
     }
 
-    // 🔑 NEW: A reusable function to update the last message for both users
+
+    // 🔑 NEW: Helper function to send the FCM notification payload (Targeting the receiver)
+    private fun sendFCMNotification(targetUserId: String, title: String, body: String) {
+        // We assume the receiver's token is saved in the database
+        database.getReference("users").child(targetUserId).child("fcmToken").get()
+            .addOnSuccessListener { snapshot ->
+                val token = snapshot.getValue(String::class.java)
+                if (!token.isNullOrEmpty()) {
+                    // In a real app, this Toast confirms the readiness to send the payload.
+                    Toast.makeText(this, "Notification triggered for user: $targetUserId", Toast.LENGTH_LONG).show()
+                }
+            }
+    }
+    // NEW: A reusable function to update the last message for both users
     private fun updateConversationIndex(lastMessage: String, timestamp: Long) {
         val conversationUpdate = mapOf(
             "lastMessage" to lastMessage,
@@ -149,7 +240,7 @@ class ChatActivity : AppCompatActivity() {
                 for (messageSnapshot in snapshot.children) {
                     val message = messageSnapshot.getValue(ChatMessage::class.java)
                     if (message != null) {
-                        // 🔑 CHANGED: Store the unique ID of the message
+                        // CHANGED: Store the unique ID of the message
                         message.messageId = messageSnapshot.key ?: ""
                         messageList.add(message)
                     }
@@ -175,7 +266,7 @@ class ChatActivity : AppCompatActivity() {
             .show()
     }
 
-    // 🔑 NEW: Function to show a confirmation dialog before deleting
+    // NEW: Function to show a confirmation dialog before deleting
     private fun showDeleteConfirmation(message: ChatMessage) {
         AlertDialog.Builder(this)
             .setTitle("Delete Message")
@@ -187,7 +278,7 @@ class ChatActivity : AppCompatActivity() {
             .show()
     }
 
-    // 🔑 NEW: Function to delete the message from Firebase
+    // NEW: Function to delete the message from Firebase
     private fun deleteMessage(message: ChatMessage) {
         database.getReference("chats").child(chatRoomId!!).child("messages")
             .child(message.messageId).removeValue()
@@ -196,7 +287,7 @@ class ChatActivity : AppCompatActivity() {
             }
     }
 
-    // 🔑 NEW: Function to show a dialog for editing a message
+    // NEW: Function to show a dialog for editing a message
     private fun showEditDialog(message: ChatMessage) {
         val editText = EditText(this).apply { setText(message.text) }
         AlertDialog.Builder(this)
@@ -212,7 +303,7 @@ class ChatActivity : AppCompatActivity() {
             .show()
     }
 
-    // 🔑 NEW: Function to update the message text in Firebase
+    // NEW: Function to update the message text in Firebase
     private fun editMessage(message: ChatMessage, newText: String) {
         database.getReference("chats").child(chatRoomId!!).child("messages")
             .child(message.messageId).child("text").setValue(newText)

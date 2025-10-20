@@ -13,7 +13,42 @@
         android:background="@android:color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- 🚀 NEW: Call Buttons Container -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="end"
+            android:gravity="center_vertical"
+            android:layout_marginEnd="16dp">
+
+            <!-- Video Call Button -->
+            <ImageView
+                android:id="@+id/video_call_button"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/video_call"
+                android:contentDescription="Video Call"
+                app:tint="#8B4513"
+                android:padding="4dp"/>
+
+            <!-- Audio Call Button -->
+            <ImageView
+                android:id="@+id/audio_call_button"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/audio_phone"
+                android:layout_marginStart="16dp"
+                android:contentDescription="Audio Call"
+                app:tint="#8B4513"
+                android:padding="4dp"/>
+
+        </LinearLayout>
+        <!-- End of Call Buttons Container -->
+
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/messages_recycler_view"
