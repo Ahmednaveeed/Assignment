@@ -16,6 +16,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ServerValue
 import java.io.ByteArrayOutputStream
 import java.util.Calendar
 
@@ -167,7 +168,8 @@ class register : AppCompatActivity() {
         userMap["name"] = fullName
         userMap["profileImageBase64"] = profileImageBase64
         userMap["dateOfBirth"] = etDob.text.toString()
-        userMap["isOnline"] = true
+        userMap["isOnline"] = false
+        userMap["lastSeen"] = ServerValue.TIMESTAMP
         userMap["posts"] = 0
         userMap["followers"] = 0
         userMap["following"] = 0
