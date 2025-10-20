@@ -322,6 +322,26 @@
                     android:padding="8dp"/>
             </LinearLayout>
 
+
+
+            <!-- In activity_friendprofile.xml, BEFORE the Highlights RecyclerView -->
+            <TextView
+                android:id="@+id/content_restriction_message"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="You must follow this account to see posts and highlights."
+                android:textSize="16sp"
+                android:textColor="#A9A9A9"
+                android:gravity="center"
+                android:padding="32dp"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/profileActions"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="20dp"/>
+
+
+
             <!-- Highlights RecyclerView (UPDATED) -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/highlights_recycler_view"

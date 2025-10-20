@@ -111,6 +111,10 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
                 app:layout_constraintTop_toTopOf="@id/posts_count"
                 app:layout_constraintStart_toEndOf="@id/posts_count"
                 app:layout_constraintEnd_toStartOf="@id/following_count" />
@@ -135,6 +139,10 @@
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:textColor="@color/black"
+                android:clickable="true"
+                android:focusable="true"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
                 app:layout_constraintTop_toTopOf="@id/posts_count"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="40dp" />
