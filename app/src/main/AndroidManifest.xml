@@ -36,6 +36,9 @@
             android:name=".CommentsActivity"
             android:exported="false" />
         <activity
+            android:name=".FollowListActivity"
+            android:exported="false" />
+        <activity
             android:name=".StoryViewActivity"
             android:exported="false" />
         <activity
@@ -50,63 +53,21 @@
         <activity
             android:name=".friendprofile"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".yourstory"-->
-<!--            android:exported="false" />-->
         <activity
             android:name=".addstory"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".story4"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".story3"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".story2"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".story1"-->
-<!--            android:exported="false" />-->
         <activity
             android:name=".heart_you"
             android:exported="false" />
         <activity
             android:name=".heart_following"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".Highlight3"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".Highlight2"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".Highlight1"-->
-<!--            android:exported="false" />-->
         <activity
             android:name=".EditProfile"
             android:exported="false" />
         <activity
             android:name=".Profile"
             android:exported="false" />
-<!--        <activity-->
-<!--            android:name=".Callumair"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".Callfaizan"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".Callsauleh"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".Callzohaib"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".Callabdullah"-->
-<!--            android:exported="false" />-->
-<!--        <activity-->
-<!--            android:name=".Callhammad"-->
-<!--            android:exported="false" />-->
         <activity
             android:name=".message"
             android:exported="false" />

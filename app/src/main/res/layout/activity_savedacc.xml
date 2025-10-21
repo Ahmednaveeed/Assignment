@@ -35,15 +35,17 @@
         android:layout_marginTop="80dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:src="@drawable/ahmed"
+            android:src="@drawable/user"
             android:contentDescription="Profile Picture"/>
 
         <TextView
+            android:id="@+id/username_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="_ahmednaveeed"
+            android:text="username"
             android:textStyle="bold"
             android:textColor="#525050"
             android:textSize="18sp"
