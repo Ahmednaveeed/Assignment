@@ -36,7 +36,7 @@ class friendprofile : AppCompatActivity() {
     private lateinit var usernameText: TextView
     private lateinit var bioNameText: TextView
     private lateinit var bioQuoteText: TextView
-    private lateinit var websiteText: TextView
+    //private lateinit var websiteText: TextView
     private lateinit var postsCountText: TextView
     private lateinit var followersCountText: TextView
     private lateinit var followingCountText: TextView
@@ -101,7 +101,7 @@ class friendprofile : AppCompatActivity() {
         usernameText = findViewById(R.id.username)
         bioNameText = findViewById(R.id.bio_name)
         bioQuoteText = findViewById(R.id.bio_quote)
-        websiteText = findViewById(R.id.website_text)
+        //websiteText = findViewById(R.id.website_text)
 
         postsCountText = findViewById(R.id.posts_count)
         followersCountText = findViewById(R.id.followers_count)
@@ -175,7 +175,7 @@ class friendprofile : AppCompatActivity() {
                     usernameText.text = user.username
                     bioNameText.text = user.name
                     bioQuoteText.text = user.bio
-                    websiteText.text = user.website
+                    //websiteText.text = user.website
 
                     val followers = snapshot.child("followers").getValue(Long::class.java) ?: 0L
                     val following = snapshot.child("following").getValue(Long::class.java) ?: 0L
@@ -385,9 +385,6 @@ class friendprofile : AppCompatActivity() {
                     Toast.makeText(this, "Failed to unfollow.", Toast.LENGTH_SHORT).show()
                 }
         }
-
-
-
 
     private fun cancelFollowRequest() {
         database.getReference("followRequests")

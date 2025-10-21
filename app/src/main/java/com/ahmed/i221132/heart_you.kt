@@ -25,6 +25,7 @@ class heart_you : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         database = FirebaseDatabase.getInstance()
 
+        val tab_following = findViewById<TextView>(R.id.tab_following)
         val tab_you = findViewById<TextView>(R.id.tab_you)
         val home_image = findViewById<ImageView>(R.id.home_image)
         val search_image = findViewById<ImageView>(R.id.search_image)
@@ -33,6 +34,9 @@ class heart_you : AppCompatActivity() {
         // 🔑 NEW: Call the function to load the profile picture
         loadUserProfilePicture()
 
+        tab_following.setOnClickListener {
+            startActivity(Intent(this, heart_following::class.java))
+        }
         tab_you.setOnClickListener {
             startActivity(Intent(this,heart_you::class.java))
         }

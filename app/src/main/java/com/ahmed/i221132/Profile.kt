@@ -172,7 +172,21 @@ class Profile : AppCompatActivity() {
         val highlightAdapter = ProfileHighlightAdapter(highlightList, this, uid)
         highlightsRecyclerView.adapter = highlightAdapter
 
-        // ... (rest of highlight loading logic)
+        val highlightsRef = database.getReference("highlights").child(uid)
+        highlightsRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                highlightList.clear()
+                highlightList.add(ProfileHighlight(title = "New", isNewButton = true))
+                for (highlightSnapshot in snapshot.children) {
+                    val highlight = highlightSnapshot.getValue(ProfileHighlight::class.java)
+                    if (highlight != null) {
+                        highlightList.add(highlight)
+                    }
+                }
+                highlightAdapter.notifyDataSetChanged()
+            }
+            override fun onCancelled(error: DatabaseError) {}
+        })
     }
 
     private fun setupNavigation() {

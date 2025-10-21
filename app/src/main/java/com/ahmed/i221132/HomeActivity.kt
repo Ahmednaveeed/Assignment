@@ -20,14 +20,11 @@ import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import de.hdodenhof.circleimageview.CircleImageView
 import com.google.firebase.messaging.FirebaseMessaging
-import coil.load
 import com.google.firebase.database.ServerValue
 import kotlinx.coroutines.Dispatchers // For thread control
 import kotlinx.coroutines.GlobalScope // For starting coroutine
 import kotlinx.coroutines.launch // For starting coroutine
 import kotlinx.coroutines.withContext // For switching back to main thread
-// NOTE: Ensure PostAdapter and StoryAdapter are available in your project.
-// NOTE: Ensure Story data class is available (similar structure to Post, but for stories).
 
 private lateinit var pickImageLauncher: ActivityResultLauncher<String>
 
@@ -214,73 +211,87 @@ class HomeActivity : AppCompatActivity() {
 
 
 
+    // In HomeActivity.kt
+
+    // In HomeActivity.kt
+
     private fun loadFilteredStories() {
         val storiesRecyclerView = findViewById<RecyclerView>(R.id.stories_recycler_view)
         storiesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
         val storyList = mutableListOf<Story>()
+        // 🔑 FIXED: The click listener logic is changed here
         val storyAdapter = StoryAdapter(storyList, this) { userId ->
+            // ALWAYS open the StoryViewActivity, regardless of who was clicked.
+            // StoryViewActivity will handle showing the stories or indicating none exist.
             val intent = Intent(this, StoryViewActivity::class.java)
             intent.putExtra("USER_ID", userId)
             startActivity(intent)
         }
         storiesRecyclerView.adapter = storyAdapter
 
+        val currentUserUid = auth.currentUser?.uid ?: return
+        val usersRef = database.getReference("users")
         val storiesRef = database.getReference("stories")
         val twentyFourHoursAgo = System.currentTimeMillis() - (24 * 60 * 60 * 1000)
 
-        storiesRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
+        // 1. Fetch CURRENT user's data first and add them unconditionally
+        usersRef.child(currentUserUid).get().addOnSuccessListener { currentUserSnapshot ->
+            val currentUserData = currentUserSnapshot.getValue(Story::class.java)
+            if (currentUserData != null) {
                 storyList.clear()
+                storyList.add(currentUserData) // Add "Your Story" first
+                storyAdapter.notifyDataSetChanged() // Show "Your Story" immediately
 
-                // Temporary list to hold stories, we only fetch user data for UIDs in this list
-                val usersWithFilteredStories = mutableSetOf<String>()
+                // 2. Now find OTHER users with active stories
+                storiesRef.addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(storiesSnapshot: DataSnapshot) {
+                        val usersWithActiveStories = mutableListOf<String>()
 
-                for (userStorySnapshot in snapshot.children) {
-                    val userId = userStorySnapshot.key
-
-                    // 🚀 CRITICAL FILTER 1: Only check stories from users we follow (or self)
-                    if (userId != null && followingUids.contains(userId)) {
-                        var hasActiveStory = false
-
-                        userStorySnapshot.children.forEach { story ->
-                            val timestamp = story.child("timestamp").getValue(Long::class.java) ?: 0L
-                            if (timestamp > twentyFourHoursAgo) {
-                                hasActiveStory = true
-                                return@forEach
+                        for (userStoriesNode in storiesSnapshot.children) {
+                            val userId = userStoriesNode.key
+                            // Only consider users we follow AND who are NOT the current user
+                            if (userId != null && userId != currentUserUid && followingUids.contains(userId)) {
+                                var hasActiveStory = false
+                                userStoriesNode.children.forEach { storySnapshot ->
+                                    val timestamp = storySnapshot.child("timestamp").getValue(Long::class.java) ?: 0L
+                                    if (timestamp > twentyFourHoursAgo) {
+                                        hasActiveStory = true
+                                        return@forEach
+                                    }
+                                }
+                                if (hasActiveStory) {
+                                    usersWithActiveStories.add(userId)
+                                }
                             }
                         }
-                        if (hasActiveStory) {
-                            usersWithFilteredStories.add(userId)
-                        }
-                    }
-                }
 
-                // Now fetch user data for the filtered list of UIDs
-                usersWithFilteredStories.forEach { userId ->
-                    database.getReference("users").child(userId).get().addOnSuccessListener { userSnapshot ->
-                        val storyUser = userSnapshot.getValue(Story::class.java)
-                        if (storyUser != null) {
-                            // 🚀 Insert self-story at the beginning
-                            if (userId == followingUids.first()) { // Assuming first added UID is current user
-                                storyList.add(0, storyUser)
-                            } else {
-                                storyList.add(storyUser)
+                        // 3. Fetch user data for those with active stories and add them AFTER "Your Story"
+                        var usersFetchedCount = 0
+                        if (usersWithActiveStories.isEmpty()) {
+                            return // No other active stories to load
+                        }
+
+                        usersWithActiveStories.forEach { userId ->
+                            usersRef.child(userId).get().addOnSuccessListener { userSnapshot ->
+                                val userData = userSnapshot.getValue(Story::class.java)
+                                if (userData != null) {
+                                    storyList.add(userData)
+                                }
+                                usersFetchedCount++
+                                if (usersFetchedCount == usersWithActiveStories.size) {
+                                    storyAdapter.notifyDataSetChanged()
+                                }
                             }
-                            storyAdapter.notifyDataSetChanged()
                         }
                     }
-                }
-                // Handle case where only current user has a story
-                if (storyList.isEmpty() && followingUids.contains(auth.currentUser?.uid)) {
-                    // Optionally fetch current user's story again if none loaded
-                }
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-                Toast.makeText(this@HomeActivity, "Failed to load stories.", Toast.LENGTH_SHORT).show()
+                    override fun onCancelled(error: DatabaseError) {
+                        Toast.makeText(this@HomeActivity, "Failed to check stories.", Toast.LENGTH_SHORT).show()
+                    }
+                })
             }
-        })
+        }
     }
 
     private fun loadFilteredPosts() {
@@ -302,7 +313,7 @@ class HomeActivity : AppCompatActivity() {
                     val post = postSnapshot.getValue(Post::class.java)
 
                     if (post != null) {
-                        // 🚀 CRITICAL FILTER 2: Check if the post author is in the following list
+                        // Check if the post author is in the following list
                         if (followingUids.contains(post.userId)) {
                             postList.add(post)
                         }
@@ -321,7 +332,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupLaunchers() {
-        // ... (This function remains the same, no changes needed)
         pickImageLauncher = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             if (uri != null) {
                 val intent = Intent(this, addstory::class.java)
@@ -343,7 +353,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun setupNavigation() {
-        // ... (This function remains the same, no changes needed)
         val search_image = findViewById<ImageView>(R.id.search_image)
         val message_button = findViewById<ImageView>(R.id.message_button)
         val add_post_button = findViewById<ImageView>(R.id.add_post)
