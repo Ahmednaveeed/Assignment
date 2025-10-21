@@ -44,6 +44,7 @@ class friendprofile : AppCompatActivity() {
     private lateinit var postsRecyclerView: RecyclerView // Maps to R.id.postsGrid
     private lateinit var messageBtn: Button
     private lateinit var emailBtn: Button
+    private lateinit var contentRestrictionMessage: TextView
 
     // Adapters & Data
     private lateinit var profilePostAdapter: ProfilePostAdapter
@@ -111,6 +112,8 @@ class friendprofile : AppCompatActivity() {
 
         highlightsRecyclerView = findViewById(R.id.highlights_recycler_view)
         postsRecyclerView = findViewById(R.id.postsGrid)
+
+        contentRestrictionMessage=findViewById(R.id.content_restriction_message)
     }
 
     private fun setupRecyclerViews() {
@@ -129,6 +132,14 @@ class friendprofile : AppCompatActivity() {
         // Follow Button Logic
         followBtn.setOnClickListener { handleFollowButtonClick() }
 
+        // 🚀 NEW: Make Follower/Following counts clickable
+        followersCountText.setOnClickListener {
+            launchFollowListActivity("Followers")
+        }
+        followingCountText.setOnClickListener {
+            launchFollowListActivity("Following")
+        }
+
         // Navigation (Your existing logic)
         findViewById<ImageView>(R.id.back_button).setOnClickListener { finish() }
         findViewById<ImageView>(R.id.home_image).setOnClickListener { startActivity(Intent(this, HomeActivity::class.java)) }
@@ -144,10 +155,18 @@ class friendprofile : AppCompatActivity() {
         }
     }
 
+
+    // 🚀 NEW FUNCTION: Launches the activity to show the list
+    private fun launchFollowListActivity(listType: String) {
+        val intent = Intent(this, FollowListActivity::class.java) // 💡 NOTE: We will create FollowListActivity next
+        intent.putExtra("TARGET_USER_UID", targetUserId)
+        intent.putExtra("LIST_TYPE", listType) // "Followers" or "Following"
+        startActivity(intent)
+    }
     // --- Data Loading Functions (Fetches all necessary data from Firebase) ---
 
     private fun loadTargetUserProfile() {
-        database.getReference("users").child(targetUserId).addListenerForSingleValueEvent(object : ValueEventListener {
+        database.getReference("users").child(targetUserId).addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val user = snapshot.getValue(User::class.java)
 
@@ -158,10 +177,16 @@ class friendprofile : AppCompatActivity() {
                     bioQuoteText.text = user.bio
                     websiteText.text = user.website
 
+                    val followers = snapshot.child("followers").getValue(Long::class.java) ?: 0L
+                    val following = snapshot.child("following").getValue(Long::class.java) ?: 0L
+
+                    followersCountText.text = followers.toString()
+                    followingCountText.text = following.toString()
+
+
+
                     // Display Counts (Based on the size of the 'followers' and 'following' maps)
                     postsCountText.text = snapshot.child("posts").childrenCount.toString()
-                    followersCountText.text = snapshot.child("followers").childrenCount.toString()
-                    followingCountText.text = snapshot.child("following").childrenCount.toString()
 
                     // Load Profile Picture from Base64
                     user.profileImageBase64?.let { base64 ->
@@ -271,6 +296,19 @@ class friendprofile : AppCompatActivity() {
     private fun updateFollowButton(text: String) {
         followBtn.text = text
 
+        // Assume all content is restricted unless confirmed "Following"
+        val isFollowing = text == "Following"
+
+        // --- Control Visibility of Content Containers ---
+        val contentVisible = if (isFollowing) View.VISIBLE else View.GONE
+        val restrictionVisible = if (isFollowing) View.GONE else View.VISIBLE
+
+        // Apply visibility to posts and highlights
+        postsRecyclerView.visibility = contentVisible
+        highlightsRecyclerView.visibility = contentVisible
+        contentRestrictionMessage.visibility = restrictionVisible // Show warning if not following
+
+        // Update the button and secondary actions (Message/Email)
         when (text) {
             "Following" -> {
                 followBtn.backgroundTintList = ColorStateList.valueOf(Color.GRAY)
@@ -278,15 +316,14 @@ class friendprofile : AppCompatActivity() {
                 messageBtn.visibility = View.VISIBLE
                 emailBtn.visibility = View.VISIBLE
             }
-            "Requested" -> {
-                followBtn.backgroundTintList = ColorStateList.valueOf(Color.GRAY)
-                followBtn.setTextColor(Color.BLACK)
-                messageBtn.visibility = View.GONE
-                emailBtn.visibility = View.GONE
-            }
-            "Follow" -> {
+            // "Requested" and "Follow" hide Message/Email and show the restriction message
+            "Requested", "Follow" -> {
                 followBtn.backgroundTintList = ColorStateList.valueOf(Color.parseColor("#8B4513"))
                 followBtn.setTextColor(Color.WHITE)
+                if (text == "Requested") {
+                    followBtn.backgroundTintList = ColorStateList.valueOf(Color.GRAY) // Gray for requested
+                    followBtn.setTextColor(Color.BLACK)
+                }
                 messageBtn.visibility = View.GONE
                 emailBtn.visibility = View.GONE
             }
@@ -315,26 +352,42 @@ class friendprofile : AppCompatActivity() {
             }
     }
 
-    private fun unfollowUser() {
-        // 1. Remove from current user's 'following'
-        database.getReference("following")
-            .child(currentUserId)
-            .child(targetUserId)
-            .removeValue()
 
-        // 2. Remove from target user's 'followers'
-        database.getReference("followers")
-            .child(targetUserId)
-            .child(currentUserId)
-            .removeValue()
-            .addOnSuccessListener {
-                updateFollowButton("Follow")
-                Toast.makeText(this, "Unfollowed.", Toast.LENGTH_SHORT).show()
-            }
-            .addOnFailureListener {
-                Toast.makeText(this, "Failed to unfollow.", Toast.LENGTH_SHORT).show()
-            }
-    }
+        private fun unfollowUser() {
+            // 1. Remove from current user's 'following' list
+            database.getReference("following")
+                .child(currentUserId)
+                .child(targetUserId)
+                .removeValue()
+
+            // 2. Remove from target user's 'followers' list
+            database.getReference("followers")
+                .child(targetUserId)
+                .child(currentUserId)
+                .removeValue()
+
+            // 3. DECREMENT COUNTERS
+            // Decrement the current user's 'following' count
+            database.getReference("users").child(currentUserId).child("following")
+                .setValue(com.google.firebase.database.ServerValue.increment(-1))
+
+            // Decrement the target user's 'followers' count
+            database.getReference("users").child(targetUserId).child("followers")
+                .setValue(com.google.firebase.database.ServerValue.increment(-1))
+
+                .addOnSuccessListener {
+                    updateFollowButton("Follow")
+                    // Optional: Re-load profile data to see count change (though Firebase usually handles this with listeners)
+                    // loadTargetUserProfile()
+                    Toast.makeText(this, "Unfollowed. Counter Decreased.", Toast.LENGTH_SHORT).show()
+                }
+                .addOnFailureListener {
+                    Toast.makeText(this, "Failed to unfollow.", Toast.LENGTH_SHORT).show()
+                }
+        }
+
+
+
 
     private fun cancelFollowRequest() {
         database.getReference("followRequests")
