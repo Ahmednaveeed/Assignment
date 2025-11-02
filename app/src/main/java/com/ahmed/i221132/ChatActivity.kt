@@ -188,6 +188,8 @@ class ChatActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 messageInput.setText("")
                 updateConversationIndex(messageText, timestamp)
+                // 🚀 NEW MESSAGE TRIGGER
+                sendFCMNotification(receiverId!!, "New Message", messageText)
             }
     }
 
