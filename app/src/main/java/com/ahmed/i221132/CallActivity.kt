@@ -14,6 +14,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import de.hdodenhof.circleimageview.CircleImageView
 //import io.agora.rtc.IRtcEngineEventHandler
 //import io.agora.rtc.RtcEngine
 //import io.agora.rtc.RtcEngine.CHANNEL_PROFILE_COMMUNICATION
@@ -27,7 +28,7 @@ import io.agora.rtc2.video.VideoCanvas
 class CallActivity : AppCompatActivity() {
 
     // 🔑 YOUR ACTUAL AGORA APP ID
-    private val AGORA_APP_ID = "080283828067490b8ce03b4b68095bdd"
+    private val AGORA_APP_ID = "144893b496ce4114a08505f7d681e137"
 
     private lateinit var rtcEngine: RtcEngine
     private lateinit var firebaseDatabase: FirebaseDatabase
@@ -79,9 +80,6 @@ class CallActivity : AppCompatActivity() {
         }
     }
 
-    // NOTE: The rest of the Agora SDK methods (initAgoraEngine, setupLocalVideo, rtcEventHandler)
-    // are included here but will ONLY work after the dependency is added and synced.
-    // The key is that the Firebase signaling logic (endCall, cleanup) is now correct.
 
     private fun initViews() {
         remoteVideoContainer = findViewById(R.id.remote_video_view_container)
@@ -133,6 +131,7 @@ class CallActivity : AppCompatActivity() {
 
             if (callType == "VIDEO") {
                 rtcEngine.enableVideo()
+                rtcEngine.enableAudio()
                 setupLocalVideo()
             } else {
                 rtcEngine.enableAudio()
@@ -156,6 +155,7 @@ class CallActivity : AppCompatActivity() {
             ViewGroup.LayoutParams.MATCH_PARENT
         ))
         rtcEngine.setupLocalVideo(VideoCanvas(surfaceView, VideoCanvas.RENDER_MODE_HIDDEN, 0))
+        localVideoContainer.visibility = View.VISIBLE
     }
 
     private fun setupRemoteVideo(uid: Int) {
@@ -218,6 +218,10 @@ class CallActivity : AppCompatActivity() {
             runOnUiThread {
                 callStatusText.text = "User Joined: $uid"
                 setupRemoteVideo(uid)
+
+                // 🔑 ADD THESE LINES: Hide the placeholder UI
+                findViewById<CircleImageView>(R.id.profile_image_large).visibility = View.GONE
+                callStatusText.visibility = View.GONE
             }
         }
         override fun onUserOffline(uid: Int, reason: Int) {

@@ -173,6 +173,7 @@ class register : AppCompatActivity() {
         userMap["posts"] = 0
         userMap["followers"] = 0
         userMap["following"] = 0
+        userMap["pendingAlertsCount"] = 0
 
         database.getReference("users").child(uid).setValue(userMap)
             .addOnSuccessListener {

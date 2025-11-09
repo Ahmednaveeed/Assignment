@@ -137,12 +137,16 @@ class friendprofile : AppCompatActivity() {
 
         messageBtn.setOnClickListener {
             val intent = Intent(this, ChatActivity::class.java)
-            intent.putExtra("USER_ID", targetUserId)
-            intent.putExtra("USER_NAME", usernameText.text.toString())
+            intent.putExtra("TARGET_USER_UID", targetUserId)
             startActivity(intent)
         }
-        // Add listener for email button if desired
-        // emailBtn.setOnClickListener { /* ... */ }
+    }
+
+    private fun launchFollowListActivity(listType: String) {
+        val intent = Intent(this, FollowListActivity::class.java)
+        intent.putExtra("TARGET_USER_UID", targetUserId)
+        intent.putExtra("LIST_TYPE", listType)
+        startActivity(intent)
     }
 
     // --- Data Loading Functions ---
@@ -303,13 +307,58 @@ class friendprofile : AppCompatActivity() {
         }
     }
 
+    // 🔑 NEW: Helper function to send the FCM notification payload (Targeting the receiver)
+    private fun sendFCMNotification(targetUserId: String, title: String, body: String) {
+        // We assume the receiver's token is saved in the database
+        database.getReference("users").child(targetUserId).child("fcmToken").get()
+            .addOnSuccessListener { snapshot ->
+                val token = snapshot.getValue(String::class.java)
+                if (!token.isNullOrEmpty()) {
+                    // IMPORTANT: This Toast confirms the intention and token retrieval for testing.
+                    Toast.makeText(this, "Notification triggered for token: $token", Toast.LENGTH_LONG).show()
+                }
+            }
+    }
+//    private fun sendFollowRequest() {
+//        database.getReference("followRequests").child(targetUserId).child(currentUserId).setValue(true)
+//            .addOnSuccessListener {
+//                updateFollowButton("Requested")
+//
+//                Toast.makeText(this, "Follow request sent.", Toast.LENGTH_SHORT).show()
+//            }
+//            .addOnFailureListener { Toast.makeText(this, "Failed to send request.", Toast.LENGTH_SHORT).show() }
+//    }
+
     private fun sendFollowRequest() {
-        database.getReference("followRequests").child(targetUserId).child(currentUserId).setValue(true)
+        // 1. Write the request node to the database
+        database.getReference("followRequests")
+            .child(targetUserId)
+            .child(currentUserId)
+            .setValue(true)
             .addOnSuccessListener {
                 updateFollowButton("Requested")
+
+                // 🚀 NEW: INCREMENT PENDING ALERT COUNT FOR RECEIVER
+                database.getReference("users").child(targetUserId).child("pendingAlertsCount")
+                    .setValue(com.google.firebase.database.ServerValue.increment(1))
+
+                // 🚀 CRITICAL FIX: SEND NOTIFICATION TO THE RECEIVER
+                // Fetch the sender's name (the current user) to use in the alert body
+                database.getReference("users").child(currentUserId).child("username").get().addOnSuccessListener { nameSnapshot ->
+                    val senderUsername = nameSnapshot.getValue(String::class.java) ?: "A user"
+
+                    sendFCMNotification(
+                        targetUserId, // Notify the person RECEIVING the request
+                        "New Follow Request",
+                        "$senderUsername wants to follow you."
+                    )
+                }
+
                 Toast.makeText(this, "Follow request sent.", Toast.LENGTH_SHORT).show()
             }
-            .addOnFailureListener { Toast.makeText(this, "Failed to send request.", Toast.LENGTH_SHORT).show() }
+            .addOnFailureListener {
+                Toast.makeText(this, "Failed to send request.", Toast.LENGTH_SHORT).show()
+            }
     }
 
     private fun unfollowUser() {
@@ -337,7 +386,5 @@ class friendprofile : AppCompatActivity() {
             .addOnFailureListener { Toast.makeText(this, "Failed to cancel request.", Toast.LENGTH_SHORT).show() }
     }
 
-    private fun launchFollowListActivity(listType: String) {
-        Toast.makeText(this, "$listType list not implemented yet", Toast.LENGTH_SHORT).show()
-    }
+
 }

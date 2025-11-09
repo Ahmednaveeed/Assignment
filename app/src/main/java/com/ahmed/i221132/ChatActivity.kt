@@ -188,8 +188,14 @@ class ChatActivity : AppCompatActivity() {
             .addOnSuccessListener {
                 messageInput.setText("")
                 updateConversationIndex(messageText, timestamp)
-                // 🚀 NEW MESSAGE TRIGGER
-                sendFCMNotification(receiverId!!, "New Message", messageText)
+                // 🚀 CRITICAL: INCREMENT ALERT COUNT FOR RECEIVER
+                database.getReference("users").child(receiverId!!).child("pendingAlertsCount")
+                    .setValue(ServerValue.increment(1))
+                    .addOnSuccessListener {
+                        // If count updates successfully, then send the FCM notification:
+                        sendFCMNotification(receiverId!!, "New Message", messageText)
+                    }
+
             }
     }
 
